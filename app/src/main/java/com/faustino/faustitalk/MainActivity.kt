@@ -21,7 +21,7 @@ class MainActivity : ComponentActivity() {
             FaustiTalkTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     Greeting(
-                        name = "Pepe pepon",
+                        name = "Pepe pepon 2024",
                         modifier = Modifier.padding(innerPadding)
                     )
                 }
