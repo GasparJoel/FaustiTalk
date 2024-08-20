@@ -89,6 +89,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
                     ))
                 )
 
+
             )
             Text(text = "Compartiendo momentos",
                 fontSize = 27.sp,
