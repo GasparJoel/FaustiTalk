@@ -1,5 +1,5 @@
 package com.faustino.faustitalk.View.Auth
-
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -26,12 +26,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.faustino.faustitalk.ui.theme.Green300
+import com.faustino.faustitalk.R
 
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
@@ -115,7 +118,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
 
             shape = RoundedCornerShape(15.dp),
             colors = ButtonDefaults.buttonColors(
-                containerColor = Color(0xFF76F083)
+                containerColor = Green300
             ),
             modifier = Modifier
                 .fillMaxWidth()
@@ -155,13 +158,13 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
             Box (
                 contentAlignment = Alignment.CenterStart
             ){
-/*
+
                 Image(
-                    painter = painterResource(id = R.drawable.google_icon),
+                    painter = painterResource(id = R.drawable.icon_google),
                     contentDescription = "",
                     modifier = Modifier.size(28.dp)
                 )
-*/
+
                 Text(
                     text = "Continuar con Google",
                     color = Color.White,
@@ -193,12 +196,12 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
 
             Box (
                 contentAlignment = Alignment.CenterStart
-            ){/*
+            ){
                 Image(
-                    painter = painterResource(id = R.drawable.facebook_icon),
+                    painter = painterResource(id = R.drawable.icon_facebook),
                     contentDescription = "",
                     modifier = Modifier.size(29.dp)
-                )*/
+                )
 
                 Text(
                     text = "Continuar con Facebook",
