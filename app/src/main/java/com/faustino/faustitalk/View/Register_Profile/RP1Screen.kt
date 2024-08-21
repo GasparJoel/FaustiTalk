@@ -17,8 +17,13 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
+import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
@@ -73,26 +78,79 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             Text(
 
                 text = "¿Cuál es tu nombre?",
-                fontSize = 27.sp,
-                fontWeight = FontWeight.W400,
-
+                fontSize = 40.sp,
+                color = Color.White,
+                fontWeight = FontWeight.ExtraBold,
 
 
             )
 
         }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(40.dp))
-        Text(
-            // modifier = Modifier.padding(horizontal = 20.dp),
-            text = "Al pulsar en \"Iniciar sesión\", aceptas nuestros Términos. Descubre cómo procesamos tus datos en nuestra Política de privacidad y Política de cookies.",
-            fontSize = 12.sp,
-            textAlign = TextAlign.Center,
-            color = Color.White,
-            lineHeight = 14.sp
+        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+
+        OutlinedTextField(value = "", onValueChange = {} ,
+            label={ Text(text = "Ingrese su nombre",color = Color.White) },
+            shape = RoundedCornerShape(20.dp),
+            modifier = androidx.compose.ui.Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+            )
+        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
 
+        Column (
+
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ){
+            Text(
+
+                text = "¿Cuál es tu Apellido?",
+                fontSize = 40.sp,
+                color = Color.White,
+                fontWeight = FontWeight.ExtraBold,
+
+
+                )
+
+        }
+        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+
+        OutlinedTextField(value = "", onValueChange = {} ,
+            label={ Text(text = "Ingrese su apellido",color = Color.White) },
+            shape = RoundedCornerShape(20.dp),
+            modifier = androidx.compose.ui.Modifier
+                .fillMaxWidth()
+                .height(50.dp)
         )
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
+        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+
+        Column (
+
+            horizontalAlignment = Alignment.CenterHorizontally,
+
+            ){
+            Text(
+
+                text = "Nombre de usuario",
+                fontSize = 40.sp,
+                color = Color.White,
+                fontWeight = FontWeight.ExtraBold,
+
+                )
+
+        }
+
+        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+
+        OutlinedTextField(value = "", onValueChange = {} ,
+            label={ Text(text = "Ingrese su apellido", color = Color.White) },
+            shape = RoundedCornerShape(20.dp),
+            modifier = androidx.compose.ui.Modifier
+                .fillMaxWidth()
+                .height(50.dp)
+        )
+        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
         Button(
 
             shape = RoundedCornerShape(15.dp),
@@ -110,117 +168,14 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
 
             ) {
             Text(
-                text = "Crear una cuenta",
+                text = "Continuar",
                 color = Color(0xFF171520),
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp
             )
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
-        Button(
 
-            shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White.copy(0.2f)
-            ),
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-
-
-            onClick = {
-
-            },
-
-            ) {
-
-            Box (
-                contentAlignment = Alignment.CenterStart
-            ){
-
-                Image(
-                    painter = painterResource(id = R.drawable.icon_google),
-                    contentDescription = "",
-                    modifier = androidx.compose.ui.Modifier.size(28.dp)
-                )
-
-                Text(
-                    text = "Continuar con Google",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = androidx.compose.ui.Modifier.fillMaxWidth()
-                )
-            }
-        }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
-        Button(
-
-            shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White.copy(0.2f)
-            ),
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-            ,
-
-
-            onClick = {
-
-            },
-
-            ) {
-
-            Box (
-                contentAlignment = Alignment.CenterStart
-            ){
-                Image(
-                    painter = painterResource(id = R.drawable.icon_facebook),
-                    contentDescription = "",
-                    modifier = androidx.compose.ui.Modifier.size(29.dp)
-                )
-
-                Text(
-                    text = "Continuar con Facebook",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = androidx.compose.ui.Modifier.fillMaxWidth()
-                )
-            }
-        }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
-        Button(
-
-            shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.Transparent
-            ),
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-            ,
-
-
-            onClick = {
-                // navController.navigate("login")
-            },
-
-            ) {
-
-            Text(
-                text = "Iniciar sesión",
-                color = Color.White,
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp,
-                textAlign = TextAlign.Center,
-                modifier = androidx.compose.ui.Modifier.fillMaxWidth()
-            )
-
-        }
         Spacer(modifier = androidx.compose.ui.Modifier.weight(1f))
 
     }
@@ -264,3 +219,6 @@ private fun Fondo(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.M
 
     }
 }
+
+
+

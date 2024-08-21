@@ -49,14 +49,14 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
+
 import com.faustino.faustitalk.R
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier,navController: NavController) {
+fun LoginScreen(modifier: Modifier = Modifier) {
 
 
 
