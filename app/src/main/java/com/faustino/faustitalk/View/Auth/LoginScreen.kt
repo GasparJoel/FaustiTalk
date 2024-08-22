@@ -54,7 +54,7 @@ import com.faustino.faustitalk.R
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
-
+@Preview
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier) {
 

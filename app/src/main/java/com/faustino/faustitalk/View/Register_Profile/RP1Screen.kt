@@ -18,12 +18,14 @@ import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.OutlinedTextField
+import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
@@ -40,6 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.faustino.faustitalk.R
+import com.faustino.faustitalk.View.Components.CustomOutlinedTextField
 import com.faustino.faustitalk.ui.theme.Green300
 import java.lang.reflect.Modifier
 
@@ -47,10 +50,16 @@ import java.lang.reflect.Modifier
 @Composable
 fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier) {
 
+    //Valores de los outlineText
+
+    var out_nombre by remember { mutableStateOf("") }
+    var out_apellido by remember { mutableStateOf("") }
+    var out_usuario by remember { mutableStateOf("") }
+
     Fondo()
     Column (
         // verticalArrangement = Arrangement.Bottom,
-        horizontalAlignment = Alignment.CenterHorizontally,
+        horizontalAlignment = Alignment.Start,
         modifier = androidx.compose.ui.Modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp),
@@ -64,7 +73,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
 
         ){
             Text(text = "Crear Perfil",
-                fontSize = 20.sp,
+                fontSize = 22.sp,
                 color = Color.White
                 )
 
@@ -88,13 +97,8 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-        OutlinedTextField(value = "", onValueChange = {} ,
-            label={ Text(text = "Ingrese su nombre",color = Color.White) },
-            shape = RoundedCornerShape(20.dp),
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-            )
+         CustomOutlinedTextField(value = out_nombre, onValueChange ={ out_nombre=it} , placeholder ="Ingrese su nombre" )
+
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
 
@@ -116,13 +120,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-        OutlinedTextField(value = "", onValueChange = {} ,
-            label={ Text(text = "Ingrese su apellido",color = Color.White) },
-            shape = RoundedCornerShape(20.dp),
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-        )
+        CustomOutlinedTextField(value = out_apellido, onValueChange ={ out_apellido=it} , placeholder ="Ingrese su Apellido" )
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
         Column (
@@ -143,13 +141,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-        OutlinedTextField(value = "", onValueChange = {} ,
-            label={ Text(text = "Ingrese su apellido", color = Color.White) },
-            shape = RoundedCornerShape(20.dp),
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-        )
+        CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su nombre de usuario" )
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
         Button(
 
