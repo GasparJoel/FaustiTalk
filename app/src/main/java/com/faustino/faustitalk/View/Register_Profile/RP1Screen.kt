@@ -1,6 +1,5 @@
 package com.faustino.faustitalk.View.Register_Profile
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -14,13 +13,9 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.foundation.text.BasicTextField
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -34,15 +29,15 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.faustino.faustitalk.R
-import com.faustino.faustitalk.View.Components.CustomOutlinedTextField
+import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
+import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
+
+import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
+import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestion
 import com.faustino.faustitalk.ui.theme.Green300
 import java.lang.reflect.Modifier
 
@@ -56,7 +51,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
     var out_apellido by remember { mutableStateOf("") }
     var out_usuario by remember { mutableStateOf("") }
 
-    Fondo()
+    BgFondoCuestion()
     Column (
         // verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.Start,
@@ -64,19 +59,16 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             .fillMaxSize()
             .padding(horizontal = 32.dp),
 
-
         ){
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
         Row (
             modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
-
         ){
             Text(text = "Crear Perfil",
                 fontSize = 22.sp,
                 color = Color.White
                 )
-
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
         Column (
@@ -84,15 +76,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ){
-            Text(
-
-                text = "¿Cuál es tu nombre?",
-                fontSize = 40.sp,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold,
-
-
-            )
+            CustomTextCuestion(titulo = "¿Cuál es tu nombre?")
 
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
@@ -107,15 +91,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ){
-            Text(
-
-                text = "¿Cuál es tu Apellido?",
-                fontSize = 40.sp,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold,
-
-
-                )
+            CustomTextCuestion(titulo = "¿Cuál es tu Apellido?")
 
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
@@ -128,14 +104,9 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ){
-            Text(
 
-                text = "Nombre de usuario",
-                fontSize = 40.sp,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold,
+            CustomTextCuestion(titulo ="Nombre de usuario" )
 
-                )
 
         }
 
@@ -143,29 +114,8 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
 
         CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su nombre de usuario" )
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
-        Button(
 
-            shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Green300
-            ),
-            modifier = androidx.compose.ui.Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-
-            ,
-            onClick = {
-                //navController.navigate("signup")
-            },
-
-            ) {
-            Text(
-                text = "Continuar",
-                color = Color(0xFF171520),
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
-            )
-        }
+         Btn_SiguienteGreen(titte = "Continuar")
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
         Spacer(modifier = androidx.compose.ui.Modifier.weight(1f))
@@ -173,44 +123,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
     }
 }
 
-@Composable
-private fun Fondo(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier) {
-    Box (
-        modifier = androidx.compose.ui.Modifier
-            .fillMaxSize()
-            .background(
-                Brush.linearGradient(
-                    0.0f to Color(0xFF171520),
-                    100.0f to Color(0xFF171520),
-                    start = Offset.Zero,
-                    end = Offset.Infinite
-                )
-            )){
-        Box (
-            modifier = androidx.compose.ui.Modifier
-                .graphicsLayer {
-                    translationY = -800f
-                }
 
-                .size(500.dp)
-
-                .blur(radius = 300.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
-                .clip(CircleShape)
-                .background(
-                    Color(0xFF76F083).copy(alpha = 0.8f)
-                    /*  brush = Brush.verticalGradient(listOf(
-                        Color.Transparent,
-                        GreenBase.copy(alpha = 0.6f)
-                    ))*/
-
-
-                )
-                .align(Alignment.TopCenter)
-
-        )
-
-    }
-}
 
 
 

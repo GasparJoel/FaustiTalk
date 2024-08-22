@@ -1,4 +1,4 @@
-package com.faustino.faustitalk.View.Components
+package com.faustino.faustitalk.View.Components.Inputs
 
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -11,7 +11,6 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.input.TextFieldValue
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Text
 import com.faustino.faustitalk.ui.theme.Green300
