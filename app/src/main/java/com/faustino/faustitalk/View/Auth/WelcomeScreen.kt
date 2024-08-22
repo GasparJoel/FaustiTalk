@@ -38,7 +38,7 @@ import com.faustino.faustitalk.R
 
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
-fun WelcomeScreen(modifier: Modifier = Modifier) {
+fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit = {}) {
 
     FondoWelcome()
 
@@ -127,7 +127,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
 
             ,
             onClick = {
-                //navController.navigate("signup")
+                navigateToSignUp()
             },
 
             ) {
@@ -228,7 +228,7 @@ fun WelcomeScreen(modifier: Modifier = Modifier) {
 
 
             onClick = {
-                // navController.navigate("login")
+                navigateToLogin()
             },
 
             ) {

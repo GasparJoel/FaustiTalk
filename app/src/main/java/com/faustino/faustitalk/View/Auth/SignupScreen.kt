@@ -53,7 +53,7 @@ import com.faustino.faustitalk.ui.theme.Green300
 
 @Preview
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier) {
+fun SignupScreen(modifier: Modifier = Modifier, ) {
 
 
     var email by remember {
