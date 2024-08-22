@@ -37,11 +37,11 @@ import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 
 import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
-import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestion
-import com.faustino.faustitalk.ui.theme.Green300
-import java.lang.reflect.Modifier
+import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
-@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
+
+
+/*@Preview(device = "spec:width=1344px,height=2992px,dpi=480")*/
 @Composable
 fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier) {
 
@@ -68,7 +68,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             Text(text = "Crear Perfil",
                 fontSize = 22.sp,
                 color = Color.White
-                )
+            )
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
         Column (
@@ -76,7 +76,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ){
-            CustomTextCuestion(titulo = "¿Cuál es tu nombre?")
+            CustomTextCuestions(titulo = "¿Cuál es tu nombre?")
 
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
@@ -91,7 +91,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ){
-            CustomTextCuestion(titulo = "¿Cuál es tu Apellido?")
+            CustomTextCuestions(titulo = "¿Cuál es tu Apellido?")
 
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
@@ -105,7 +105,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
 
             ){
 
-            CustomTextCuestion(titulo ="Nombre de usuario" )
+            CustomTextCuestions(titulo ="Nombre de usuario" )
 
 
         }

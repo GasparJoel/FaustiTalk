@@ -8,7 +8,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
 
 @Composable
-fun CustomTextCuestion(
+fun CustomTextCuestions(
 titulo : String ,
 ){
    Text(
