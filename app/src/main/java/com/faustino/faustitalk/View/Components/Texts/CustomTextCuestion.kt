@@ -13,8 +13,8 @@ titulo : String ,
 ){
    Text(
        text = titulo,
-       fontSize = 40.sp,
+       fontSize = 30.sp,
        color = Color.White,
-       fontWeight = FontWeight.ExtraBold,
+       fontWeight = FontWeight.Bold,
    )
 }

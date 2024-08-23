@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -55,14 +56,14 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
     Column (
         // verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.Start,
-        modifier = androidx.compose.ui.Modifier
+        modifier = Modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp),
 
         ){
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         Row (
-            modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
+            modifier = Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center
         ){
             Text(text = "Crear Perfil",
@@ -70,7 +71,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
                 color = Color.White
             )
         }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(15.dp))
         Column (
 
             horizontalAlignment = Alignment.CenterHorizontally,
@@ -79,11 +80,11 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             CustomTextCuestions(titulo = "¿Cuál es tu nombre?")
 
         }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
          CustomOutlinedTextField(value = out_nombre, onValueChange ={ out_nombre=it} , placeholder ="Ingrese su nombre" )
 
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
 
         Column (
@@ -94,10 +95,10 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             CustomTextCuestions(titulo = "¿Cuál es tu Apellido?")
 
         }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         CustomOutlinedTextField(value = out_apellido, onValueChange ={ out_apellido=it} , placeholder ="Ingrese su Apellido" )
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         Column (
 
@@ -113,12 +114,13 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
         CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su nombre de usuario" )
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+
+        Spacer(modifier = Modifier.height(20.dp))
 
         Btn_SiguienteGreen(titte = "Continuar",onClick = {})
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(15.dp))
 
-        Spacer(modifier = androidx.compose.ui.Modifier.weight(1f))
+        Spacer(modifier = Modifier.weight(1f))
 
     }
 }
