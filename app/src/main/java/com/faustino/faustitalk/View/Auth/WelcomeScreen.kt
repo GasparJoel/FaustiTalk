@@ -35,12 +35,15 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.faustino.faustitalk.ui.theme.Green300
 import com.faustino.faustitalk.R
+import com.faustino.faustitalk.View.Components.Butons.Btn_CrearCuenta
+import com.faustino.faustitalk.View.Components.Butons.IconButtonWithText
+import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit = {}) {
 
-    FondoWelcome()
+    BgFondoCuestion();
 
     Column (
         // verticalArrangement = Arrangement.Bottom,
@@ -112,107 +115,21 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
             color = Color.White,
             lineHeight = 14.sp
 
-
         )
         Spacer(modifier = Modifier.height(15.dp))
-        Button(
 
-            shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Green300
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
+        Btn_CrearCuenta(titte = "Crear una cuenta")
 
-            ,
-            onClick = {
-                navigateToSignUp()
-            },
-
-            ) {
-            Text(
-                text = "Crear una cuenta",
-                color = Color(0xFF171520),
-                fontWeight = FontWeight.Bold,
-                fontSize = 16.sp
-            )
-        }
         Spacer(modifier = Modifier.height(15.dp))
-        Button(
 
-            shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White.copy(0.2f)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp),
-
-
-            onClick = {
-
-            },
-
-            ) {
-
-            Box (
-                contentAlignment = Alignment.CenterStart
-            ){
-
-                Image(
-                    painter = painterResource(id = R.drawable.icon_google),
-                    contentDescription = "",
-                    modifier = Modifier.size(28.dp)
-                )
-
-                Text(
-                    text = "Continuar con Google",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
+        IconButtonWithText(imageResource = R.drawable.icon_google, buttonText = "Continuar con Google") {
+            
         }
+
         Spacer(modifier = Modifier.height(15.dp))
-        Button(
 
-            shape = RoundedCornerShape(15.dp),
-            colors = ButtonDefaults.buttonColors(
-                containerColor = Color.White.copy(0.2f)
-            ),
-            modifier = Modifier
-                .fillMaxWidth()
-                .height(50.dp)
-            ,
+        IconButtonWithText(imageResource = R.drawable.icon_facebook, buttonText = "Continuar con Facebook") {
 
-
-            onClick = {
-
-            },
-
-            ) {
-
-            Box (
-                contentAlignment = Alignment.CenterStart
-            ){
-                Image(
-                    painter = painterResource(id = R.drawable.icon_facebook),
-                    contentDescription = "",
-                    modifier = Modifier.size(29.dp)
-                )
-
-                Text(
-                    text = "Continuar con Facebook",
-                    color = Color.White,
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp,
-                    textAlign = TextAlign.Center,
-                    modifier = Modifier.fillMaxWidth()
-                )
-            }
         }
         Spacer(modifier = Modifier.height(15.dp))
         Button(
@@ -250,41 +167,3 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
 }
 
 
-@Composable
-private fun FondoWelcome(modifier: Modifier = Modifier) {
-    Box (
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.linearGradient(
-                    0.0f to Color(0xFF171520),
-                    100.0f to Color(0xFF171520),
-                    start = Offset.Zero,
-                    end = Offset.Infinite
-                )
-            )){
-        Box (
-            modifier = Modifier
-                .graphicsLayer {
-                    translationY = -800f
-                }
-
-                .size(500.dp)
-
-                .blur(radius = 300.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
-                .clip(CircleShape)
-                .background(
-                    Color(0xFF76F083).copy(alpha = 0.8f)
-                    /*  brush = Brush.verticalGradient(listOf(
-                        Color.Transparent,
-                        GreenBase.copy(alpha = 0.6f)
-                    ))*/
-
-
-                )
-                .align(Alignment.TopCenter)
-
-        )
-
-    }
-}
