@@ -45,3 +45,33 @@ fun Btn_SiguienteGreen(
         )
     }
 }
+
+@Composable
+fun Btn_CrearCuenta(
+    titte:String
+
+){
+    Button(
+
+        shape = RoundedCornerShape(15.dp),
+        colors = ButtonDefaults.buttonColors(
+            containerColor = Green300
+        ),
+        modifier = androidx.compose.ui.Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+
+        ,
+        onClick = {
+            //navController.navigate("signup")
+        },
+
+        ) {
+        Text(
+            text = titte,
+            color = Color(0xFF171520),
+            fontWeight = FontWeight.Bold,
+            fontSize = 16.sp
+        )
+    }
+}
