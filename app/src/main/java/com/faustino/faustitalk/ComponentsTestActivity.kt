@@ -6,7 +6,7 @@ import androidx.activity.compose.setContent
 import androidx.compose.runtime.*
 import androidx.compose.ui.tooling.preview.Preview
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
-import com.faustino.faustitalk.View.Components.Inputs.CustomDatePickerField
+import com.faustino.faustitalk.View.Components.Inputs.CustomDatePicker
 
 class ComponentsTestActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -20,13 +20,7 @@ class ComponentsTestActivity : ComponentActivity() {
 @Composable
 fun ComponentsTestScreen() {
     BgFondoCuestion()
-//    var selectedDate by remember { mutableStateOf("") }
-//
-//    CustomDatePickerField(
-//        label = "Select Date",
-//        selectedDate = selectedDate,
-//        onDateSelected = { date ->
-//            selectedDate = date
-//        }
+
+//    CustomDatePicker(
 //    )
 }

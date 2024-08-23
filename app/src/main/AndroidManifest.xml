@@ -13,22 +13,22 @@
         android:theme="@style/Theme.FaustiTalk"
         tools:targetApi="31">
         <!-- Actividad de Principal -->
-
-        <activity
-            android:name=".MainActivity"
-            android:exported="true"
-            android:label="@string/app_name"
-            android:theme="@style/Theme.FaustiTalk">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-
-        <!-- Nueva actividad de prueba -->
         <!--
+                <activity
+                    android:name=".MainActivity"
+                    android:exported="true"
+                    android:label="@string/app_name"
+                    android:theme="@style/Theme.FaustiTalk">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
+
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+
+        -->
+                <!-- Nueva actividad de prueba -->
+
         <activity android:name=".ComponentsTestActivity"
             android:exported="true">
             <intent-filter>
@@ -36,7 +36,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        -->
+
     </application>
 
 </manifest>

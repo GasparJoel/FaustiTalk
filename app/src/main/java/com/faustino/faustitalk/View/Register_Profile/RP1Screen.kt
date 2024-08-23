@@ -41,7 +41,7 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 
 
-/*@Preview(device = "spec:width=1344px,height=2992px,dpi=480")*/
+@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier) {
 
