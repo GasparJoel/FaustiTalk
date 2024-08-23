@@ -13,9 +13,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.faustino.faustitalk.ui.theme.Green300
 
+
 @Composable
 fun Btn_SiguienteGreen(
-    titte:String
+
+    titte:String,
+    onClick: () -> Unit
+
 ){
     Button(
 
@@ -29,7 +33,7 @@ fun Btn_SiguienteGreen(
 
         ,
         onClick = {
-            //navController.navigate("signup")
+            onClick()
         },
 
         ) {
