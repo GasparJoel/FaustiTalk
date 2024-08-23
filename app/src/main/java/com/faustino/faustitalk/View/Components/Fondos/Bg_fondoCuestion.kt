@@ -19,6 +19,7 @@ import androidx.compose.ui.unit.dp
 
 @Composable
 fun BgFondoCuestion(modifier: Modifier = Modifier) {
+
     Box (
         modifier = androidx.compose.ui.Modifier
             .fillMaxSize()

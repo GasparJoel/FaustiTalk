@@ -45,6 +45,7 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
 
     BgFondoCuestion();
 
+
     Column (
         // verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.CenterHorizontally,
