@@ -51,6 +51,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 
 import com.faustino.faustitalk.R
+import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
+import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
+import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
+import com.faustino.faustitalk.View.Components.Texts.Text200
+import com.faustino.faustitalk.View.Components.Texts.Text200bold
+import com.faustino.faustitalk.View.Components.Texts.Text250bold
+import com.faustino.faustitalk.View.Components.Texts.Text300
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
@@ -75,25 +82,8 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         painterResource(id = R.drawable.eye_hidden_password)
     }
 
-    fondoLogin()
-    /*
-    Box (
-        modifier = Modifier
-            .padding(horizontal = 32.dp, vertical = 40.dp)
-            .background(Color.Transparent)
-            .clip(CircleShape)
-            .clickable { }
+    BgFondoCuestion()
 
-    ){
-        Icon(
-            painter = painterResource(id = R.drawable.arrow_prev),
-            contentDescription = "",
-            modifier = Modifier.size(40.dp),
-            tint = Color.White
-        )
-
-    }
-    */
     Column(
         modifier = modifier
             .fillMaxSize()
@@ -109,24 +99,7 @@ fun LoginScreen(modifier: Modifier = Modifier) {
 
 
         ) {
-        /*
-        Row (
-            modifier = Modifier.fillMaxWidth()
-        ){
 
-            Text(text = "Fausti",
-                fontSize = 40.sp,
-                color = Color.White,
-                fontWeight = FontWeight.ExtraBold,
-
-                )
-            Text(text = "Talk",
-                fontSize = 40.sp,
-                color = GreenBase,
-                fontWeight = FontWeight.ExtraBold,
-
-                )
-        }*/
         Spacer(modifier = Modifier
             .height(40.dp)
         )
@@ -134,66 +107,32 @@ fun LoginScreen(modifier: Modifier = Modifier) {
             horizontalAlignment = Alignment.Start,
             modifier = Modifier.fillMaxWidth()
         ){
-            Text(text = "Iniciar sesión ",
-                fontSize = 32.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Black,
 
-                )
+            Text300(text = "Iniciar sesión")
 
             Spacer(modifier = Modifier
                 .height(10.dp)
                 .fillMaxWidth()
             )
 
-            Text(text = "Inicie sesión para continuar usando la aplicación.",
-                fontSize = 16.sp,
-                color = Color.White.copy(alpha = 0.5f),
-                fontWeight = FontWeight.Normal,
-            )
+
+            Text200(text ="Inicie sesión para continuar usando la aplicación." )
         }
         Spacer(modifier = Modifier.height(16.dp))
         Column (
             horizontalAlignment = Alignment.Start,
             modifier = Modifier.fillMaxWidth()
         ){
-            Text(text = "Email",
-                fontSize = 18.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.padding(bottom = 5.dp)
-            )
-            OutlinedTextField(
 
-                value = email,
-                onValueChange = {
-                    email = it
-                },
-                // label = {Text(text = "Email") },
-                placeholder = { Text("Ingrese su Email", color = Color.White.copy(alpha = 0.5f)) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
+            Text250bold(text = "Email")
 
-                ,
-                shape = RoundedCornerShape(20.dp),
-                singleLine = true,
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Green300, // Color del borde cuando está enfocado
-                    unfocusedBorderColor = Color.Transparent, // Color del borde cuando no está enfocado
-                    focusedLabelColor = Green300,
-                    unfocusedContainerColor = Color.White.copy(alpha = 0.1f),
-                    focusedContainerColor = Color.White.copy(alpha = 0.04f)
-                )
-            )
+            CustomOutlinedTextField(value = email, onValueChange = { email=it }, placeholder ="Ingrese su Email" )
+
 
             Spacer(modifier = Modifier.height(8.dp))
-            Text(text = "Contraseña",
-                fontSize = 18.sp,
-                color = Color.White,
-                fontWeight = FontWeight.Medium,
-                modifier = Modifier.padding(bottom = 5.dp)
-            )
+
+            Text250bold(text = "Contraseña")
+
             OutlinedTextField(
                 value = password,
                 onValueChange = {
@@ -238,42 +177,16 @@ fun LoginScreen(modifier: Modifier = Modifier) {
                     onClick = {
 
                     }){
-                    Text(text = "¿Olvidaste tu contraseña?",
-                        fontSize = 16.sp,
-                        color = Color.White.copy(alpha = 0.9f),
-                        fontWeight = FontWeight.Medium,
-                        textAlign = TextAlign.End,
-                        textDecoration = TextDecoration.Underline
-                    )
+
+                    Text200bold(text = "¿Olvidaste tu contraseña?")
                 }
             }
 
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Button(
+            Btn_SiguienteGreen(titte = "Iniciar") {}
 
-                shape = RoundedCornerShape(20.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Green300
-                ),
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(53.dp)
-
-                ,
-                onClick = {
-                    //authViewModel.login(email, password)
-                },
-              //  enabled = authState.value != AuthState.Loading
-            ) {
-                Text(
-                    text = "Iniciar",
-                    color = Color(0xFF171520),
-                    fontWeight = FontWeight.Bold,
-                    fontSize = 16.sp
-                )
-            }
         }
 
         Spacer(modifier = Modifier.height(8.dp))
@@ -281,80 +194,15 @@ fun LoginScreen(modifier: Modifier = Modifier) {
         TextButton(onClick = {
             // navController.navigate("signup")
         }) {
-            Text(text = "¿No tienes una cuenta?",
+
+            Text200bold(text = "¿No tienes una cuenta?",
                 color = Color.White)
-            Text(text = "  Registrarse",
-                color = Green300
-            )
+            Text200bold(text = "Registrarse",
+                color = Green300)
+
         }
         Spacer(modifier = Modifier.height(8.dp))
-        /*
-        dividerOr()
-
-        Row {
-            Button(
-                shape = RoundedCornerShape(20.dp),
-                colors = ButtonDefaults.buttonColors(
-                    containerColor = Color.White.copy(alpha = 0.1f)
-                ),
-                modifier = Modifier
-                    .width(70.dp)
-                    .height(60.dp)
-                ,
-                onClick = {
-
-                },
-
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.google_icon),
-                    contentDescription =  "",
-
-                )
-            }
-
-        }
-*/
-    }
-}
-
-
-@Composable
-private fun fondoLogin(modifier: Modifier = Modifier) {
-    Box (
-        modifier = Modifier
-            .fillMaxSize()
-            .background(
-                Brush.linearGradient(
-                    0.0f to Dark900,
-                    100.0f to Dark900,
-                    start = Offset.Zero,
-                    end = Offset.Infinite
-                )
-            )){
-        Box (
-            modifier = Modifier
-                .graphicsLayer {
-                    translationY = -900f
-                    translationX = 300f
-                }
-
-                .size(500.dp)
-
-                .blur(radius = 300.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
-                .clip(CircleShape)
-                .background(
-                    Green300.copy(alpha = 0.8f)
-                    /*  brush = Brush.verticalGradient(listOf(
-                        Color.Transparent,
-                        GreenBase.copy(alpha = 0.6f)
-                    ))*/
-
-
-                )
-                .align(Alignment.TopCenter)
-
-        )
 
     }
 }
+

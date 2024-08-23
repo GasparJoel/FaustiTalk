@@ -23,7 +23,7 @@ fun Btn_SiguienteGreen(
 ){
     Button(
 
-        shape = RoundedCornerShape(15.dp),
+        shape = RoundedCornerShape(20.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Green300
         ),
