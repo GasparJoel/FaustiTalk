@@ -58,3 +58,43 @@ fun BgFondoCuestion(modifier: Modifier = Modifier) {
 
     }
 }
+
+@Composable
+fun BgFondoPrincipal(modifier: Modifier = Modifier) {
+
+    Box (
+        modifier = androidx.compose.ui.Modifier
+            .fillMaxSize()
+            .background(
+                Brush.linearGradient(
+                    0.0f to Color(0xFF171520),
+                    100.0f to Color(0xFF171520),
+                    start = Offset.Zero,
+                    end = Offset.Infinite
+                )
+            )){
+        Box (
+            modifier = androidx.compose.ui.Modifier
+                .graphicsLayer {
+                    translationY = -850f
+                }
+
+                .size(500.dp)
+
+                .blur(radius = 300.dp, edgeTreatment = BlurredEdgeTreatment.Unbounded)
+                .clip(CircleShape)
+                .background(
+                    Color(0xFF76F083).copy(alpha = 0.8f)
+                    /*  brush = Brush.verticalGradient(listOf(
+                        Color.Transparent,
+                        GreenBase.copy(alpha = 0.6f)
+                    ))*/
+
+
+                )
+                .align(Alignment.TopCenter)
+
+        )
+
+    }
+}

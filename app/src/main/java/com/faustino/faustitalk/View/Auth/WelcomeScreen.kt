@@ -38,12 +38,13 @@ import com.faustino.faustitalk.R
 import com.faustino.faustitalk.View.Components.Butons.Btn_CrearCuenta
 import com.faustino.faustitalk.View.Components.Butons.IconButtonWithText
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
+import com.faustino.faustitalk.View.Components.Fondos.BgFondoPrincipal
 
-@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
+/*@Preview(device = "spec:width=1344px,height=2992px,dpi=480")*/
 @Composable
 fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit = {}) {
 
-    BgFondoCuestion();
+    BgFondoPrincipal();
 
 
     Column (
@@ -115,7 +116,6 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
             textAlign = TextAlign.Center,
             color = Color.White,
             lineHeight = 14.sp
-
         )
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -157,7 +157,8 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
                 fontWeight = FontWeight.Bold,
                 fontSize = 16.sp,
                 textAlign = TextAlign.Center,
-                modifier = Modifier.fillMaxWidth()
+                modifier = Modifier.fillMaxWidth(),
+
             )
 
         }
