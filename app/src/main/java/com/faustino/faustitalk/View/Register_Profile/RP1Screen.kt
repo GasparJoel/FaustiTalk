@@ -115,7 +115,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
         CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su nombre de usuario" )
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(titte = "Continuar")
+        //Btn_SiguienteGreen(titte = "Continuar")
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
         Spacer(modifier = androidx.compose.ui.Modifier.weight(1f))

@@ -103,7 +103,7 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(titte = "Continuar")
+
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
