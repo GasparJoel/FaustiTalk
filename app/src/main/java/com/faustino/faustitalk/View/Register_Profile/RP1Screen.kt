@@ -60,7 +60,7 @@ fun RPDoc1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Mo
             .padding(horizontal = 32.dp),
 
         ){
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
+        Spacer(modifier = androidx.compose.ui.Modifier.height(25.dp))
         Row (
             modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
             horizontalArrangement = Arrangement.Center

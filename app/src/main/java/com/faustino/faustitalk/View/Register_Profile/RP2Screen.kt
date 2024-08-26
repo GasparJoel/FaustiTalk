@@ -15,8 +15,13 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material3.DropdownMenuItem
+import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExposedDropdownMenuBox
+import androidx.compose.material3.ExposedDropdownMenuDefaults
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -47,7 +52,7 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .padding(horizontal = 32.dp)
     ) {
-        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
         Box(
             modifier = Modifier
@@ -96,7 +101,7 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-
+        MenuGenero()
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -105,4 +110,42 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
     }
+}
+@OptIn(ExperimentalMaterial3Api::class)
+@Composable
+fun MenuGenero(){
+     val list = listOf("one","two","tree");
+    var selectText by remember {
+        mutableStateOf(list[0])
+    }
+
+    var isExpanded by remember{
+        mutableStateOf(false)
+    }
+
+    ExposedDropdownMenuBox(
+        expanded =isExpanded ,
+        onExpandedChange = {isExpanded=!isExpanded}
+    ) {
+        TextField(
+            modifier = Modifier.menuAnchor(),
+            value = selectText,
+            onValueChange ={},
+            readOnly = true,
+            trailingIcon = {ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)}
+        )
+        ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded=false }) {
+            list.forEachIndexed{index,text ->
+                DropdownMenuItem(
+                    text = { Text(text = text) },
+                    onClick = { selectText=list[index]
+                    isExpanded=false
+                    },
+                    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+
+                )
+            }
+        }
+    }
+    Text(text = "Currentrly select : "+ selectText)
 }
