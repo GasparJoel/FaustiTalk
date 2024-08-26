@@ -13,6 +13,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.faustino.faustitalk.Navigation.NavigationWrapper
@@ -25,20 +26,21 @@ class MainActivity : ComponentActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        installSplashScreen()
         enableEdgeToEdge()
         setContent {
             navHostController = rememberNavController()
 
             FaustiTalkTheme {
-/*
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     NavigationWrapper(modifier = Modifier.padding(innerPadding) , navHostController = navHostController)
 
                 }
-*/
+/*
                 Surface(modifier = Modifier.fillMaxSize()){
                     RP4Screen()
-                }
+                }**/
             }
         }
     }
