@@ -10,15 +10,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.FaustiTalk"
+        android:theme="@style/Theme.FaustiTalk.MySplash"
         tools:targetApi="31">
         <!-- Actividad de Principal -->
-        <!--
+
                 <activity
                     android:name=".MainActivity"
                     android:exported="true"
                     android:label="@string/app_name"
-                    android:theme="@style/Theme.FaustiTalk">
+                    android:theme="@style/Theme.FaustiTalk.MySplash">
                     <intent-filter>
                         <action android:name="android.intent.action.MAIN" />
 
@@ -26,17 +26,17 @@
                     </intent-filter>
                 </activity>
 
-        -->
+
                 <!-- Nueva actividad de prueba -->
+        <!--
+                <activity android:name=".ComponentsTestActivity"
+                    android:exported="true">
+                    <intent-filter>
+                        <action android:name="android.intent.action.MAIN" />
+                        <category android:name="android.intent.category.LAUNCHER" />
+                    </intent-filter>
+                </activity>
+        -->
+            </application>
 
-        <activity android:name=".ComponentsTestActivity"
-            android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
-        </activity>
-
-    </application>
-
-</manifest>
+        </manifest>
