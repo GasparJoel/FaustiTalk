@@ -34,7 +34,7 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 
 
-@Preview
+//@Preview
 @Composable
 fun RP3Screen(modifier: Modifier = Modifier) {
     BgFondoCuestion()

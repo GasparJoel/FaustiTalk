@@ -28,6 +28,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 import com.faustino.faustitalk.View.Components.Inputs.CustomDatePicker
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
@@ -58,7 +59,7 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
                 tint = Color.White,
                 modifier = Modifier
                     .align(Alignment.CenterStart)
-                    .size(24.dp)
+                    .size(45.dp)
             )
 
             Text(
@@ -99,7 +100,7 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        //Btn_SiguienteGreen(titte = "Continuar")
+        Btn_SiguienteGreen(titte = "Continuar", onClick = {})
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
