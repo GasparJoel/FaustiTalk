@@ -1,6 +1,8 @@
 package com.faustino.faustitalk.View.Register_Profile
 
 import android.app.DatePickerDialog
+import androidx.compose.foundation.background
+import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -12,6 +14,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Person
@@ -29,6 +32,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -114,7 +118,7 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MenuGenero(){
-     val list = listOf("one","two","tree");
+     val list = listOf("FEMENINO","MASCULINO");
     var selectText by remember {
         mutableStateOf(list[0])
     }
@@ -125,7 +129,10 @@ fun MenuGenero(){
 
     ExposedDropdownMenuBox(
         expanded =isExpanded ,
-        onExpandedChange = {isExpanded=!isExpanded}
+        onExpandedChange = {isExpanded=!isExpanded},
+                modifier = Modifier.background(Color.White.copy(alpha = 0.04f), RoundedCornerShape(15.dp))
+                    .border(1.dp, Color.Transparent, RoundedCornerShape(15.dp))
+            .clip(RoundedCornerShape(25.dp))
     ) {
         TextField(
             modifier = Modifier.menuAnchor(),
@@ -134,7 +141,12 @@ fun MenuGenero(){
             readOnly = true,
             trailingIcon = {ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)}
         )
-        ExposedDropdownMenu(expanded = isExpanded, onDismissRequest = { isExpanded=false }) {
+        ExposedDropdownMenu(
+            expanded = isExpanded,
+            onDismissRequest = { isExpanded=false }
+
+
+        ) {
             list.forEachIndexed{index,text ->
                 DropdownMenuItem(
                     text = { Text(text = text) },
