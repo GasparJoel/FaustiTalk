@@ -31,6 +31,7 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         enableEdgeToEdge()
         setContent {
+
             val navController = rememberNavController()
 
             FaustiTalkTheme {
