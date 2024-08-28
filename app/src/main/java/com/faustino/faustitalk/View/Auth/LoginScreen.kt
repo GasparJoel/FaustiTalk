@@ -49,8 +49,10 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 
 import com.faustino.faustitalk.R
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
@@ -63,7 +65,7 @@ import com.faustino.faustitalk.ui.theme.Green300
 
 @Preview
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier) {
+fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authViewModel: AuthViewModel) {
 
 
 

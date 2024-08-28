@@ -48,8 +48,8 @@ fun Btn_SiguienteGreen(
 
 @Composable
 fun Btn_CrearCuenta(
-    titte:String
-
+    titte:String,
+    onClick: () -> Unit
 ){
     Button(
 
@@ -63,7 +63,7 @@ fun Btn_CrearCuenta(
 
         ,
         onClick = {
-            //navController.navigate("signup")
+            onClick()
         },
 
         ) {

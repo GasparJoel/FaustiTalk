@@ -40,6 +40,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
@@ -180,6 +181,7 @@ fun SignupScreen(modifier: Modifier = Modifier, ) {
                 ,
                 shape = RoundedCornerShape(20.dp),
                 singleLine = true,
+                textStyle = TextStyle(color=Color.White),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Green300, // Color del borde cuando está enfocado
                     unfocusedBorderColor = Color.Transparent, // Color del borde cuando no está enfocado
@@ -212,7 +214,7 @@ fun SignupScreen(modifier: Modifier = Modifier, ) {
                 shape = RoundedCornerShape(20.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 singleLine = true,
-
+                textStyle = TextStyle(color=Color.White),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Green300, // Color del borde cuando está enfocado
                     unfocusedBorderColor = Color.Transparent, // Color del borde cuando no está enfocado

@@ -14,9 +14,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
+import androidx.navigation.NavController
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
 import com.faustino.faustitalk.Navigation.NavigationWrapper
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Register_Profile.RP4Screen
 import com.faustino.faustitalk.ui.theme.FaustiTalkTheme
 
@@ -29,18 +31,14 @@ class MainActivity : ComponentActivity() {
         installSplashScreen()
         enableEdgeToEdge()
         setContent {
-            navHostController = rememberNavController()
+            val navController = rememberNavController()
 
             FaustiTalkTheme {
 
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    NavigationWrapper(modifier = Modifier.padding(innerPadding) , navHostController = navHostController)
-
+                    NavigationWrapper(modifier = Modifier.padding(innerPadding), authViewModel = AuthViewModel(), navController = navController)
                 }
-/*
-                Surface(modifier = Modifier.fillMaxSize()){
-                    RP4Screen()
-                }**/
+
             }
         }
     }

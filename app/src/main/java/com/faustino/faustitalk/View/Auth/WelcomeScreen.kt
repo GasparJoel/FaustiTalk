@@ -40,7 +40,7 @@ import com.faustino.faustitalk.View.Components.Butons.IconButtonWithText
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoPrincipal
 
-/*@Preview(device = "spec:width=1344px,height=2992px,dpi=480")*/
+@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit = {}) {
 
@@ -119,7 +119,7 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
         )
         Spacer(modifier = Modifier.height(15.dp))
 
-        Btn_CrearCuenta(titte = "Crear una cuenta")
+        Btn_CrearCuenta(titte = "Crear una cuenta", onClick = {navigateToSignUp()})
 
         Spacer(modifier = Modifier.height(15.dp))
 
