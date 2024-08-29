@@ -26,6 +26,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -52,6 +53,7 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 
 import com.faustino.faustitalk.R
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
@@ -76,6 +78,17 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
     var password by remember {
         mutableStateOf("")
     }
+    val context = LocalContext.current
+    val authState = authViewModel.authState.observeAsState()
+    LaunchedEffect(authState.value) {
+        when(authState.value){
+            is AuthState.Authenticated ->navController.navigate("RP1Screen")
+            is AuthState.Error -> Toast.makeText(context,
+                (authState.value as AuthState.Error).message,Toast.LENGTH_SHORT).show()
+            else ->Unit
+        }
+    }
+
     var hiddenPasswordIcon by remember { mutableStateOf(false) }
 
     val icon = if (hiddenPasswordIcon){
@@ -187,7 +200,7 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Btn_SiguienteGreen(titte = "Iniciar") {}
+            Btn_SiguienteGreen( "Iniciar" , onClick = {authViewModel.login(email,password)},enabled=authState.value != AuthState.Loading )
 
         }
 

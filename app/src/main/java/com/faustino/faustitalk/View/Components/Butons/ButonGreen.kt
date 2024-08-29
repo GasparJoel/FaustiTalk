@@ -16,29 +16,25 @@ import com.faustino.faustitalk.ui.theme.Green300
 
 @Composable
 fun Btn_SiguienteGreen(
-
-    titte:String,
-    onClick: () -> Unit
-
-){
+    title: String,
+    onClick: () -> Unit,
+    enabled: Boolean // Añadido el parámetro 'enabled'
+) {
     Button(
-
         shape = RoundedCornerShape(20.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = Green300
         ),
         modifier = androidx.compose.ui.Modifier
             .fillMaxWidth()
-            .height(50.dp)
-
-        ,
+            .height(50.dp),
         onClick = {
             onClick()
         },
-
-        ) {
+        enabled = enabled // Pasar el parámetro 'enabled' aquí
+    ) {
         Text(
-            text = titte,
+            text = title,
             color = Color(0xFF171520),
             fontWeight = FontWeight.Bold,
             fontSize = 16.sp
