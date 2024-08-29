@@ -22,6 +22,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.BlurredEdgeTreatment
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.draw.clip
@@ -33,6 +34,8 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 
@@ -41,9 +44,9 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 
 
-@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
+//@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
-fun RP1Screen(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier) {
+fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
 
     //Valores de los outlineText
 

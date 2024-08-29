@@ -63,7 +63,7 @@ import com.faustino.faustitalk.View.Components.Texts.Text300
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
-@Preview
+
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authViewModel: AuthViewModel) {
 
@@ -194,7 +194,7 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
         Spacer(modifier = Modifier.height(8.dp))
 
         TextButton(onClick = {
-            // navController.navigate("signup")
+             navController.navigate("signup")
         }) {
 
             Text200bold(text = "¿No tienes una cuenta?",

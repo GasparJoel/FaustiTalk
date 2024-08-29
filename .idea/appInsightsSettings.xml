@@ -9,10 +9,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.faustino.faustitalk" />
+                  <option name="mobileSdkAppId" value="1:789640903345:android:b3f3c30e34b5c0c9f44090" />
+                  <option name="projectId" value="faustitalk" />
+                  <option name="projectNumber" value="789640903345" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />

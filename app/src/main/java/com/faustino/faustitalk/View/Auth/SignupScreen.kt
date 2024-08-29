@@ -26,6 +26,7 @@ import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
@@ -48,13 +49,16 @@ import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavController
 import com.faustino.faustitalk.R
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
-@Preview
+
 @Composable
-fun SignupScreen(modifier: Modifier = Modifier, ) {
+fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
 
 
     var email by remember {
@@ -64,8 +68,16 @@ fun SignupScreen(modifier: Modifier = Modifier, ) {
         mutableStateOf("")
     }
     var hiddenPasswordIcon by remember { mutableStateOf(false) }
-
-
+    val context = LocalContext.current
+    val authState = authViewModel.authState.observeAsState()
+    LaunchedEffect(authState.value) {
+        when(authState.value){
+            is AuthState.Authenticated ->navController.navigate("RP1Screen")
+            is AuthState.Error -> Toast.makeText(context,
+                (authState.value as AuthState.Error).message,Toast.LENGTH_SHORT).show()
+            else ->Unit
+        }
+    }
 
     val icon = if (hiddenPasswordIcon) {
         painterResource(id = R.drawable.eye_open_password)
@@ -249,7 +261,7 @@ fun SignupScreen(modifier: Modifier = Modifier, ) {
 
                 ,
                 onClick = {
-                   // authViewModel.signup(email,password)
+                    authViewModel.signup(email,password)
                 },
                 //enabled = authState.value != AuthState.Loading
             ) {
@@ -265,7 +277,7 @@ fun SignupScreen(modifier: Modifier = Modifier, ) {
         Spacer(modifier = Modifier.height(8.dp))
 
         TextButton(onClick = {
-           // navController.navigate("login")
+            navController.navigate("login")
         }) {
             Text(text = "¿Ya tienes una cuenta?",
                 color = Color.White)
@@ -285,8 +297,8 @@ private fun fondoLogin(modifier: Modifier = Modifier) {
             .fillMaxSize()
             .background(
                 Brush.linearGradient(
-                    0.0f to Dark900 ,
-                    100.0f to Dark900 ,
+                    0.0f to Dark900,
+                    100.0f to Dark900,
                     start = Offset.Zero,
                     end = Offset.Infinite
                 )

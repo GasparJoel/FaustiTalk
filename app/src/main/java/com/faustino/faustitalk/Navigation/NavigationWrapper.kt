@@ -31,10 +31,10 @@ fun NavigationWrapper(modifier: Modifier = Modifier, authViewModel: AuthViewMode
         }
 
         composable("signup") {
-            SignupScreen()
+            SignupScreen(modifier, navController, authViewModel)
         }
         composable("RP1Screen") {
-            RP1Screen()
+            RP1Screen(modifier, navController, authViewModel)
         }
 
 
