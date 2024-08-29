@@ -81,7 +81,7 @@ fun RP4Screen(modifier: Modifier = Modifier) {
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Btn_SiguienteGreen(titte = "Continuar" , onClick = { })
+        Btn_SiguienteGreen(title = "Continuar" , onClick = { },enabled = true)
         Spacer(modifier = Modifier.height(50.dp))
     }
 

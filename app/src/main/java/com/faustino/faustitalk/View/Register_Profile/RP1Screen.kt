@@ -131,7 +131,7 @@ fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authV
         CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su nombre de usuario" )
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(titte = "Continuar", onClick = {})
+        Btn_SiguienteGreen(title = "Continuar", onClick = {  }, enabled = true)
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
         Spacer(modifier = androidx.compose.ui.Modifier.weight(1f))

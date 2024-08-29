@@ -2,7 +2,6 @@ package com.faustino.faustitalk.View.Auth
 
 import android.widget.Toast
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -46,13 +45,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.text.input.VisualTransformation
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.faustino.faustitalk.Navigation.Graphs.AuthScreen
+import com.faustino.faustitalk.Navigation.Graphs.Graph
 import com.faustino.faustitalk.R
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
+import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
@@ -72,7 +73,10 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, au
     val authState = authViewModel.authState.observeAsState()
     LaunchedEffect(authState.value) {
         when(authState.value){
-            is AuthState.Authenticated ->navController.navigate("RP1Screen")
+            is AuthState.Authenticated ->
+                navController.navigate(Graph.MAIN_SCREEN){
+                    popUpTo(AuthScreen.Login.route){inclusive = true}
+                }
             is AuthState.Error -> Toast.makeText(context,
                 (authState.value as AuthState.Error).message,Toast.LENGTH_SHORT).show()
             else ->Unit
@@ -179,30 +183,7 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, au
                 fontWeight = FontWeight.Medium,
                 modifier = Modifier.padding(bottom = 5.dp)
             )
-            OutlinedTextField(
-
-
-                value = email,
-                onValueChange = {
-                    email = it
-                },
-                // label = {Text(text = "Email") },
-                placeholder = { Text("Ejemplo: Jose25", color = Color.White.copy(alpha = 0.5f)) },
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(56.dp)
-                ,
-                shape = RoundedCornerShape(20.dp),
-                singleLine = true,
-                textStyle = TextStyle(color=Color.White),
-                colors = OutlinedTextFieldDefaults.colors(
-                    focusedBorderColor = Green300, // Color del borde cuando está enfocado
-                    unfocusedBorderColor = Color.Transparent, // Color del borde cuando no está enfocado
-                    focusedLabelColor = Green300,
-                    unfocusedContainerColor = Color.White.copy(alpha = 0.1f),
-                    focusedContainerColor = Color.White.copy(alpha = 0.04f)
-                )
-            )
+            CustomOutlinedTextField(value = email, onValueChange = {email = it}, placeholder = "juan@jemplo.com")
 
             Spacer(modifier = Modifier.height(8.dp))
             Text(text = "Contraseña",
@@ -224,7 +205,7 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, au
 
                 //.clip(RoundedCornerShape(15.dp))
                 ,
-                shape = RoundedCornerShape(20.dp),
+                shape = RoundedCornerShape(15.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 singleLine = true,
                 textStyle = TextStyle(color=Color.White),

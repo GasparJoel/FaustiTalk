@@ -44,7 +44,7 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
-fun RPDoc2Screen(modifier: Modifier = Modifier) {
+fun RP2Screen(modifier: Modifier = Modifier) {
 
     //Valores de los outlineText
     var out_fecha_nacimiento by remember { mutableStateOf("") }
@@ -109,7 +109,7 @@ fun RPDoc2Screen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(titte = "Continuar", onClick = {})
+        Btn_SiguienteGreen(title = "Continuar", onClick = {},enabled = true)
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
