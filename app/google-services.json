@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "789640903345",
+    "project_id": "faustitalk",
+    "storage_bucket": "faustitalk.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:789640903345:android:b3f3c30e34b5c0c9f44090",
+        "android_client_info": {
+          "package_name": "com.faustino.faustitalk"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD8jp0p_9JifQLgJ7L3_zh7lifT_B9tnzA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
