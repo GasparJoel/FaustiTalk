@@ -31,8 +31,8 @@ import androidx.compose.ui.unit.dp
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun RegisterDropdownMenu(listOf: List<String>,  value: (String) -> Unit) {
-    val list = listOf("SELECCIONAR","MASCULINO","FEMENINO","PREFIERO NO DECIRLO");
+fun RegisterDropdownMenu(list: List<String>,  value: (String) -> Unit) {
+
     var selectText by remember {
         mutableStateOf(list[0])
     }
