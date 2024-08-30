@@ -5,8 +5,11 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.gestures.FlingBehavior
 import androidx.compose.foundation.gestures.ScrollableDefaults
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.ExperimentalLayoutApi
+import androidx.compose.foundation.layout.FlowRow
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
@@ -15,13 +18,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-
+import androidx.compose.foundation.lazy.grid.GridCells
+import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
+import androidx.compose.foundation.lazy.grid.itemsIndexed
 import androidx.compose.foundation.lazy.itemsIndexed
-
+import androidx.compose.foundation.lazy.staggeredgrid.LazyVerticalStaggeredGrid
+import androidx.compose.foundation.lazy.staggeredgrid.StaggeredGridCells
+import androidx.compose.foundation.lazy.staggeredgrid.itemsIndexed
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
-
+import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -45,6 +53,7 @@ import com.faustino.faustitalk.View.Components.Texts.Text300
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
+@OptIn(ExperimentalLayoutApi::class)
 @Preview
 @Composable
 fun RP4Screen(modifier: Modifier = Modifier) {
@@ -60,13 +69,12 @@ fun RP4Screen(modifier: Modifier = Modifier) {
         Spacer(modifier = Modifier.height(28.dp))
         CustomTextCuestions(titulo = "Elige tus Intereses")
         Spacer(modifier = Modifier.height(10.dp))
-
         LazyColumn(
             modifier = Modifier
                 .weight(1f)
                 .fillMaxWidth(),
             contentPadding = PaddingValues(vertical = 16.dp),
-           // columns = GridCells.Fixed(2)
+            // columns = GridCells.Fixed(2)
         ) {
             itemsIndexed(items) { index, item ->
                 Box(contentAlignment = Alignment.CenterStart){
@@ -74,18 +82,47 @@ fun RP4Screen(modifier: Modifier = Modifier) {
 
                 }
 
-
-
             }
         }
+        /*
+        FlowRow(
+            modifier = Modifier
+                .weight(1f)
+                .fillMaxWidth(),
+//contentPadding = PaddingValues(vertical = 16.dp),
+// columns = GridCells.Fixed(2)
+        ) {
+            items.forEach { item ->
+                //Box(contentAlignment = Alignment.CenterStart){
+                GridItemSelect(item = item)
+                //   }
+
+            }
+        }*/
         Spacer(modifier = Modifier.height(20.dp))
         Btn_SiguienteGreen(title = "Continuar" , onClick = { },enabled = true)
         Spacer(modifier = Modifier.height(50.dp))
     }
 
+
+
 }
+/*
+FlowRow(
+modifier = Modifier
+.weight(1f)
+.fillMaxWidth(),
+//contentPadding = PaddingValues(vertical = 16.dp),
+// columns = GridCells.Fixed(2)
+) {
+    items.forEach { item ->
+        //Box(contentAlignment = Alignment.CenterStart){
+        GridItemSelect(item = item)
+        //   }
 
-
+    }
+}
+*/
 
 @Composable
 fun GridItemSelect(item:ItemSelectInterest) {
@@ -116,13 +153,13 @@ fun GridItemSelect(item:ItemSelectInterest) {
             },
 
             )
-        {
+        {/*
             //Box( contentAlignment = Alignment.CenterStart) {
                 if(hiddenIconSelect){
                     Image(painter = painterResource(id = R.drawable.ic_checkselect), contentDescription = "" , modifier = Modifier.padding(start = 2.dp, end = 6.dp))
                 }else{
+                }*/
                     Text(modifier = Modifier.padding(end = 4.dp), text = item.emoji , fontSize = 20.sp, )
-                }
 
                 Text(
                     modifier = Modifier

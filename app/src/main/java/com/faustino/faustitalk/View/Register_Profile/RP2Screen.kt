@@ -16,6 +16,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.ArrowDropDown
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.DropdownMenuItem
@@ -38,6 +39,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
+import com.faustino.faustitalk.View.Components.DropdownMenus.RegisterDropdownMenu
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 import com.faustino.faustitalk.View.Components.Inputs.CustomDatePicker
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
@@ -48,6 +50,7 @@ fun RP2Screen(modifier: Modifier = Modifier) {
 
     //Valores de los outlineText
     var out_fecha_nacimiento by remember { mutableStateOf("") }
+    var genero by remember { mutableStateOf("") }
 
     BgFondoCuestion()
     Column(
@@ -105,9 +108,12 @@ fun RP2Screen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        MenuGenero()
+        RegisterDropdownMenu(
+            generos_list,
+            value = { genero = it })
 
-        Spacer(modifier = Modifier.height(25.dp))
+        //Text(text = "Currentrly select : "+ genero)
+        Spacer(modifier = Modifier.height(20.dp))
 
         Btn_SiguienteGreen(title = "Continuar", onClick = {},enabled = true)
 
@@ -115,49 +121,7 @@ fun RP2Screen(modifier: Modifier = Modifier) {
 
     }
 }
-@OptIn(ExperimentalMaterial3Api::class)
-@Composable
-fun MenuGenero(){
-     val list = listOf("FEMENINO","MASCULINO");
-    var selectText by remember {
-        mutableStateOf(list[0])
-    }
-
-    var isExpanded by remember{
-        mutableStateOf(false)
-    }
-
-    ExposedDropdownMenuBox(
-        expanded =isExpanded ,
-        onExpandedChange = {isExpanded=!isExpanded},
-                modifier = Modifier.background(Color.White.copy(alpha = 0.04f), RoundedCornerShape(15.dp))
-                    .border(1.dp, Color.Transparent, RoundedCornerShape(15.dp))
-            .clip(RoundedCornerShape(25.dp))
-    ) {
-        TextField(
-            modifier = Modifier.menuAnchor(),
-            value = selectText,
-            onValueChange ={},
-            readOnly = true,
-            trailingIcon = {ExposedDropdownMenuDefaults.TrailingIcon(expanded = isExpanded)}
-        )
-        ExposedDropdownMenu(
-            expanded = isExpanded,
-            onDismissRequest = { isExpanded=false }
 
 
-        ) {
-            list.forEachIndexed{index,text ->
-                DropdownMenuItem(
-                    text = { Text(text = text) },
-                    onClick = { selectText=list[index]
-                    isExpanded=false
-                    },
-                    contentPadding = ExposedDropdownMenuDefaults.ItemContentPadding
+private val generos_list = listOf("SELECCIONAR","MASCULINO","FEMENINO","PREFIERO NO DECIRLO")
 
-                )
-            }
-        }
-    }
-    //Text(text = "Currentrly select : "+ selectText)
-}
