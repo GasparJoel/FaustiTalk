@@ -107,7 +107,7 @@ fun RP2Screen(modifier: Modifier = Modifier) {
 
         MenuGenero()
 
-        Spacer(modifier = Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(25.dp))
 
         Btn_SiguienteGreen(title = "Continuar", onClick = {},enabled = true)
 
@@ -159,5 +159,5 @@ fun MenuGenero(){
             }
         }
     }
-    Text(text = "Currentrly select : "+ selectText)
+    //Text(text = "Currentrly select : "+ selectText)
 }
