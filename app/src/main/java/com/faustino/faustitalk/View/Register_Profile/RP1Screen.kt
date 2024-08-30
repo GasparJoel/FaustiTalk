@@ -45,8 +45,6 @@ import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
-
-
 //@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
