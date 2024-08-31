@@ -21,8 +21,10 @@ class MainActivity : ComponentActivity() {
             FaustiTalkTheme {
 
                 RootNavigationGraph()
-
             }
         }
     }
 }
+//enableEdgeToEdge()
+//https://developer.android.com/develop/ui/views/layout/edge-to-edge-manually?hl=es-419
+//https://developer.android.com/develop/ui/views/layout/edge-to-edge?hl=es-419#kotlin

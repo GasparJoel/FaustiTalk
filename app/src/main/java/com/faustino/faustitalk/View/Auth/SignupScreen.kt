@@ -77,6 +77,10 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, au
                 navController.navigate(Graph.MAIN_SCREEN){
                     popUpTo(AuthScreen.Login.route){inclusive = true}
                 }
+            is AuthState.IncompleteProfile -> {
+                navController.navigate("rp1ScreePrueba")
+            }
+
             is AuthState.Error -> Toast.makeText(context,
                 (authState.value as AuthState.Error).message,Toast.LENGTH_SHORT).show()
             else ->Unit
@@ -243,6 +247,9 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, au
                 ,
                 onClick = {
                     authViewModel.signup(email,password)
+
+
+
                 },
                 //enabled = authState.value != AuthState.Loading
             ) {

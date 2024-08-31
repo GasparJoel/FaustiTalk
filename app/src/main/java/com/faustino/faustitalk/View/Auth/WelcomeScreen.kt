@@ -1,8 +1,7 @@
 package com.faustino.faustitalk.View.Auth
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
+
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -10,42 +9,62 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.livedata.observeAsState
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.BlurredEdgeTreatment
-import androidx.compose.ui.draw.blur
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.graphicsLayer
-import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.faustino.faustitalk.ui.theme.Green300
+import androidx.navigation.NavHostController
+import com.faustino.faustitalk.Navigation.Graphs.AuthScreen
+import com.faustino.faustitalk.Navigation.Graphs.Graph
 import com.faustino.faustitalk.R
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_CrearCuenta
 import com.faustino.faustitalk.View.Components.Butons.IconButtonWithText
-import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoPrincipal
 
-@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
+//@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
-fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit = {}) {
+fun WelcomeScreen(
+    authViewModel: AuthViewModel,
+    navController: NavHostController
+) {
+
+
+    val authState = authViewModel.authState.observeAsState()
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
+
+    LaunchedEffect(authState.value) {
+        when (authState.value){
+            is AuthState.Authenticated ->
+                navController.navigate(Graph.MAIN_SCREEN){
+                    popUpTo(AuthScreen.Login.route){inclusive = true}
+                }
+            is AuthState.IncompleteProfile -> {
+                navController.navigate("rp1ScreePrueba")
+            }
+            is AuthState.Error -> Toast.makeText(context,
+                (authState.value as AuthState.Error).message, Toast.LENGTH_SHORT).show()
+            else -> Unit
+        }
+    }
 
     BgFondoPrincipal();
-
 
     Column (
         // verticalArrangement = Arrangement.Bottom,
@@ -119,12 +138,15 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
         )
         Spacer(modifier = Modifier.height(15.dp))
 
-        Btn_CrearCuenta(titte = "Crear una cuenta", onClick = {navigateToSignUp()})
+        Btn_CrearCuenta(titte = "Crear una cuenta", onClick = {navController.navigate(AuthScreen.SignUp.route)})
 
         Spacer(modifier = Modifier.height(15.dp))
 
         IconButtonWithText(imageResource = R.drawable.icon_google, buttonText = "Continuar con Google") {
-            
+            authViewModel.LoginToGoogle(
+                context = context,
+                scope = scope
+            )
         }
 
         Spacer(modifier = Modifier.height(15.dp))
@@ -146,7 +168,7 @@ fun WelcomeScreen(navigateToLogin: () -> Unit = {}, navigateToSignUp: () -> Unit
 
 
             onClick = {
-                navigateToLogin()
+                navController.navigate(AuthScreen.Login.route)
             },
 
             ) {

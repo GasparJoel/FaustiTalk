@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.View.Register_Profile
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -32,11 +33,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
+import com.faustino.faustitalk.Navigation.Graphs.AuthScreen
+import com.faustino.faustitalk.Navigation.Graphs.Graph
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
@@ -50,20 +54,26 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
 
 
-    val authState = authViewModel.authState.observeAsState()
 
-    LaunchedEffect(authState.value) {
-        when(authState.value){
-            is AuthState.Unauthenticated -> navController.navigate("login")
-            else->Unit
-        }
-    }
 
     //Valores de los outlineText
 
     var out_nombre by remember { mutableStateOf("") }
     var out_apellido by remember { mutableStateOf("") }
     var out_usuario by remember { mutableStateOf("") }
+
+
+//
+    val authState = authViewModel.authState.observeAsState()
+    LaunchedEffect(authState.value) {
+        when(authState.value){
+            is AuthState.Authenticated ->
+                navController.navigate(Graph.MAIN_SCREEN){
+                    popUpTo(AuthScreen.Login.route){inclusive = true}
+                }
+            else ->Unit
+        }
+    }
 
     BgFondoCuestion()
     Column (
@@ -129,7 +139,11 @@ fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authV
         CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su nombre de usuario" )
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(title = "Continuar", onClick = {  }, enabled = true)
+
+        //completa el registro  -- solo prueba
+        Btn_SiguienteGreen(title = "Continuar",{ authViewModel.completeUserProfile(out_nombre,out_apellido,out_usuario) }, enabled = true)
+
+
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
         Spacer(modifier = androidx.compose.ui.Modifier.weight(1f))

@@ -8,6 +8,7 @@ import com.faustino.faustitalk.View.Auth.LoginScreen
 import com.faustino.faustitalk.View.Auth.SignupScreen
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Auth.WelcomeScreen
+import com.faustino.faustitalk.View.Register_Profile.RP1Screen
 
 fun NavGraphBuilder.authNavGraph(navHostController: NavHostController, authViewModel: AuthViewModel) {
 
@@ -28,8 +29,16 @@ fun NavGraphBuilder.authNavGraph(navHostController: NavHostController, authViewM
         }
         composable(route = AuthScreen.Welcome.route){
             WelcomeScreen(
-                navigateToLogin = { navHostController.navigate(AuthScreen.Login.route) },
-                navigateToSignUp = { navHostController.navigate(AuthScreen.SignUp.route) }
+                navController = navHostController,
+                authViewModel = authViewModel,
+            )
+        }
+
+        // RUTA DE PRUEBA A RP1
+        composable(route = "rp1ScreePrueba"){
+            RP1Screen(
+                navController = navHostController,
+                authViewModel = authViewModel,
             )
         }
 
@@ -37,6 +46,13 @@ fun NavGraphBuilder.authNavGraph(navHostController: NavHostController, authViewM
     }
 
 }
+
+
+
+
+
+
+
 sealed class AuthScreen(val route:String){
     //  object SPLASH : AuthScreen("SPLASH")
     object Welcome : AuthScreen("WELCOME")
