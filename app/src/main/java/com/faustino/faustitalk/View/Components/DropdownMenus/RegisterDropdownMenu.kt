@@ -55,12 +55,10 @@ fun RegisterDropdownMenu(
             disabledContentColor = Color.White,
             disabledContainerColor = Color.White.copy(alpha = 0.04f),
         ),
-        shape = RoundedCornerShape(15.dp),
-
+        shape = RoundedCornerShape(15.dp)
 
     ) {
         Row(
-
             horizontalArrangement = Arrangement.SpaceBetween,
             verticalAlignment = Alignment.CenterVertically,
             modifier = Modifier
