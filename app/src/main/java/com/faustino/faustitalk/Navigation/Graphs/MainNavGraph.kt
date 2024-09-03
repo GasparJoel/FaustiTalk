@@ -18,23 +18,23 @@ fun MainNavGraph(navHostController: NavHostController, authViewModel: AuthViewMo
         navController = navHostController,
         startDestination = BottonBarScreen.Home.route,
         route = Graph.MAIN_SCREEN
-    ){
-        composable(route = BottonBarScreen.Home.route){
+    ) {
+        composable(route = BottonBarScreen.Home.route) {
             HomeScreen()
         }
-        composable(route = BottonBarScreen.Inbox.route){
+        composable(route = BottonBarScreen.Inbox.route) {
             InboxScreen()
         }
-        composable(route = BottonBarScreen.Post.route){
+        composable(route = BottonBarScreen.Post.route) {
             PostScreen()
         }
-        composable(route = BottonBarScreen.Profile.route){
-            ProfileScreen(authViewModel,navHostController)
+        composable(route = BottonBarScreen.Profile.route) {
+            ProfileScreen(authViewModel, navHostController)
         }
-        composable(route = BottonBarScreen.Search.route){
+        composable(route = BottonBarScreen.Search.route) {
             SearchScreen()
         }
-
     }
 }
+
 
