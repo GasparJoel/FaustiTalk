@@ -9,22 +9,20 @@ import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 
 @Composable
 fun RootNavigationGraph() {
-    val navHostController = rememberNavController()
+    val rootNavHostController = rememberNavController()
     val authViewModel = AuthViewModel()
     NavHost(
-        navController = navHostController,
+        navController = rootNavHostController,
         startDestination = Graph.AUTHENTICATION,
         route = Graph.ROOT
     ){
 
-        authNavGraph(navHostController,authViewModel)
         composable(route = Graph.MAIN_SCREEN){
-            MainScreen(authViewModel = authViewModel)
+            MainScreen(rootNavHostController = rootNavHostController, authViewModel = authViewModel)
         }
+        authNavGraph(rootNavHostController,authViewModel)
 
     }
-
-
 
 }
 

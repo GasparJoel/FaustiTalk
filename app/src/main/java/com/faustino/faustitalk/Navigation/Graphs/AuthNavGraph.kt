@@ -10,32 +10,26 @@ import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Auth.WelcomeScreen
 import com.faustino.faustitalk.View.Register_Profile.RP1Screen
 
-fun NavGraphBuilder.authNavGraph(navHostController: NavHostController, authViewModel: AuthViewModel) {
+fun NavGraphBuilder.authNavGraph(rootNavHostController: NavHostController, authViewModel: AuthViewModel) {
     navigation(
         route = Graph.AUTHENTICATION,
         startDestination = AuthScreen.Welcome.route
     ) {
         composable(route = AuthScreen.Login.route) {
-            LoginScreen(navController = navHostController, authViewModel = authViewModel)
+            LoginScreen(navController = rootNavHostController, authViewModel = authViewModel)
         }
         composable(route = AuthScreen.SignUp.route) {
-            SignupScreen(navController = navHostController, authViewModel = authViewModel)
+            SignupScreen(navController = rootNavHostController, authViewModel = authViewModel)
         }
         composable(route = AuthScreen.Welcome.route) {
-            WelcomeScreen(navController = navHostController, authViewModel = authViewModel)
+            WelcomeScreen(navController = rootNavHostController, authViewModel = authViewModel)
         }
         composable(route = "rp1ScreePrueba") {
-            RP1Screen(navController = navHostController, authViewModel = authViewModel)
+            RP1Screen(navController = rootNavHostController, authViewModel = authViewModel)
         }
     }
 
 }
-
-
-
-
-
-
 
 sealed class AuthScreen(val route:String){
     //  object SPLASH : AuthScreen("SPLASH")

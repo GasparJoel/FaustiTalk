@@ -19,7 +19,7 @@ googleGmsGoogleServices = "4.4.2"
 googleid = "1.1.1"
 
 firebaseBom = "33.2.0"
-roomCompiler = "2.6.1"
+
 
 
 [libraries]
@@ -51,7 +51,7 @@ play-services-auth = { module = "com.google.android.gms:play-services-auth", ver
 androidx-credentials = { module = "androidx.credentials:credentials", version.ref = "credentials" }
 
 androidx-runtime-livedata = { group = "androidx.compose.runtime", name = "runtime-livedata", version.ref = "runtimeLivedata" }
-androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

@@ -19,7 +19,6 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             FaustiTalkTheme {
-
                 RootNavigationGraph()
             }
         }
@@ -28,3 +27,5 @@ class MainActivity : ComponentActivity() {
 //enableEdgeToEdge()
 //https://developer.android.com/develop/ui/views/layout/edge-to-edge-manually?hl=es-419
 //https://developer.android.com/develop/ui/views/layout/edge-to-edge?hl=es-419#kotlin
+
+//https://www.youtube.com/watch?v=lRWGFy7IWBY Status Bar transparente y Insets en Jetpack Compose

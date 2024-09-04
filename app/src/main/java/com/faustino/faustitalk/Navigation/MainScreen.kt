@@ -29,19 +29,26 @@ import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
 @Composable
-fun MainScreen(navHostController: NavHostController = rememberNavController(),authViewModel: AuthViewModel) {
+fun MainScreen(
+    homeNavHostController: NavHostController = rememberNavController(),
+    rootNavHostController: NavHostController,
+    authViewModel: AuthViewModel
+) {
 
     Scaffold (
-        bottomBar = { BottomBarCustom(navController = navHostController)},
+        bottomBar = { BottomBarCustom(navController = homeNavHostController)},
     ){ paddingValues ->
         var modifier = Modifier.padding(paddingValues)
-        MainNavGraph(navHostController,authViewModel)
+        MainNavGraph(
+            rootNavHostController = rootNavHostController,
+            homeNavHostController = homeNavHostController,
+            authViewModel = authViewModel)
     }
 
 }
 
 @Composable
-fun BottomBarCustom(navController: NavController) {
+fun BottomBarCustom(navController: NavHostController) {
     val  selected = remember {
         mutableStateOf( BottonBarScreen.Home.icon )
     }
