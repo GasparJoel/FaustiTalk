@@ -55,7 +55,12 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 //@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
-fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authViewModel: AuthViewModel) {
+fun RP1Screen(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    authViewModel: AuthViewModel,
+    continueClick: () -> Unit = {}
+) {
 
 
 
@@ -79,25 +84,15 @@ fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authV
         }
     }
 
-    BgFondoCuestion()
+//    BgFondoCuestion()
     Column (
         // verticalArrangement = Arrangement.Bottom,
         horizontalAlignment = Alignment.Start,
-        modifier = androidx.compose.ui.Modifier
+        modifier = modifier
             .fillMaxSize()
-            .padding(horizontal = 32.dp),
+            .padding(horizontal = 32.dp)
 
         ){
-        Spacer(modifier = androidx.compose.ui.Modifier.padding(WindowInsets.statusBars.asPaddingValues()))
-        Row (
-            modifier = androidx.compose.ui.Modifier.fillMaxWidth(),
-            horizontalArrangement = Arrangement.Center
-        ){
-            Text(text = "Crear Perfil",
-                fontSize = 22.sp,
-                color = Color.White
-            )
-        }
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
         Column (
 
@@ -145,7 +140,7 @@ fun RP1Screen(modifier: Modifier = Modifier, navController: NavController, authV
 
 
         //completa el registro  -- solo prueba
-        Btn_SiguienteGreen(title = "Continuar",{ authViewModel.completeUserProfile(out_nombre,out_apellido,out_usuario) }, enabled = true)
+        Btn_SiguienteGreen(title = "Continuar",{ continueClick()}, enabled = true)
 
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))

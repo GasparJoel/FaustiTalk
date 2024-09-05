@@ -46,41 +46,19 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
-fun RP2Screen(modifier: Modifier = Modifier) {
+fun RP2Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
 
     //Valores de los outlineText
     var out_fecha_nacimiento by remember { mutableStateOf("") }
     var genero by remember { mutableStateOf("") }
 
-    BgFondoCuestion()
+    //BgFondoCuestion()
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp)
     ) {
-        Spacer(modifier = Modifier.height(25.dp))
-
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowLeft,
-                contentDescription = "Icono de perfil",
-                tint = Color.White,
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .size(45.dp)
-            )
-
-            Text(
-                text = "Crear Perfil",
-                fontSize = 22.sp,
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
 
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -115,7 +93,7 @@ fun RP2Screen(modifier: Modifier = Modifier) {
         //Text(text = "Currentrly select : "+ genero)
         Spacer(modifier = Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(title = "Continuar", onClick = {},enabled = true)
+        Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick()},enabled = true)
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 

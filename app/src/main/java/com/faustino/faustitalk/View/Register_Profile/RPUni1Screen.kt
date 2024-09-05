@@ -1,17 +1,10 @@
 package com.faustino.faustitalk.View.Register_Profile
 
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.KeyboardArrowLeft
-import androidx.compose.material3.Icon
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -19,21 +12,17 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.compose.ui.unit.sp
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.DropdownMenus.RegisterDropdownMenu
-import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
-import com.faustino.faustitalk.View.Components.Inputs.CustomDatePicker
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 
 
 @Preview
 @Composable
-fun RPUni1Screen() {
+fun RPUni1Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
     var carreras by remember { mutableStateOf(listOf<String>()) }
 
     var facultad by remember { mutableStateOf("SELECCIONAR FACULTAD") }
@@ -42,35 +31,14 @@ fun RPUni1Screen() {
 
     var ciclo by remember { mutableStateOf("") }
 
-    BgFondoCuestion()
+  //BgFondoCuestion()
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp)
     ) {
-        Spacer(modifier = Modifier.height(25.dp))
 
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowLeft,
-                contentDescription = "Icono de perfil",
-                tint = Color.White,
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .size(45.dp)
-            )
-
-            Text(
-                text = "Crear Perfil",
-                fontSize = 22.sp,
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
 
         Spacer(modifier = Modifier.height(15.dp))
 
@@ -117,7 +85,7 @@ fun RPUni1Screen() {
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-        Btn_SiguienteGreen(title = "Continuar", onClick = {},enabled = true)
+        Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick()},enabled = true)
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
@@ -144,6 +112,7 @@ private data class Facultad(
     val nombre:String,
     val escuelas: List<String>
 )
+
 private val facultades_list = listOf(
     Facultad(
         "FACULTAD DE BROMATOLOGÍA Y NUTRICIÓN",

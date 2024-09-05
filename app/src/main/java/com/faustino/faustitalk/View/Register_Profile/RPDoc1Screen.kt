@@ -35,37 +35,17 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 @Preview
 @Composable
-fun RPDoc1Screen(modifier: Modifier = Modifier) {
+fun RPDoc1Screen(modifier: Modifier = Modifier, continueClick: () -> Unit={}) {
 
     var espaciality by remember { mutableStateOf("") }
-    BgFondoCuestion()
+   // BgFondoCuestion()
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp),
     ) {
-        Spacer(modifier = Modifier.padding(WindowInsets.statusBars.asPaddingValues()))
-        Box(
-            modifier = Modifier
-                .fillMaxWidth()
-        ) {
-            Icon(
-                imageVector = Icons.Default.KeyboardArrowLeft,
-                contentDescription = "Icono de perfil",
-                tint = Color.White,
-                modifier = Modifier
-                    .align(Alignment.CenterStart)
-                    .size(45.dp)
-            )
 
-            Text(
-                text = "Crear Perfil",
-                fontSize = 22.sp,
-                color = Color.White,
-                modifier = Modifier.align(Alignment.Center)
-            )
-        }
         Spacer(modifier = Modifier.height(20.dp))
 
         CustomTextCuestions(titulo = "Especialidad")
@@ -75,7 +55,7 @@ fun RPDoc1Screen(modifier: Modifier = Modifier) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(title = "Continuar", onClick = { /*TODO*/ }, enabled = true )
+        Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick() }, enabled = true )
 
 
     }
