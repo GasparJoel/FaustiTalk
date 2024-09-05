@@ -368,5 +368,3 @@ sealed class RegisterProfile(val route:String){
     object RPUni2 : RegisterProfile("RPUni2")
 
 }
-
-
