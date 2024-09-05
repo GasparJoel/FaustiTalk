@@ -1,10 +1,9 @@
 package com.faustino.faustitalk.View.Register_Profile
 
+import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -18,9 +17,12 @@ import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
@@ -29,45 +31,101 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.faustino.faustitalk.R
-import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
+import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
+import com.faustino.faustitalk.ui.theme.Green300
 
 
 
-@Preview
 @Composable
-fun RP3Screen(modifier: Modifier = Modifier) {
-    BgFondoCuestion()
+fun RP3Screen( modifier: Modifier, continueClick: (tipo: Int) -> Unit = {}) {
+
+    var selectedProfile by remember { mutableStateOf(0) }
+
+
+  //  BgFondoCuestion()
     Column (
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp),
     ){
-        Spacer(modifier = Modifier.height(28.dp))
+        //Spacer(modifier = androidx.compose.ui.Modifier.padding(WindowInsets.statusBars.asPaddingValues()))
+        Spacer(modifier = Modifier.height(26.dp))
+
         CustomTextCuestions(titulo = "Selecciona tu perfil")
-        Spacer(modifier = Modifier.height(26.dp))
-        btn_SelecconPerfil(imageResource = R.drawable.ic_estudent,text = "Estudiante", onClick = {})
-        Spacer(modifier = Modifier.height(26.dp))
-        btn_SelecconPerfil(imageResource = R.drawable.ic_book,text = "Docente", onClick = {})
-        Spacer(modifier = Modifier.height(26.dp))
-        btn_SelecconPerfil(imageResource = R.drawable.ic_administrative,text = "Administrativo", onClick = {})
 
+        Spacer(modifier = Modifier.height(26.dp))
+
+        btn_SelecconPerfil(
+            imageResource = R.drawable.ic_estudent,
+            text = "Estudiante",
+            onClick = {
+                        selectedProfile = 1
+                      },
+            selected = selectedProfile == 1
+        )
+
+        Spacer(modifier = Modifier.height(26.dp))
+
+        btn_SelecconPerfil(
+            imageResource = R.drawable.ic_book,
+            text = "Docente",
+            onClick = {
+                        selectedProfile = 2
+                      },
+            selected = selectedProfile == 2
+        )
+
+        Spacer(modifier = Modifier.height(26.dp))
+
+        btn_SelecconPerfil(
+            imageResource = R.drawable.ic_administrative,
+            text = "Administrativo",
+            onClick = {
+                        selectedProfile = 3
+                      },
+            selected = selectedProfile == 3
+        )
+        Spacer(modifier = Modifier.height(26.dp))
+
+        Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick(selectedProfile) }, enabled = selectedProfile != 0)
     }
-
 }
 
 @Composable
-fun btn_SelecconPerfil(modifier: Modifier = Modifier, imageResource: Int , text:String,  onClick: () -> Unit) {
+fun btn_SelecconPerfil(modifier: Modifier = Modifier, imageResource: Int , text:String,  onClick: () -> Unit, selected:Boolean) {
+
+    /* if (selected){
+            return BorderStroke(1.dp, Color.White)
+            }else{
+                return BorderStroke(3.dp, Green300)
+            }*/
+    var coloBorder  = if (selected){
+        Green300
+    }else{
+        Color.White
+    }
+    var coloText = if (selected){
+        Green300.copy(alpha = 0.8f)
+    }else{
+        Color.White
+    }
+    var stroke  = if (selected){
+        3.dp
+    }else{
+        1.dp
+    }
+
 
     Button(
 
         shape = RoundedCornerShape(15.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = Color.White.copy(alpha = 0.10f)
+            containerColor = Color.White.copy(alpha = 0.05f)
 
         ),
-        border = BorderStroke(1.dp, Color.White),
+        border = BorderStroke(stroke,coloBorder),
         modifier = Modifier
             .fillMaxWidth()
             .height(80.dp)
@@ -85,7 +143,7 @@ fun btn_SelecconPerfil(modifier: Modifier = Modifier, imageResource: Int , text:
         ){
             Text(
                 text = text,
-                color = Color.White.copy(alpha = 0.9f),
+                color = coloText,
                 fontWeight = FontWeight.Normal,
                 fontSize = 25.sp
             )

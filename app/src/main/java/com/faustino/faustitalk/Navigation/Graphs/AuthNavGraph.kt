@@ -2,8 +2,10 @@ package com.faustino.faustitalk.Navigation.Graphs
 
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
+import com.faustino.faustitalk.Navigation.RegProfileScreen
 import com.faustino.faustitalk.View.Auth.LoginScreen
 import com.faustino.faustitalk.View.Auth.SignupScreen
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
@@ -24,10 +26,13 @@ fun NavGraphBuilder.authNavGraph(rootNavHostController: NavHostController, authV
         composable(route = AuthScreen.Welcome.route) {
             WelcomeScreen(navController = rootNavHostController, authViewModel = authViewModel)
         }
-        composable(route = "rp1ScreePrueba") {
-            RP1Screen(navController = rootNavHostController, authViewModel = authViewModel)
+        composable(route = AuthScreen.RegisterProfile.route){
+            RegProfileScreen(rootNavHostController = rootNavHostController, authViewModel = authViewModel)
         }
+
     }
+
+
 
 }
 
@@ -36,5 +41,6 @@ sealed class AuthScreen(val route:String){
     object Welcome : AuthScreen("WELCOME")
     object Login : AuthScreen("LOGIN")
     object SignUp : AuthScreen("SIGNUP")
+    object RegisterProfile : AuthScreen("REGISTERPROFILE")
     object Forgot : AuthScreen("FORGOT")
 }

@@ -31,7 +31,7 @@ import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.ui.theme.Dark900
 
 @Composable
-fun ProfileScreen(authViewModel: AuthViewModel, navHostController: NavHostController) {
+fun ProfileScreen(authViewModel: AuthViewModel, rootNavHostController: NavHostController) {
     var showDialog by remember { mutableStateOf(false) }
 
     Column(
@@ -65,7 +65,7 @@ fun ProfileScreen(authViewModel: AuthViewModel, navHostController: NavHostContro
                         authViewModel.signout()  // Lógica de cierre de sesión
 
                         // Navega a la pantalla de bienvenida y limpia las rutas anteriores
-                        navHostController.navigate(AuthScreen.Welcome.route) {
+                        rootNavHostController.navigate(AuthScreen.Welcome.route) {
                             popUpTo(AuthScreen.Welcome.route) { inclusive = true }
                             launchSingleTop = true // Evita que se creen múltiples instancias de la misma pantalla
                         }
