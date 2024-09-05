@@ -56,17 +56,17 @@ import com.faustino.faustitalk.ui.theme.Green300
 @OptIn(ExperimentalLayoutApi::class)
 @Preview
 @Composable
-fun RP4Screen(modifier: Modifier = Modifier) {
+fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
 
-    BgFondoCuestion()
+   // BgFondoCuestion()
     Column(
         horizontalAlignment = Alignment.Start,
-        modifier = Modifier
+        modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp),
     ) {
 
-        Spacer(modifier = Modifier.height(28.dp))
+        Spacer(modifier = Modifier.height(26.dp))
         CustomTextCuestions(titulo = "Elige tus Intereses")
         Spacer(modifier = Modifier.height(10.dp))
         LazyColumn(
@@ -231,3 +231,4 @@ private val items = listOf(
     ItemSelectInterest("🎧", "Podcasts"),
     ItemSelectInterest("🎻", "Violín")
 )
+

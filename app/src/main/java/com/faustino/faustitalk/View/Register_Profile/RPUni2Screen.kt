@@ -1,4 +1,9 @@
 package com.faustino.faustitalk.View.Register_Profile
 
-class RPUni2Screen {
+import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
+
+@Composable
+fun RPUni2Screen(modifier: Modifier = Modifier,  continueClick: () -> Unit={}) {
+
 }
