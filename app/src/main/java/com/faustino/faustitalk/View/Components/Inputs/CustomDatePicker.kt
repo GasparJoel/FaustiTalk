@@ -5,7 +5,6 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.border
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -14,7 +13,6 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
 import androidx.compose.material3.Icon
-import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
@@ -29,7 +27,9 @@ import androidx.compose.ui.unit.sp
 import java.util.Calendar
 
 @Composable
-fun CustomDatePicker() {
+fun CustomDatePicker(
+
+) {
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
 
@@ -48,6 +48,7 @@ fun CustomDatePicker() {
 
     Row(
         modifier = Modifier
+
             .fillMaxWidth()
             .height(56.dp)
             .background(Color.White.copy(alpha = 0.04f), RoundedCornerShape(15.dp))
@@ -77,5 +78,7 @@ fun CustomDatePicker() {
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun CustomDatePickerPreview() {
-    CustomDatePicker()
+    CustomDatePicker(
+
+    )
 }

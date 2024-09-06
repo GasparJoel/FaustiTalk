@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.View.Register_Profile
 
+import MetodosViewModel
 import android.app.DatePickerDialog
 import androidx.compose.foundation.background
 import androidx.compose.foundation.border
@@ -38,6 +39,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.DropdownMenus.RegisterDropdownMenu
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
@@ -47,6 +49,8 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun RP2Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
+
+    val metodosViewModel: MetodosViewModel = viewModel()
 
     //Valores de los outlineText
     var out_fecha_nacimiento by remember { mutableStateOf("") }
@@ -89,7 +93,13 @@ fun RP2Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
         //Text(text = "Currentrly select : "+ genero)
         Spacer(modifier = Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick()},enabled = true)
+        Btn_SiguienteGreen(
+            title = "Continuar",
+            onClick = {
+                continueClick()
+                metodosViewModel.completeRP2Screen(out_fecha_nacimiento,genero)
+                      },
+            enabled = true)
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 

@@ -38,6 +38,23 @@ class MetodosViewModel : ViewModel() {
                 }
         }
     }
+    fun completeRP2Screen(fechaNacimiento: String, genero: String) {
+        val user = auth.currentUser
+        if (user != null) {
+            val userRef = db.collection("users").document(user.uid)
+            val updatedUserMap = mapOf(
+                "fecha_nacimiento" to fechaNacimiento,
+                "genero" to genero
+            )
+            userRef.update(updatedUserMap)
+                .addOnSuccessListener {
+                    _authState.value = AuthState.Unauthenticated
+                }
+                .addOnFailureListener { e ->
+                    _authState.value = AuthState.Error("Error al actualizar el perfil: ${e.message}")
+                }
+        }
+    }
 
     fun fetchUserData() {
         val user = auth.currentUser
