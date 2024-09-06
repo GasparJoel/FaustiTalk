@@ -135,6 +135,7 @@ fun RP1Screen(
         )
         Spacer(modifier = Modifier.height(20.dp))
 
+
         // Botón para continuar
         Btn_SiguienteGreen(
             title = "Continuar",
