@@ -99,12 +99,12 @@ fun RP1Screen(
             horizontalAlignment = Alignment.CenterHorizontally,
 
             ){
-            CustomTextCuestions(titulo = "¿Cuál es tu nombre?")
+            CustomTextCuestions(titulo = "¿Cuál es tu Nombre?")
 
         }
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-         CustomOutlinedTextField(value = out_nombre, onValueChange ={ out_nombre=it} , placeholder ="Ingrese su nombre" )
+         CustomOutlinedTextField(value = out_nombre, onValueChange ={ out_nombre=it} , placeholder ="Ingrese su Nombre" )
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
@@ -128,14 +128,14 @@ fun RP1Screen(
 
             ){
 
-            CustomTextCuestions(titulo ="Nombre de usuario" )
+            CustomTextCuestions(titulo ="Nombre de Usuario" )
 
 
         }
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
-        CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su nombre de usuario" )
+        CustomOutlinedTextField(value = out_usuario, onValueChange ={ out_usuario=it} , placeholder ="Ingrese su Nombre de Usuario" )
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
 
 

@@ -70,11 +70,7 @@ fun RP2Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        CustomDatePicker(
-//            label = "01/01/2000",
-//            selectedDate = out_fecha_nacimiento,
-//            onDateSelected = { out_fecha_nacimiento = it }
-        )
+        CustomDatePicker()
 
         Spacer(modifier = Modifier.height(20.dp))
 

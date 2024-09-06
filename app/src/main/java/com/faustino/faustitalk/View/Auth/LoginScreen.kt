@@ -66,8 +66,6 @@ import com.faustino.faustitalk.ui.theme.Green300
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authViewModel: AuthViewModel) {
 
-
-
     var email by remember {
         mutableStateOf("")
     }
@@ -215,7 +213,7 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
              navController.navigate("signup")
         }) {
 
-            Text200bold(text = "¿No tienes una cuenta?",
+            Text200bold(text = "¿No tienes una cuenta? ",
                 color = Color.White)
             Text200bold(text = "Registrarse",
                 color = Green300)

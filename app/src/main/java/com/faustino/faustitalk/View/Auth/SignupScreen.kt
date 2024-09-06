@@ -78,7 +78,9 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, au
                     popUpTo(AuthScreen.Login.route){inclusive = true}
                 }
             is AuthState.IncompleteProfile -> {
-                navController.navigate("rp1ScreePrueba")
+                navController.navigate(AuthScreen.RegisterProfile.route){
+                    popUpTo(AuthScreen.Login.route){inclusive = true}
+                }
             }
 
             is AuthState.Error -> Toast.makeText(context,
