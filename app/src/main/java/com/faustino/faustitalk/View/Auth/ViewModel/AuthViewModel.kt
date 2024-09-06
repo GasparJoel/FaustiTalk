@@ -39,8 +39,8 @@ class AuthViewModel:ViewModel() {
         if (auth.currentUser ==null){
             _authState.value=AuthState.Unauthenticated
         }else{
-            //_authState.value=AuthState.Authenticated
-            checkUserProfile() // validacion
+            _authState.value=AuthState.Authenticated
+            //checkUserProfile() // validacion
         }
     }
 
@@ -102,10 +102,14 @@ class AuthViewModel:ViewModel() {
         val db = FirebaseFirestore.getInstance()
         val userMap = hashMapOf(
             "email" to email,
-            "name" to "",  // Campo que se completará en el perfil
-            "surname" to "",  // Campo que se completará en el perfil
-            "user" to "user", // Campo que se completará en el perfil
-            "profileComplete" to false // Marcador para verificar si el perfil está completo
+            "username" to "",
+            "name" to "",
+            "apellido" to "",
+            "fecha_nacimiento" to "",
+            "genero" to "",
+            "tipoperfil" to "",
+            "descripcion" to "",
+            "profileComplete" to false
         )
 
         db.collection("users").document(uid)
@@ -154,10 +158,14 @@ class AuthViewModel:ViewModel() {
             val userRef = db.collection("users").document(user.uid)
 
             val updatedUserMap = mapOf(
-                "name" to name,
                 "surname" to surname,
-                "user" to username,
-                "profileComplete" to true
+                "name" to name,
+                "apellido" to "",
+                "fecha_nacimiento" to "",
+                "genero" to "",
+                "tipoperfil" to "",
+                "descripcion" to "",
+                "profileComplete" to false
 
             )
 

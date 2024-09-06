@@ -17,7 +17,7 @@ class ComponentsTestActivity : ComponentActivity() {
         //enableEdgeToEdge()
         setContent {
            // ComponentsTestScreen()
-            RootNavigationGraph()
+            //RootNavigationGraph()
         }
     }
 }

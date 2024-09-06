@@ -66,8 +66,6 @@ import com.faustino.faustitalk.ui.theme.Green300
 @Composable
 fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authViewModel: AuthViewModel) {
 
-
-
     var email by remember {
         mutableStateOf("")
     }

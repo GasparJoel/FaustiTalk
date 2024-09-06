@@ -26,6 +26,9 @@ import com.faustino.faustitalk.View.Components.Items.ItemSelectInterest
 @Preview
 @Composable
 fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
+    // Crea una lista de estados para mantener si cada elemento está seleccionado o no
+    var selectedItems by remember { mutableStateOf(List(items.size) { false }) }
+
     Column(
         horizontalAlignment = Alignment.Start,
         modifier = modifier
@@ -45,8 +48,18 @@ fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
             horizontalArrangement = Arrangement.spacedBy(8.dp),
             verticalArrangement = Arrangement.spacedBy(8.dp)
         ) {
-            itemsIndexed(items) { _, item ->
-                GridItemSelect(item = item)
+            itemsIndexed(items) { index, item ->
+                // Pasa el estado de selección y una función para actualizarlo
+                GridItemSelect(
+                    item = item,
+                    isSelected = selectedItems[index],
+                    onSelectChange = {
+                        // Actualiza el estado de selección cuando el usuario hace clic
+                        selectedItems = selectedItems.toMutableList().apply {
+                            this[index] = !this[index]
+                        }
+                    }
+                )
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
@@ -56,11 +69,9 @@ fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
 }
 
 @Composable
-fun GridItemSelect(item: ItemSelectInterest) {
-    var hiddenIconSelect by remember { mutableStateOf(false) }
-
-    val colorButton = if (hiddenIconSelect) Green300 else Color.White.copy(0.09f)
-    val colorText = if (hiddenIconSelect) Dark900 else Color.White
+fun GridItemSelect(item: ItemSelectInterest, isSelected: Boolean, onSelectChange: () -> Unit) {
+    val colorButton = if (isSelected) Green300 else Color.White.copy(0.09f)
+    val colorText = if (isSelected) Dark900 else Color.White
 
     Button(
         shape = RoundedCornerShape(30.dp),
@@ -68,7 +79,7 @@ fun GridItemSelect(item: ItemSelectInterest) {
         modifier = Modifier
             .padding(4.dp)
             .fillMaxWidth(),
-        onClick = { hiddenIconSelect = !hiddenIconSelect }
+        onClick = onSelectChange
     ) {
         Text(modifier = Modifier.padding(end = 4.dp), text = item.emoji, fontSize = 17.sp)
         Text(

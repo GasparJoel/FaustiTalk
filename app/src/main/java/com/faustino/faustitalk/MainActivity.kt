@@ -5,11 +5,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.rememberNavController
+import com.faustino.faustitalk.Navigation.Graphs.Graph
 import com.faustino.faustitalk.Navigation.Graphs.RootNavigationGraph
-import com.faustino.faustitalk.View.Register_Profile.RP3Screen
-import com.faustino.faustitalk.View.Register_Profile.RP4Screen
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
+import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 
 import com.faustino.faustitalk.ui.theme.FaustiTalkTheme
 
@@ -20,11 +19,16 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         installSplashScreen()
         enableEdgeToEdge()
+        val authViewModel = AuthViewModel()
+        var route = Graph.AUTHENTICATION
 
+        if (authViewModel.authState.value == AuthState.Authenticated){
+            route = Graph.MAIN_SCREEN
+        }
 
         setContent {
             FaustiTalkTheme {
-                RootNavigationGraph()
+                RootNavigationGraph(authViewModel, route)
                 //RP3Screen()
             }
         }
