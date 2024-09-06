@@ -33,12 +33,13 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 
 //@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
+
 fun RP1Screen(
     modifier: Modifier = Modifier,
     navController: NavController,
     authViewModel: AuthViewModel,
     continueClick: () -> Unit = {}
-){
+) {
     // Obtener el ViewModel para manejar métodos
     val metodosViewModel: MetodosViewModel = viewModel()
 
@@ -49,6 +50,7 @@ fun RP1Screen(
     var out_nombre by remember { mutableStateOf("") }
     var out_apellido by remember { mutableStateOf("") }
     var out_usuario by remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
 
     // Observa los datos del usuario
     val userData by metodosViewModel.userData.observeAsState(emptyMap())
@@ -68,59 +70,87 @@ fun RP1Screen(
     // Manejo del estado de autenticación
     val authState = authViewModel.authState.observeAsState()
     LaunchedEffect(authState.value) {
-        when(authState.value){
+        when(authState.value) {
             is AuthState.Authenticated ->
-                navController.navigate(Graph.MAIN_SCREEN){
-                    popUpTo(AuthScreen.Login.route){inclusive = true}
+                navController.navigate(Graph.MAIN_SCREEN) {
+                    popUpTo(AuthScreen.Login.route) { inclusive = true }
                 }
             else -> Unit
         }
     }
 
-    Column (
+    // Verifica si los campos están vacíos
+    val isFormValid = out_nombre.isNotBlank() && out_apellido.isNotBlank() && out_usuario.isNotBlank()
+    val nombreError = if (out_nombre.isBlank()) "El nombre es obligatorio" else null
+    val apellidoError = if (out_apellido.isBlank()) "El apellido es obligatorio" else null
+    val usuarioError = if (out_usuario.isBlank()) "El nombre de usuario es obligatorio" else null
+
+    Column(
         horizontalAlignment = Alignment.Start,
         modifier = modifier
             .fillMaxSize()
             .padding(horizontal = 32.dp)
     ) {
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
-        Column (
+        Spacer(modifier = Modifier.height(15.dp))
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             CustomTextCuestions(titulo = "¿Cuál es tu nombre?")
         }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
-        CustomOutlinedTextField(value = out_nombre, onValueChange = { out_nombre = it }, placeholder = "Ingrese su nombre")
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
-        Column (
+        Spacer(modifier = Modifier.height(20.dp))
+        CustomOutlinedTextField(
+            value = out_nombre,
+            onValueChange = { out_nombre = it },
+            placeholder = "Ingrese su nombre",
+            isError = out_nombre.isBlank(),
+            errorMessage = nombreError
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             CustomTextCuestions(titulo = "¿Cuál es tu Apellido?")
         }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
-        CustomOutlinedTextField(value = out_apellido, onValueChange = { out_apellido = it }, placeholder = "Ingrese su Apellido")
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
-        Column (
+        Spacer(modifier = Modifier.height(20.dp))
+        CustomOutlinedTextField(
+            value = out_apellido,
+            onValueChange = { out_apellido = it },
+            placeholder = "Ingrese su Apellido",
+            isError = out_apellido.isBlank(),
+            errorMessage = apellidoError
+        )
+        Spacer(modifier = Modifier.height(20.dp))
+        Column(
             horizontalAlignment = Alignment.CenterHorizontally
-        ){
+        ) {
             CustomTextCuestions(titulo = "Nombre de usuario")
         }
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
-        CustomOutlinedTextField(value = out_usuario, onValueChange = { out_usuario = it }, placeholder = "Ingrese su nombre de usuario")
-        Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
+        CustomOutlinedTextField(
+            value = out_usuario,
+            onValueChange = { out_usuario = it },
+            placeholder = "Ingrese su nombre de usuario",
+            isError = out_usuario.isBlank(),
+            errorMessage = usuarioError
+        )
+        Spacer(modifier = Modifier.height(20.dp))
 
-        // Completa el registro -- solo prueba
+        // Botón para continuar
         Btn_SiguienteGreen(
             title = "Continuar",
             onClick = {
-                continueClick()
-                metodosViewModel.completeRP1Screen(out_nombre, out_apellido, out_usuario)
+                if (isFormValid) {
+                    continueClick()
+                    metodosViewModel.completeRP1Screen(out_nombre, out_apellido, out_usuario)
+                } else {
+                    errorMessage = "Todos los campos son obligatorios"
+                }
             },
-            enabled = true
+            enabled = isFormValid
         )
 
-        Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
-        Spacer(modifier = androidx.compose.ui.Modifier.weight(1f))
+        Spacer(modifier = Modifier.height(15.dp))
+        Spacer(modifier = Modifier.weight(1f))
     }
 }
 

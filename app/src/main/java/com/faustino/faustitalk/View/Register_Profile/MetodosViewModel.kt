@@ -31,7 +31,7 @@ class MetodosViewModel : ViewModel() {
             )
             userRef.update(updatedUserMap)
                 .addOnSuccessListener {
-                    _authState.value = AuthState.Authenticated
+                    _authState.value = AuthState.Unauthenticated
                 }
                 .addOnFailureListener { e ->
                     _authState.value = AuthState.Error("Error al actualizar el perfil: ${e.message}")
