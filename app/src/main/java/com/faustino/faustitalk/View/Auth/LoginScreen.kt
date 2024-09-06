@@ -6,6 +6,7 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -64,7 +65,11 @@ import com.faustino.faustitalk.ui.theme.Green300
 
 
 @Composable
-fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authViewModel: AuthViewModel) {
+fun LoginScreen(
+    modifier: Modifier = Modifier,
+    navController: NavController,
+    authViewModel: AuthViewModel
+) {
 
     var email by remember {
         mutableStateOf("")
@@ -76,27 +81,32 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
     val context = LocalContext.current
     val authState = authViewModel.authState.observeAsState()
     LaunchedEffect(authState.value) {
-        when(authState.value){
+        when (authState.value) {
             is AuthState.Authenticated ->
-                navController.navigate(Graph.MAIN_SCREEN){
-                    popUpTo(AuthScreen.Login.route){inclusive = true}
+                navController.navigate(Graph.MAIN_SCREEN) {
+                    popUpTo(AuthScreen.Login.route) { inclusive = true }
                 }
+
             is AuthState.IncompleteProfile -> {
-                navController.navigate(AuthScreen.RegisterProfile.route){
-                    popUpTo(AuthScreen.Login.route){inclusive = true}
+                navController.navigate(AuthScreen.RegisterProfile.route) {
+                    popUpTo(AuthScreen.Login.route) { inclusive = true }
                 }
             }
-            is AuthState.Error -> Toast.makeText(context,
-                (authState.value as AuthState.Error).message,Toast.LENGTH_SHORT).show()
-            else ->Unit
+
+            is AuthState.Error -> Toast.makeText(
+                context,
+                (authState.value as AuthState.Error).message, Toast.LENGTH_SHORT
+            ).show()
+
+            else -> Unit
         }
     }
 
     var hiddenPasswordIcon by remember { mutableStateOf(false) }
 
-    val icon = if (hiddenPasswordIcon){
+    val icon = if (hiddenPasswordIcon) {
         painterResource(id = R.drawable.eye_open_password)
-    } else{
+    } else {
         painterResource(id = R.drawable.eye_hidden_password)
     }
 
@@ -110,41 +120,46 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
                     listOf(Dark01Base, Dark02Base),
                 )
             )*/
-            .padding(horizontal = 32.dp)
-        ,
+            .padding(horizontal = 32.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally,
 
 
         ) {
 
-        Spacer(modifier = Modifier
-            .height(40.dp)
+        Spacer(
+            modifier = Modifier
+                .height(40.dp)
         )
-        Column (
+        Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier.fillMaxWidth()
-        ){
+        ) {
 
             Text300(text = "Iniciar sesión")
 
-            Spacer(modifier = Modifier
-                .height(10.dp)
-                .fillMaxWidth()
+            Spacer(
+                modifier = Modifier
+                    .height(10.dp)
+                    .fillMaxWidth()
             )
 
 
-            Text200(text ="Inicie sesión para continuar usando la aplicación." )
+            Text200(text = "Inicie sesión para continuar usando la aplicación.")
         }
         Spacer(modifier = Modifier.height(16.dp))
-        Column (
+        Column(
             horizontalAlignment = Alignment.Start,
             modifier = Modifier.fillMaxWidth()
-        ){
+        ) {
 
             Text250bold(text = "Email")
 
-            CustomOutlinedTextField(value = email, onValueChange = { email=it }, placeholder ="Ingrese su Email" )
+            CustomOutlinedTextField(
+                value = email,
+                onValueChange = { email = it },
+                placeholder = "Ingrese su Email"
+            )
 
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -157,7 +172,12 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
                     password = it
                 },
                 // label = {Text(text = "Password")},
-                placeholder = { Text("Ingrese su contraseña", color = Color.White.copy(alpha = 0.5f)) },
+                placeholder = {
+                    Text(
+                        "Ingrese su contraseña",
+                        color = Color.White.copy(alpha = 0.5f)
+                    )
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .height(56.dp)
@@ -167,7 +187,7 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
                 shape = RoundedCornerShape(15.dp),
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 singleLine = true,
-                textStyle = TextStyle(color=Color.White),
+                textStyle = TextStyle(color = Color.White),
                 colors = OutlinedTextFieldDefaults.colors(
                     focusedBorderColor = Green300, // Color del borde cuando está enfocado
                     unfocusedBorderColor = Color.Transparent, // Color del borde cuando no está enfocado
@@ -178,7 +198,8 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
                 trailingIcon = {
                     IconButton(
                         onClick = { hiddenPasswordIcon = !hiddenPasswordIcon },
-                        modifier = Modifier.padding(end = 8.dp)) {
+                        modifier = Modifier.padding(end = 8.dp)
+                    ) {
                         Icon(painter = icon, contentDescription = "Visible icon")
                     }
                 },
@@ -186,16 +207,14 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
                 else PasswordVisualTransformation()
 
             )
-            Column (
+            Column(
                 modifier = Modifier
                     .fillMaxWidth(),
                 horizontalAlignment = Alignment.End,
-            ){
+            ) {
                 TextButton(
-                    onClick = {
-
-                    }){
-
+                    onClick = {})
+                {
                     Text200bold(text = "¿Olvidaste tu contraseña?")
                 }
             }
@@ -203,22 +222,36 @@ fun LoginScreen(modifier: Modifier = Modifier,navController:NavController,authVi
 
             Spacer(modifier = Modifier.height(10.dp))
 
-            Btn_SiguienteGreen( "Iniciar" , onClick = {authViewModel.login(email,password)},enabled=authState.value != AuthState.Loading )
+            Btn_SiguienteGreen(
+                "Iniciar",
+                onClick = { authViewModel.login(email, password) },
+                enabled = authState.value != AuthState.Loading
+            )
 
         }
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        TextButton(onClick = {
-             navController.navigate("signup")
-        }) {
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(
+                text = "¿No tienes una cuenta? ",
+                color = Color.White
+            )
 
-            Text200bold(text = "¿No tienes una cuenta? ",
-                color = Color.White)
-            Text200bold(text = "Registrarse",
-                color = Green300)
-
+            TextButton(onClick = {
+                navController.navigate("signup")
+            }) {
+                Text200bold(
+                    text = "Registrarse",
+                    color = Green300
+                )
+            }
         }
+
         Spacer(modifier = Modifier.height(8.dp))
 
     }

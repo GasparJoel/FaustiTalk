@@ -58,6 +58,7 @@ fun CustomOutlinedTextField(
                 style = TextStyle(fontSize = 12.sp),
                 modifier = Modifier.padding(start = 16.dp, top = 4.dp)
             )
+
         }
     }
 }
