@@ -44,9 +44,8 @@ class AuthViewModel:ViewModel() {
         if (auth.currentUser == null) {
             _authState.value = AuthState.Unauthenticated
         } else {
-            _authState.value=AuthState.Loading
-
-            checkUserProfile() // validacion
+            _authState.value=AuthState.Authenticated
+            //checkUserProfile() // validacion
         }
     }
 

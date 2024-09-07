@@ -1,7 +1,6 @@
 package com.faustino.faustitalk
 
 import android.os.Bundle
-
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
@@ -23,37 +22,21 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         authViewModel = AuthViewModel()
+
         splashScreen = installSplashScreen()
 
-        splashScreen.setKeepOnScreenCondition {
-            // Mantener el splash visible mientras el estado es "Loading"
-            authViewModel.authState.value is AuthState.Loading
-        }
 
         enableEdgeToEdge()
         setContent {
-
-/*
             var route = Graph.AUTHENTICATION
-            if(authViewModel.authState.value == AuthState.Authenticated){
-                route = Graph.MAIN_SCREEN
-            }*/
+
 
             FaustiTalkTheme {
-                // Observa el estado de autenticación
-                val authState by authViewModel.authState.observeAsState(AuthState.Loading)
-
-                when (authState) {
-                    is AuthState.Authenticated -> {
-                        RootNavigationGraph(authViewModel, Graph.MAIN_SCREEN)
-                    }
-                    is AuthState.IncompleteProfile -> {
-                        RootNavigationGraph(authViewModel, Graph.AUTHENTICATION)
-                    }
-                    else -> {
-                        RootNavigationGraph(authViewModel, Graph.AUTHENTICATION)
-                    }
+                if(authViewModel.authState.value == AuthState.Authenticated){
+                    route = Graph.MAIN_SCREEN
                 }
+
+                RootNavigationGraph(authViewModel, route)
                 //RP3Screen()
             }
         }
@@ -61,10 +44,6 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
-        if(authViewModel.authState.value == AuthState.IncompleteProfile){
-           authViewModel.signout()
-        }
-
     }
 
 
