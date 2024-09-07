@@ -49,12 +49,20 @@ import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun RP2Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
+    
+    //Acá se debería comenzar a recibir el ViewModel del RP anterior y no crear uno nuevo
+    val metodosViewModel: MetodosViewModel = viewModel()
 
     val metodosViewModel: MetodosViewModel = viewModel()
 
     //Valores de los outlineText
     var out_fecha_nacimiento by remember { mutableStateOf("") }
-    var genero by remember { mutableStateOf("") }
+    var out_genero by remember { mutableStateOf("") }
+    var errorMessage by remember { mutableStateOf<String?>(null) }
+
+
+    val isFormValid = out_fecha_nacimiento.isNotBlank() && out_genero.isNotBlank()
+
 
     //BgFondoCuestion()
     Column(
@@ -88,18 +96,18 @@ fun RP2Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
 
         RegisterDropdownMenu(
             generos_list,
-            value = { genero = it })
+            value = { out_genero = it })
 
         //Text(text = "Currentrly select : "+ genero)
         Spacer(modifier = Modifier.height(20.dp))
 
-        Btn_SiguienteGreen(
-            title = "Continuar",
+        Btn_SiguienteGreen(title = "Continuar",
             onClick = {
                 continueClick()
-                metodosViewModel.completeRP2Screen(out_fecha_nacimiento,genero)
-                      },
-            enabled = true)
+                metodosViewModel.completeRP2Screen(out_fecha_nacimiento, out_genero)
+            },
+            enabled = true
+        )
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 

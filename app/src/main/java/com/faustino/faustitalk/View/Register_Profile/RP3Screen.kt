@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.View.Register_Profile
 
+import MetodosViewModel
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
@@ -30,6 +31,7 @@ import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.faustino.faustitalk.R
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
@@ -40,10 +42,16 @@ import com.faustino.faustitalk.ui.theme.Green300
 @Composable
 fun RP3Screen( modifier: Modifier, continueClick: (tipo: Int) -> Unit = {}) {
 
+    val metodosViewModel: MetodosViewModel = viewModel()
+
     var selectedProfile by remember { mutableStateOf(0) }
+    var out_perfil by remember { mutableStateOf("")}
+    //var errorMessage by remember { mutableStateOf<String?>(null) }
+
+    //val isFormValid = selectedProfile
 
 
-  //  BgFondoCuestion()
+    //  BgFondoCuestion()
     Column (
         horizontalAlignment = Alignment.Start,
         modifier = modifier
@@ -62,6 +70,7 @@ fun RP3Screen( modifier: Modifier, continueClick: (tipo: Int) -> Unit = {}) {
             text = "Estudiante",
             onClick = {
                         selectedProfile = 1
+                        out_perfil = "Estudiante"
                       },
             selected = selectedProfile == 1
         )
@@ -73,6 +82,7 @@ fun RP3Screen( modifier: Modifier, continueClick: (tipo: Int) -> Unit = {}) {
             text = "Docente",
             onClick = {
                         selectedProfile = 2
+                        out_perfil = "Docente"
                       },
             selected = selectedProfile == 2
         )
@@ -84,12 +94,19 @@ fun RP3Screen( modifier: Modifier, continueClick: (tipo: Int) -> Unit = {}) {
             text = "Administrativo",
             onClick = {
                         selectedProfile = 3
+                        out_perfil = "Administrativo"
                       },
             selected = selectedProfile == 3
         )
         Spacer(modifier = Modifier.height(26.dp))
 
-        Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick(selectedProfile) }, enabled = selectedProfile != 0)
+        Btn_SiguienteGreen(
+            title = "Continuar",
+            onClick = {
+                continueClick(selectedProfile)
+                metodosViewModel.completeRP3Screen(out_perfil)
+            },
+            enabled = selectedProfile != 0)
     }
 }
 
