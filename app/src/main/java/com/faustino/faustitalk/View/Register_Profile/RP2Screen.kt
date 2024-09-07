@@ -53,6 +53,8 @@ fun RP2Screen(modifier: Modifier = Modifier, continueClick: () -> Unit = {}) {
     //Acá se debería comenzar a recibir el ViewModel del RP anterior y no crear uno nuevo
     val metodosViewModel: MetodosViewModel = viewModel()
 
+    val metodosViewModel: MetodosViewModel = viewModel()
+
     //Valores de los outlineText
     var out_fecha_nacimiento by remember { mutableStateOf("") }
     var out_genero by remember { mutableStateOf("") }

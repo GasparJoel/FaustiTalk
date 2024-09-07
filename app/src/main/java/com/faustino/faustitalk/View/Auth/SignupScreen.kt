@@ -5,6 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -54,6 +55,7 @@ import com.faustino.faustitalk.R
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
+import com.faustino.faustitalk.View.Components.Texts.Text200bold
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
@@ -266,14 +268,20 @@ fun SignupScreen(modifier: Modifier = Modifier, navController: NavController, au
 
         Spacer(modifier = Modifier.height(8.dp))
 
-        TextButton(onClick = {
-            navController.navigate("login")
-        }) {
-            Text(text = "¿Ya tienes una cuenta?",
+        Row(
+            modifier = Modifier.fillMaxWidth(),
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.Center
+        ) {
+            Text(text = "¿Ya tienes una cuenta? ",
                 color = Color.White)
-            Text(text = "  Iniciar sesión",
-                color = Green300
-            )
+
+            TextButton(onClick = {
+                navController.navigate("login")
+            }) {
+                Text200bold(text = "Iniciar Sesión",
+                    color = Green300)
+            }
         }
 
     }
