@@ -72,6 +72,12 @@ fun RP4Screen(
         Btn_SiguienteGreen(
             title = "Continuar",
             onClick = {
+
+                // Obtén la lista de intereses seleccionados
+                val selectedInterests = getSelectedInterests(selectedItems)
+                // Llama a CompleteRP4Screen del ViewModel
+                metodosViewModel.CompleteRP4Screen(selectedInterests)
+
                 metodosViewModel.crearUsuario()
                 finishClick()
             },
@@ -101,6 +107,12 @@ fun GridItemSelect(item: ItemSelectInterest, isSelected: Boolean, onSelectChange
             textAlign = TextAlign.Center
         )
     }
+}
+
+// Función para obtener los intereses seleccionados
+fun getSelectedInterests(selectedItems: List<Boolean>): List<String> {
+    return items.filterIndexed { index, _ -> selectedItems[index] }
+        .map { it.text } // Extrae solo el texto de los intereses seleccionados
 }
 
 private val items = listOf(

@@ -15,7 +15,7 @@ class User {
     private var ciclo: String = ""
 
     private var especialidad: String = ""
-
+    private var intereses: MutableList<String> = mutableListOf()
 
 
     constructor()
@@ -139,6 +139,20 @@ class User {
 
     fun getDescripcion(): String {
         return this.descripcion
+    }
+    // Funciones para agregar, eliminar y obtener intereses
+    fun addInteres(interes: String) {
+        if (interes.isNotEmpty()) {
+            this.intereses.add(interes)
+        }
+    }
+
+    fun removeInteres(interes: String) {
+        this.intereses.remove(interes)
+    }
+
+    fun getIntereses(): List<String> {
+        return this.intereses
     }
 
 }

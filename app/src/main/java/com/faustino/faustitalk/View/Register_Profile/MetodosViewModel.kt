@@ -41,6 +41,11 @@ class MetodosViewModel : ViewModel() {
     fun completeRPDocSreen(especialidad:String){
         userC.setEspecialidad(especialidad)
     }
+    fun CompleteRP4Screen(intereses: List<String>) {
+        for (interes in intereses) {
+            userC.addInteres(interes) // Agrega cada interés al arreglo
+        }
+    }
 
     fun crearUsuario() {
         val user = auth.currentUser
@@ -82,13 +87,18 @@ class MetodosViewModel : ViewModel() {
                     }
 
                     // Crear la subcolección 'Intereses' usando el mismo uid
-                    val interesesData = mapOf(
-                        "interes1" to "Ejemplo de interés",
-                        "interes2" to "Otro interés"
-                    )
-                    userRef.collection("Intereses").document(user.uid).set(interesesData)
+                    val intereses = userC.getIntereses() // Supongamos que esto devuelve una lista de intereses
+                    val interesesData = intereses.mapIndexed { index, interes ->
+                        "interes${index + 1}" to interes
+                    }.toMap()
 
-                    _authState.value = AuthState.Authenticated
+                    userRef.collection("Intereses").document(user.uid).set(interesesData)
+                        .addOnSuccessListener {
+                            _authState.value = AuthState.Authenticated
+                        }
+                        .addOnFailureListener { e ->
+                            _authState.value = AuthState.Error("Error al almacenar intereses: ${e.message}")
+                        }
                 }
                 .addOnFailureListener { e ->
                     _authState.value = AuthState.Error("Error al actualizar el perfil: ${e.message}")
