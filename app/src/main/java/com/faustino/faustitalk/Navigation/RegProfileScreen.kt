@@ -1,12 +1,14 @@
 package com.faustino.faustitalk.Navigation
 
 import MetodosViewModel
+import android.app.AlertDialog
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContentTransitionScope
 
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -17,8 +19,13 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.systemBarsPadding
+import androidx.compose.foundation.shape.CircleShape
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.KeyboardArrowLeft
+import androidx.compose.material3.AlertDialog
+
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LinearProgressIndicator
@@ -32,6 +39,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -58,15 +66,32 @@ fun RegProfileScreen(
      rootNavHostController: NavHostController,
      authViewModel: AuthViewModel
 ) {
+
     var metodosViewModel = MetodosViewModel()
 
     var progress by remember { mutableStateOf(0.16f) }
+    var rp1estate by remember { mutableStateOf(true) }
+
+    var showDialog by remember { mutableStateOf(false) }
+
     Scaffold (
         topBar ={CustomTopAppBar(
             progress,
             navController = rpNavHostController ,
             onBackPress = {
-                    progress -= 0.16f // Disminuye el progreso al retroceder
+                val currentRoute = rpNavHostController.currentBackStackEntry?.destination?.route
+
+                if (currentRoute == RegisterProfile.RP1.route) {
+                    if (showDialog) {
+                        showDialog = false
+                    } else {
+                        showDialog = true
+                    }
+
+                }else{
+                    progress -= 0.16f
+                    rpNavHostController.popBackStack()
+                }
             })
         } ,
         modifier = Modifier.fillMaxSize()
@@ -98,11 +123,50 @@ fun RegProfileScreen(
                     rpNavHostController.navigate(RegisterProfile.RP2.route){
                       //  popUpTo(RegisterProfile.RP1.route){ inclusive = true}
                         progress += 0.16f
+                        rp1estate = false
                     }
                 }
                 BackHandler {
-                    progress -= 0.16f
-                    rpNavHostController.popBackStack() // Volver a la pantalla anterior
+                  //  progress -= 0.16f
+
+                    if (rp1estate){
+                        if (showDialog) {
+                            // Si ya se muestra el diálogo, no realizar la navegación hacia atrás
+                            showDialog = false
+                        } else {
+                            // Mostrar el diálogo cuando se presiona el botón de retroceso
+                            showDialog = true
+                        }
+
+                    }
+                     // Volver a la pantalla anterior
+                }
+
+                if (showDialog) {
+                    AlertDialog(
+                        onDismissRequest = { showDialog = false },
+                        title = { Text("Cancelar Registro") },
+                        text = { Text("¿Estás seguro de que deseas cancelar el registro de tu perfil?") },
+                        confirmButton = {
+                            Button(onClick = {
+                                showDialog = false
+                                authViewModel.signout()  // Lógica de cierre de sesión
+
+                                // Navegar a la pantalla de bienvenida y limpiar las rutas anteriores
+                                rootNavHostController.navigate(AuthScreen.Welcome.route) {
+                                    popUpTo(AuthScreen.RegisterProfile.route) { inclusive = true }
+                                    launchSingleTop = true // Evita que se creen múltiples instancias de la misma pantalla
+                                }
+                            }) {
+                                Text("Aceptar")
+                            }
+                        },
+                        dismissButton = {
+                            Button(onClick = { showDialog = false }) {
+                                Text("Cancelar")
+                            }
+                        }
+                    )
                 }
             }
             composable(route = RegisterProfile.RP2.route,
@@ -133,6 +197,7 @@ fun RegProfileScreen(
                 }
                 BackHandler {
                     progress -= 0.16f
+                    rp1estate = true
                     rpNavHostController.popBackStack() // Volver a la pantalla anterior
                 }
             }
@@ -325,19 +390,24 @@ fun CustomTopAppBar(
                     .fillMaxWidth()
 
             ) {
-                Icon(
-                    imageVector = Icons.Default.KeyboardArrowLeft,
-                    contentDescription = "Icono de perfil",
-                    tint = Color.White,
-                    modifier = Modifier
-                        .align(Alignment.CenterStart)
-                        .size(42.dp)
-                        .clickable { // Aquí se maneja el evento de retroceso
-                            onBackPress() // Llama a la función de retroceso proporcionada
-                            navController.popBackStack()
-                        }
+                Box(
+                    modifier = Modifier.clip(CircleShape)
+                ) {
+                    Icon(
+                        imageVector = Icons.Default.KeyboardArrowLeft,
+                        contentDescription = "Icono de perfil",
 
-                )
+                        tint = Color.White,
+                        modifier = Modifier
+                            .align(Alignment.CenterStart)
+                            .size(42.dp)
+                            .clickable { // Aquí se maneja el evento de retroceso
+                                onBackPress() // Llama a la función de retroceso proporcionada
+                                //  navController.popBackStack()
+                            }
+
+                    )
+                }
 
                 Text(
                     text = "Crear Perfil",

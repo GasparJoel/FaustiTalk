@@ -34,7 +34,7 @@ fun CustomDatePicker(
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
 
-    var selectedDate by remember { mutableStateOf("01/10/2000") }
+    var selectedDate by remember { mutableStateOf("dd/mm/yyyy") }
 
     val year = calendar.get(Calendar.YEAR)
     val month = calendar.get(Calendar.MONTH)
@@ -43,8 +43,8 @@ fun CustomDatePicker(
     val datePickerDialog = DatePickerDialog(
         context,
         { _, selectedYear, selectedMonth, selectedDay ->
-            value(selectedDate)
             selectedDate = "${selectedDay}/${selectedMonth + 1}/$selectedYear"
+            value(selectedDate)
         }, year, month, day
     )
 

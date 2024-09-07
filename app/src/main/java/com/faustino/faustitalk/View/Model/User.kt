@@ -1,4 +1,4 @@
-package com.faustino.faustitalk.View.Register_Profile
+package com.faustino.faustitalk.View.Model
 
 class User {
     private var username: String = ""
@@ -28,7 +28,7 @@ class User {
         }
     }
     fun setEspecialidad(especialidad:String){
-        this.especialidad
+        this.especialidad = especialidad
     }
 
     fun getFacultad():String{

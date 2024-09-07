@@ -41,7 +41,6 @@ fun RP1Screen(
 ) {
     // Obtener el ViewModel para manejar métodos
 
-
     // Obtener el contexto
     val context = LocalContext.current
 
@@ -79,10 +78,17 @@ fun RP1Screen(
     }
 
     // Verifica si los campos están vacíos
-    val isFormValid = out_nombre.isNotBlank() && out_apellido.isNotBlank() && out_usuario.isNotBlank()
-    val nombreError = if (out_nombre.isBlank()) "El nombre es obligatorio" else null
-    val apellidoError = if (out_apellido.isBlank()) "El apellido es obligatorio" else null
-    val usuarioError = if (out_usuario.isBlank()) "El nombre de usuario es obligatorio" else null
+  //  val isFormValid = out_nombre.isNotBlank() && out_apellido.isNotBlank() && out_usuario.isNotBlank()
+  //  val nombreError = if (out_nombre.isBlank()) "El nombre es obligatorio" else null
+  //  val apellidoError = if (out_apellido.isBlank()) "El apellido es obligatorio" else null
+   // val usuarioError = if (out_usuario.isBlank()) "El nombre de usuario es obligatorio" else null
+    //
+  //  var isFormValid = if (out_usuario.isBlank() || out_apellido.isBlank() || out_nombre.isBlank()) false else true // detenta si un almenos un capo esta vacio
+    var isFormValid  by remember { mutableStateOf(1) }
+
+    var nombreError by remember { mutableStateOf("") }
+    var apellidoError by remember { mutableStateOf("") }
+    var usuarioError by remember { mutableStateOf("") }
 
     Column(
         horizontalAlignment = Alignment.Start,
@@ -101,7 +107,7 @@ fun RP1Screen(
             value = out_nombre,
             onValueChange = { out_nombre = it },
             placeholder = "Ingrese su nombre",
-            isError = out_nombre.isBlank(),
+            isError = out_nombre.isBlank() && isFormValid != 1,
             errorMessage = nombreError
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -110,14 +116,16 @@ fun RP1Screen(
         ) {
             CustomTextCuestions(titulo = "¿Cuál es tu Apellido?")
         }
+
         Spacer(modifier = Modifier.height(20.dp))
         CustomOutlinedTextField(
             value = out_apellido,
             onValueChange = { out_apellido = it },
             placeholder = "Ingrese su Apellido",
-            isError = out_apellido.isBlank(),
+            isError = out_apellido.isBlank() && isFormValid != 1,
             errorMessage = apellidoError
         )
+
         Spacer(modifier = Modifier.height(20.dp))
         Column(
             horizontalAlignment = Alignment.CenterHorizontally
@@ -129,7 +137,7 @@ fun RP1Screen(
             value = out_usuario,
             onValueChange = { out_usuario = it },
             placeholder = "Ingrese su nombre de usuario",
-            isError = out_usuario.isBlank(),
+            isError = out_usuario.isBlank() && isFormValid != 1,
             errorMessage = usuarioError
         )
         Spacer(modifier = Modifier.height(20.dp))
@@ -139,14 +147,18 @@ fun RP1Screen(
         Btn_SiguienteGreen(
             title = "Continuar",
             onClick = {
-                if (isFormValid) {
+                if (out_usuario.isBlank() || out_apellido.isBlank() || out_nombre.isBlank()) isFormValid = 2 else isFormValid = 3
+                if (isFormValid == 3) {
                     continueClick()
                     metodosViewModel.completeRP1Screen(out_nombre, out_apellido, out_usuario)
                 } else {
                     errorMessage = "Todos los campos son obligatorios"
+                    apellidoError = "El nombre es obligatorio"
+                    nombreError = "El apellido es obligatorio"
+                    usuarioError = "El usuario es Obligatorio"
                 }
             },
-            enabled = isFormValid
+            enabled = true
         )
 
         Spacer(modifier = Modifier.height(15.dp))

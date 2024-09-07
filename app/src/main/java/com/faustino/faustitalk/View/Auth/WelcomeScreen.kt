@@ -1,6 +1,10 @@
 package com.faustino.faustitalk.View.Auth
 
+import android.content.Intent
+import android.util.Log
 import android.widget.Toast
+import androidx.activity.compose.rememberLauncherForActivityResult
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -40,11 +44,15 @@ import com.faustino.faustitalk.Navigation.Graphs.Graph
 import com.faustino.faustitalk.R
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
+import com.faustino.faustitalk.View.Auth.ViewModel.WEB_CLIENT_ID
 import com.faustino.faustitalk.View.Components.Butons.Btn_CrearCuenta
 import com.faustino.faustitalk.View.Components.Butons.IconButtonWithText
 import com.faustino.faustitalk.View.Components.Fondos.BgFondoPrincipal
 import com.faustino.faustitalk.View.Components.Privacity.PrivacyPolicy
 import com.faustino.faustitalk.ui.theme.Green300
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 
 //@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
@@ -53,11 +61,10 @@ fun WelcomeScreen(
     navController: NavHostController
 ) {
 
-
     val authState = authViewModel.authState.observeAsState()
     val context = LocalContext.current
     val scope = rememberCoroutineScope()
-
+    //--------------------------
     LaunchedEffect(authState.value) {
         when (authState.value) {
             is AuthState.Authenticated ->
@@ -79,6 +86,8 @@ fun WelcomeScreen(
             else -> Unit
         }
     }
+
+
 
     BgFondoPrincipal();
 
@@ -201,10 +210,12 @@ fun WelcomeScreen(
             imageResource = R.drawable.icon_google,
             buttonText = "Continuar con Google"
         ) {
+
             authViewModel.LoginToGoogle(
                 context = context,
                 scope = scope
             )
+
         }
 
         Spacer(modifier = Modifier.height(15.dp))

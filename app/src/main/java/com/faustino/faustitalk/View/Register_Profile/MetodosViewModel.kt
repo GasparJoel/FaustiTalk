@@ -1,14 +1,12 @@
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
-import com.faustino.faustitalk.View.Register_Profile.User
+import com.faustino.faustitalk.View.Model.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.auth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
-import kotlinx.coroutines.launch
 
 class MetodosViewModel : ViewModel() {
 
