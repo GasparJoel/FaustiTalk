@@ -44,6 +44,9 @@ class MainActivity : ComponentActivity() {
 
     override fun onDestroy() {
         super.onDestroy()
+        if(authViewModel.authState.value == AuthState.IncompleteProfile){
+           authViewModel.signout()
+        }
     }
 
 

@@ -10,6 +10,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.navigation.NavController
 import com.google.android.libraries.identity.googleid.GetGoogleIdOption
+import com.google.android.libraries.identity.googleid.GetSignInWithGoogleOption
 import com.google.android.libraries.identity.googleid.GoogleIdTokenCredential
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
@@ -192,15 +193,20 @@ class AuthViewModel:ViewModel() {
     fun LoginToGoogle(context: Context, scope: CoroutineScope) {
         _authState.value = AuthState.Loading
         val credentialManager = CredentialManager.create(context)
-
+/*
         // Permitir selección de cuentas, incluyendo nuevas cuentas no autorizadas
         val googleIdOption = GetGoogleIdOption.Builder()
-            .setFilterByAuthorizedAccounts(false)  // Permitir nuevas cuentas no autorizadas
+            .setFilterByAuthorizedAccounts(false)
             .setServerClientId(WEB_CLIENT_ID)
             .build()
+*/
+        val signInWithGoogleOption = GetSignInWithGoogleOption
+            .Builder(WEB_CLIENT_ID)
+            .build()
+
 
         val request = GetCredentialRequest.Builder()
-            .addCredentialOption(googleIdOption)
+            .addCredentialOption(signInWithGoogleOption)
             .build()
 
         scope.launch {
@@ -274,6 +280,7 @@ class AuthViewModel:ViewModel() {
         }
     }
 }
+
 sealed class AuthState{
     object Authenticated :AuthState()
     object  Unauthenticated :AuthState()

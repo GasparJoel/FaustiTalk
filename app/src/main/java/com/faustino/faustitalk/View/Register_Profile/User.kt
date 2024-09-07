@@ -28,7 +28,7 @@ class User {
         }
     }
     fun setEspecialidad(especialidad:String){
-        this.especialidad
+        this.especialidad = especialidad
     }
 
     fun getFacultad():String{
