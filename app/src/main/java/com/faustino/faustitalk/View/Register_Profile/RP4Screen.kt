@@ -27,11 +27,13 @@ import com.faustino.faustitalk.View.Components.Items.ItemSelectInterest
 @OptIn(ExperimentalLayoutApi::class)
 @Preview
 @Composable
-fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
+fun RP4Screen(
+    modifier: Modifier = Modifier,
+    metodosViewModel: MetodosViewModel = MetodosViewModel(),
+    finishClick: () -> Unit = {}
+) {
     // Crea una lista de estados para mantener si cada elemento está seleccionado o no
     var selectedItems by remember { mutableStateOf(List(items.size) { false }) }
-
-    val metodosViewModel: MetodosViewModel = viewModel()
 
     Column(
         horizontalAlignment = Alignment.Start,
@@ -71,7 +73,7 @@ fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
             title = "Continuar",
             onClick = {
                 metodosViewModel.crearUsuario()
-                finishClick
+                finishClick()
             },
             enabled = true)
         Spacer(modifier = Modifier.height(50.dp))

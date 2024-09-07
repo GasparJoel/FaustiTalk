@@ -1,7 +1,6 @@
 package com.faustino.faustitalk.View.Register_Profile
 
 import MetodosViewModel
-import androidx.compose.animation.animateColorAsState
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -27,7 +26,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.tooling.preview.Preview
 
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
@@ -40,9 +38,12 @@ import com.faustino.faustitalk.ui.theme.Green300
 
 
 @Composable
-fun RP3Screen( modifier: Modifier, continueClick: (tipo: Int) -> Unit = {}) {
+fun RP3Screen(
+    modifier: Modifier,
+    metodosViewModel: MetodosViewModel,
+    continueClick: (tipo: Int) -> Unit = {}
+) {
 
-    val metodosViewModel: MetodosViewModel = viewModel()
 
     var selectedProfile by remember { mutableStateOf(0) }
     var out_perfil by remember { mutableStateOf("")}

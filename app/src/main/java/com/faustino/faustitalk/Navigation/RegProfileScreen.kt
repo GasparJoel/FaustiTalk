@@ -1,12 +1,12 @@
 package com.faustino.faustitalk.Navigation
 
+import MetodosViewModel
 import androidx.activity.compose.BackHandler
 import androidx.compose.animation.AnimatedContentTransitionScope
 
 
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
-import androidx.compose.animation.fadeIn
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -33,7 +33,6 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -59,6 +58,8 @@ fun RegProfileScreen(
      rootNavHostController: NavHostController,
      authViewModel: AuthViewModel
 ) {
+    var metodosViewModel = MetodosViewModel()
+
     var progress by remember { mutableStateOf(0.16f) }
     Scaffold (
         topBar ={CustomTopAppBar(
@@ -72,6 +73,7 @@ fun RegProfileScreen(
     ){  paddingValues ->
         BgFondoCuestion()
         var modifier = Modifier.padding(paddingValues)
+
         NavHost(navController = rpNavHostController,
             startDestination = RegisterProfile.RP1.route ,
             route = AuthScreen.RegisterProfile.route
@@ -92,7 +94,7 @@ fun RegProfileScreen(
                     AnimatedContentTransitionScope.SlideDirection.End, tween(700)
                 )
             } ){
-                RP1Screen(navController = rpNavHostController, authViewModel = authViewModel, modifier = modifier){
+                RP1Screen(navController = rpNavHostController, authViewModel = authViewModel, modifier = modifier , metodosViewModel = metodosViewModel){
                     rpNavHostController.navigate(RegisterProfile.RP2.route){
                       //  popUpTo(RegisterProfile.RP1.route){ inclusive = true}
                         progress += 0.16f
@@ -123,7 +125,7 @@ fun RegProfileScreen(
             }
 
             ){
-                RP2Screen(modifier = modifier, ){
+                RP2Screen(metodosViewModel = metodosViewModel,modifier = modifier, ){
                     rpNavHostController.navigate(RegisterProfile.RP3.route){
                        // popUpTo(RegisterProfile.RP2.route){ inclusive = true}
                         progress += 0.16f
@@ -154,7 +156,7 @@ fun RegProfileScreen(
                 }
             ){
 
-                RP3Screen( modifier = modifier ){
+                RP3Screen( modifier = modifier ,metodosViewModel = metodosViewModel){
 
                     when(it){
                         1 -> rpNavHostController.navigate(RegisterProfile.RPUni1.route)
@@ -170,6 +172,7 @@ fun RegProfileScreen(
                     rpNavHostController.popBackStack() // Volver a la pantalla anterior
                 }
             }
+            //SCREEN FINAL
             composable(route = RegisterProfile.RP4.route,
                 enterTransition = {
                     return@composable slideIntoContainer(
@@ -189,7 +192,7 @@ fun RegProfileScreen(
                     )
                 }
             ){
-                RP4Screen( modifier = modifier){
+                RP4Screen( modifier = modifier , metodosViewModel = metodosViewModel){
                     rootNavHostController.navigate(Graph.MAIN_SCREEN){
                         progress += 0.16f   //
 
@@ -249,7 +252,7 @@ fun RegProfileScreen(
                     )
                 }
             ){
-                RPDoc2Screen( modifier = modifier){
+                RPDoc2Screen( modifier = modifier,metodosViewModel = metodosViewModel){
                     rpNavHostController.navigate(RegisterProfile.RP4.route){
                         progress += 0.16f
                     }
@@ -278,7 +281,7 @@ fun RegProfileScreen(
                     )
                 }
             ){
-                RPUni1Screen( modifier = modifier){
+                RPUni1Screen( modifier = modifier, metodosViewModel = metodosViewModel){
                     rpNavHostController.navigate(RegisterProfile.RPDoc2.route){
                         progress += 0.16f
                     }
@@ -346,10 +349,10 @@ fun CustomTopAppBar(
         }
 
         LinearProgressIndicator(
-            progress = animatedProgress,
+            progress = { animatedProgress },
             modifier = Modifier.fillMaxWidth(),
             color = Green300,
-            trackColor = Color.White.copy(alpha = 0.4f)
+            trackColor = Color.White.copy(alpha = 0.4f),
         )
 
     }

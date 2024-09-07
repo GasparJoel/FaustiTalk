@@ -4,7 +4,6 @@ import MetodosViewModel
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 
@@ -26,7 +25,6 @@ import com.faustino.faustitalk.Navigation.Graphs.Graph
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthState
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
-import com.faustino.faustitalk.View.Components.Fondos.BgFondoCuestion
 
 import com.faustino.faustitalk.View.Components.Inputs.CustomOutlinedTextField
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
@@ -38,10 +36,11 @@ fun RP1Screen(
     modifier: Modifier = Modifier,
     navController: NavController,
     authViewModel: AuthViewModel,
-    continueClick: () -> Unit = {}
+    metodosViewModel: MetodosViewModel,
+    continueClick: () -> Unit = {},
 ) {
     // Obtener el ViewModel para manejar métodos
-    val metodosViewModel: MetodosViewModel = viewModel()
+
 
     // Obtener el contexto
     val context = LocalContext.current
