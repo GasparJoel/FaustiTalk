@@ -35,31 +35,65 @@ class MetodosViewModel : ViewModel() {
     fun completeRP3Screen(tipoPerfil: String){
         userC.setTipoPerfil(tipoPerfil)
     }
+    fun completeRPUni1Screen(facultad:String, escuela:String, ciclo:String){
+        userC.setUniversitario(facultad,escuela,ciclo)
+    }
+    fun completeRPDocSreen(especialidad:String){
+        userC.setEspecialidad(especialidad)
+    }
 
-    fun crearUsuario(){
+    fun crearUsuario() {
         val user = auth.currentUser
-        if(user != null){
+        if (user != null) {
             val userRef = db.collection("users").document(user.uid)
             val updatedUserMap = mapOf(
-                "apellido" to userC.getApellido(),
-                "descripcion" to "",
-                "email" to userC.getEmail(),
-                //"fecha_nacimiento" to userC.getFechaNac(),
-                "fecha_nacimiento" to "06-09-2024",
-                "genero" to userC.getGenero(),
-                "name" to userC.getNombre(),
-                "profileComplete" to true, //Se actualiza a Perfil creado
-                "tipoperfil" to userC.getTipoPerfil(),
+                "email" to user.email,
                 "username" to userC.getUsername(),
+                "name" to userC.getNombre(),
+                "apellido" to userC.getApellido(),
+                "fecha_nacimiento" to userC.getFechaNac(),
+                "genero" to userC.getGenero(),
+                "tipoperfil" to userC.getTipoPerfil(),
+                "descripcion" to "",
+                "profileComplete" to true // Se actualiza a Perfil creado
             )
+
+            // Actualiza el documento del usuario
             userRef.update(updatedUserMap)
                 .addOnSuccessListener {
+                    // Obtener el tipo de perfil
+                    val tipoPerfil = userC.getTipoPerfil()
+
+                    // Validar si es 'Universitario' o 'Docente'/'Administrativo'
+                    if (tipoPerfil == "Universitario") {
+                        // Crear subcolección 'Universitario' con las propiedades facultad, escuela y ciclo usando el mismo uid
+                        val universitarioData = mapOf(
+                            "facultad" to userC.getFacultad(),
+                            "escuela" to userC.getEscuela(),
+                            "ciclo" to userC.getCiclo()
+                        )
+                        userRef.collection("Universitario").document(user.uid).set(universitarioData)
+                    } else if (tipoPerfil == "Docente" || tipoPerfil == "Administrativo") {
+                        // Crear subcolección 'Docente' o 'Administrativo' con la propiedad especialidad usando el mismo uid
+                        val data = mapOf(
+                            "especialidad" to userC.getEspecialidad()
+                        )
+                        userRef.collection(tipoPerfil).document(user.uid).set(data)
+                    }
+
+                    // Crear la subcolección 'Intereses' usando el mismo uid
+                    val interesesData = mapOf(
+                        "interes1" to "Ejemplo de interés",
+                        "interes2" to "Otro interés"
+                    )
+                    userRef.collection("Intereses").document(user.uid).set(interesesData)
+
                     _authState.value = AuthState.Authenticated
                 }
                 .addOnFailureListener { e ->
                     _authState.value = AuthState.Error("Error al actualizar el perfil: ${e.message}")
                 }
-            }
+        }
     }
     fun fetchUserData() {
         val user = auth.currentUser

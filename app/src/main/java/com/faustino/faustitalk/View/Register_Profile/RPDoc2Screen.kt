@@ -36,7 +36,12 @@ fun  RPDoc2Screen(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-       Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick() }, enabled = true )
+        Btn_SiguienteGreen(
+            title = "Continuar",
+            onClick = {
+                continueClick()
+
+                      }, enabled = true )
 
         }
 

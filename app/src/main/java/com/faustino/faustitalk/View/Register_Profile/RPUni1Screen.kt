@@ -44,12 +44,9 @@ fun RPUni1Screen(
             .padding(horizontal = 32.dp)
     ) {
 
-
         Spacer(modifier = Modifier.height(15.dp))
 
-
         CustomTextCuestions(titulo = "Faculdad")
-
 
         Spacer(modifier = Modifier.height(20.dp))
 
@@ -90,7 +87,13 @@ fun RPUni1Screen(
         )
 
         Spacer(modifier = Modifier.height(20.dp))
-        Btn_SiguienteGreen(title = "Continuar", onClick = { continueClick()},enabled = true)
+        Btn_SiguienteGreen(
+            title = "Continuar",
+            onClick = {
+                continueClick()
+                metodosViewModel.completeRPUni1Screen(facultad,escuela, ciclo)
+
+            },enabled = true)
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(15.dp))
 
@@ -132,7 +135,7 @@ private val facultades_list = listOf(
         )
     ),
     Facultad(
-        "FACULTAD DE CIENCIAS ECONÓMICAS, CONTABLES Y FINANCIERAS",
+        "FACULTAD DE CIENCIAS ECONÓMICAS,CONTABLES Y FINANCIERAS",
         listOf(
             "Ciencias Contables y Financieras",
             "Economía y Finanzas"

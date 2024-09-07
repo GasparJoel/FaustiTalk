@@ -68,10 +68,10 @@ fun RP3Screen(
 
         btn_SelecconPerfil(
             imageResource = R.drawable.ic_estudent,
-            text = "Estudiante",
+            text = "Universitario",
             onClick = {
                         selectedProfile = 1
-                        out_perfil = "Estudiante"
+                        out_perfil = "Universitario"
                       },
             selected = selectedProfile == 1
         )

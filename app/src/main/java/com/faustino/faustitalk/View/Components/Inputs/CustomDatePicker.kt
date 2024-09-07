@@ -28,8 +28,9 @@ import java.util.Calendar
 
 @Composable
 fun CustomDatePicker(
-
+    value: (String) -> Unit
 ) {
+
     val context = LocalContext.current
     val calendar = Calendar.getInstance()
 
@@ -42,6 +43,7 @@ fun CustomDatePicker(
     val datePickerDialog = DatePickerDialog(
         context,
         { _, selectedYear, selectedMonth, selectedDay ->
+            value(selectedDate)
             selectedDate = "${selectedDay}/${selectedMonth + 1}/$selectedYear"
         }, year, month, day
     )
@@ -74,7 +76,7 @@ fun CustomDatePicker(
         )
     }
 }
-
+/*
 @Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun CustomDatePickerPreview() {
@@ -82,3 +84,4 @@ fun CustomDatePickerPreview() {
 
     )
 }
+*/

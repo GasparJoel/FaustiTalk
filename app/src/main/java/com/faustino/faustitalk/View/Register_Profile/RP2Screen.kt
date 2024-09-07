@@ -56,7 +56,7 @@ fun RP2Screen(
 
         Spacer(modifier = Modifier.height(20.dp))
 
-        CustomDatePicker()
+        CustomDatePicker(value = {out_fecha_nacimiento = it})
 
         Spacer(modifier = Modifier.height(20.dp))
 

@@ -10,7 +10,43 @@ class User {
     private var tipoPerfil: String = ""
     private var descripcion: String = ""
 
+    private var facultad: String = ""
+    private var escuela: String = ""
+    private var ciclo: String = ""
+
+    private var especialidad: String = ""
+
+
+
     constructor()
+
+    fun setUniversitario(facultad:String, escuela:String, ciclo:String){
+        if (username.isNotEmpty()){
+            this.facultad = facultad
+            this.escuela = escuela
+            this.ciclo = ciclo
+        }
+    }
+    fun setEspecialidad(especialidad:String){
+        this.especialidad
+    }
+
+    fun getFacultad():String{
+        return this.facultad
+    }
+
+    fun getEscuela():String{
+        return this.escuela
+    }
+
+    fun getCiclo():String{
+        return this.ciclo
+    }
+
+    fun getEspecialidad():String{
+        return this.especialidad
+    }
+
 
     fun setUsername(username: String) {
         if (username.isNotEmpty()) {

@@ -223,7 +223,7 @@ fun RegProfileScreen(
                     )
                 }
             ){
-                RPDoc1Screen( modifier = modifier){
+                RPDoc1Screen( modifier = modifier,metodosViewModel = metodosViewModel){
                     rpNavHostController.navigate(RegisterProfile.RPDoc2.route){
                         progress += 0.16f
                     }
