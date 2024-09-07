@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.View.Register_Profile
 
+import MetodosViewModel
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
@@ -16,6 +17,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.faustino.faustitalk.View.Components.Butons.Btn_SiguienteGreen
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 import com.faustino.faustitalk.ui.theme.Dark900
@@ -28,6 +30,8 @@ import com.faustino.faustitalk.View.Components.Items.ItemSelectInterest
 fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
     // Crea una lista de estados para mantener si cada elemento está seleccionado o no
     var selectedItems by remember { mutableStateOf(List(items.size) { false }) }
+
+    val metodosViewModel: MetodosViewModel = viewModel()
 
     Column(
         horizontalAlignment = Alignment.Start,
@@ -63,7 +67,13 @@ fun RP4Screen(modifier: Modifier = Modifier, finishClick: () -> Unit = {}) {
             }
         }
         Spacer(modifier = Modifier.height(20.dp))
-        Btn_SiguienteGreen(title = "Continuar", onClick = finishClick, enabled = true)
+        Btn_SiguienteGreen(
+            title = "Continuar",
+            onClick = {
+                metodosViewModel.crearUsuario()
+                finishClick
+            },
+            enabled = true)
         Spacer(modifier = Modifier.height(50.dp))
     }
 }
