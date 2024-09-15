@@ -1,10 +1,10 @@
 package com.faustino.faustitalk.Navigation.Graphs
 
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import com.faustino.faustitalk.Navigation.BottonBarScreen
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Menu.HomeScreen
@@ -17,7 +17,9 @@ import com.faustino.faustitalk.View.Menu.SearchScreen
 fun MainNavGraph(
     homeNavHostController: NavHostController,
     rootNavHostController: NavHostController,
-    authViewModel: AuthViewModel) {
+    authViewModel: AuthViewModel,
+    modifier: Modifier
+) {
 
     NavHost(
         navController = homeNavHostController,
@@ -34,7 +36,7 @@ fun MainNavGraph(
             PostScreen()
         }
         composable(route = BottonBarScreen.Profile.route) {
-            ProfileScreen(authViewModel, rootNavHostController)
+            ProfileScreen(modifier,authViewModel, rootNavHostController)
         }
         composable(route = BottonBarScreen.Search.route) {
             SearchScreen()

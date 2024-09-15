@@ -40,9 +40,12 @@ fun MainScreen(
     ){ paddingValues ->
         var modifier = Modifier.padding(paddingValues)
         MainNavGraph(
+
             rootNavHostController = rootNavHostController,
             homeNavHostController = homeNavHostController,
-            authViewModel = authViewModel)
+            authViewModel = authViewModel,
+            modifier = modifier
+        )
     }
 
 }
