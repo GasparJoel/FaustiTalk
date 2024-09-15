@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.View.Auth
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.util.Log
 import android.widget.Toast
@@ -7,18 +8,26 @@ import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxWithConstraints
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.defaultMinSize
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
+import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.safeContentPadding
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -38,6 +47,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.core.content.contentValuesOf
 import androidx.navigation.NavHostController
 import com.faustino.faustitalk.Navigation.Graphs.AuthScreen
 import com.faustino.faustitalk.Navigation.Graphs.Graph
@@ -55,6 +65,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.common.api.ApiException
 
 //@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
+@SuppressLint("UnusedBoxWithConstraintsScope")
 @Composable
 fun WelcomeScreen(
     authViewModel: AuthViewModel,
@@ -164,28 +175,48 @@ fun WelcomeScreen(
 
         var showDialog by remember { mutableStateOf(false) }
 
-        Column(
-            horizontalAlignment = Alignment.CenterHorizontally
+        Box(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(0.dp)
         ) {
-            Text(
-                text = "¡Bienvenido a nuestra comunidad universitaria! Recuerda que al utilizar esta app, aceptas nuestros ",
-                fontSize = 12.sp,
-                textAlign = TextAlign.Center,
-                color = Color.White,
-                lineHeight = 14.sp,
-                modifier = Modifier.padding(0.dp) // Ensure no bottom padding
-            )
-
-            TextButton(onClick = {
-                showDialog = true
-            }, modifier = Modifier.padding(0.dp)) {
+            Column(
+                horizontalAlignment = Alignment.CenterHorizontally,  // Alinea el contenido horizontalmente en el centro
+                modifier = Modifier
+                    .align(Alignment.TopCenter)
+                    .padding(0.dp)  // Elimina padding adicional
+            ) {
                 Text(
-                    text = "Términos y Condiciones y Política de Privacidad.",
+                    text = "¡Bienvenido a nuestra comunidad universitaria! Recuerda que al utilizar esta app, aceptas nuestros ",
                     fontSize = 12.sp,
-                    color = Green300,
-                    textDecoration = TextDecoration.Underline,
-                    modifier = Modifier.padding(0.dp)
+                    textAlign = TextAlign.Center,
+                    color = Color.White,
+                    lineHeight = 12.sp,  // Ajusta la altura de línea para evitar espacio extra
+                    modifier = Modifier
+                        .padding(0.dp)  // Elimina padding adicional
                 )
+
+                TextButton(
+                    modifier = Modifier
+                        .padding(0.dp)
+                        .offset(y = -17.dp)
+                        .defaultMinSize(minWidth = 1.dp, minHeight = 1.dp)
+                        .then(Modifier.minimumInteractiveComponentSize()),
+                    onClick = { showDialog = true },
+                    contentPadding = PaddingValues(0.dp)
+                ) {
+                    Text(
+                        text = "Términos y Condiciones y Política de Privacidad.",
+                        fontSize = 12.sp,
+                        color = Green300,
+                        textDecoration = TextDecoration.Underline,
+                        modifier = Modifier
+                            .padding(0.dp)
+                            .align(Alignment.CenterVertically),
+                        maxLines = 1,
+                        textAlign = TextAlign.Center
+                    )
+                }
             }
         }
 
