@@ -20,37 +20,25 @@ import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
-
 const val WEB_CLIENT_ID = "789640903345-0ehtnjqpqnbipc10knt0o1meebovntpo.apps.googleusercontent.com"
 
-
-class AuthViewModel:ViewModel() {
-    //Para acceder a la autenticaction de firebase 
+class AuthViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
-
-    //datos mutables que solo se exponen con liveData (imutable)
     private val _authState = MutableLiveData<AuthState>()
-
-    //Permite ver los cambios de _authstate
     val authState: LiveData<AuthState> = _authState
 
     init {
         checkAuthStatus()
-      //  checkUserProfile()
     }
-
-
 
     fun checkAuthStatus() {
         if (auth.currentUser == null) {
             _authState.value = AuthState.Unauthenticated
         } else {
-            _authState.value=AuthState.Authenticated
-            //checkUserProfile() // validacion
+            checkUserProfile()
         }
     }
 
-    //verifica si el perfil está completo al intentar acceder a la vista de inicio
     fun checkUserProfile() {
         val user = auth.currentUser
         if (user != null) {
@@ -77,9 +65,8 @@ class AuthViewModel:ViewModel() {
     }
 
     fun login(email: String, password: String) {
-
         if (email.isEmpty() || password.isEmpty()) {
-            _authState.value = AuthState.Error("El correo y la contraseña no pueden estar vacios")
+            _authState.value = AuthState.Error("El correo y la contraseña no pueden estar vacíos")
             return
         }
         _authState.value = AuthState.Loading
@@ -87,19 +74,16 @@ class AuthViewModel:ViewModel() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    checkUserProfile() // Validar perfil después de autenticar
-                    //_authState.value = AuthState.Authenticated
+                    checkUserProfile()
                 } else {
-                    _authState.value = AuthState.Error(task.exception?.message ?: "Algo Salio Mal")
+                    _authState.value = AuthState.Error(task.exception?.message ?: "Algo salió mal")
                 }
-
             }
     }
 
     fun signup(email: String, password: String) {
-
         if (email.isEmpty() || password.isEmpty()) {
-            _authState.value = AuthState.Error("El correo y la contraseña no pueden estar vacios")
+            _authState.value = AuthState.Error("El correo y la contraseña no pueden estar vacíos")
             return
         }
         _authState.value = AuthState.Loading
@@ -107,30 +91,23 @@ class AuthViewModel:ViewModel() {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-
-                    val user = auth.currentUser // obtener usuario actual
+                    val user = auth.currentUser
                     if (user != null) {
-                        createUserDocument(user.uid, email) // crea usuario con el uid
+                        createUserDocument(user.uid, email)
                         _authState.value = AuthState.IncompleteProfile
                     }
-                    //_authState.value = AuthState.Authenticated
                 } else {
-                    _authState.value = AuthState.Error(task.exception?.message ?: "Algo Salio Mal")
+                    _authState.value = AuthState.Error(task.exception?.message ?: "Algo salió mal")
                 }
-
             }
     }
 
     fun signout() {
         _authState.value = AuthState.Unauthenticated
         auth.signOut()
-
     }
 
-
-    //Cuando un usuario se registra por primera vez, crea un documento en la colección users con su UID y cualquier otra información inicial que necesites
     private fun createUserDocument(uid: String, email: String) {
-
         val db = FirebaseFirestore.getInstance()
         val userMap = hashMapOf(
             "email" to email,
@@ -150,81 +127,27 @@ class AuthViewModel:ViewModel() {
                 _authState.value = AuthState.IncompleteProfile
             }
             .addOnFailureListener { e ->
-                _authState.value =
-                    AuthState.Error("Error al crear el perfil del usuario: ${e.message}")
+                _authState.value = AuthState.Error("Error al crear el perfil del usuario: ${e.message}")
             }
     }
-
-
-
-
-    /*
-    //completa la información y luego actualiza el documento en Firestore
-    fun completeUserProfile(name: String, surname: String, username: String) {
-        val user = auth.currentUser
-        if (user != null) {
-            val db = FirebaseFirestore.getInstance()
-            val userRef = db.collection("users").document(user.uid)
-
-            val updatedUserMap = mapOf(
-                "surname" to surname,
-                "name" to name,
-                "apellido" to "",
-                "fecha_nacimiento" to "",
-                "genero" to "",
-                "tipoperfil" to "",
-                "descripcion" to "",
-                "profileComplete" to false
-
-            )
-
-            userRef.update(updatedUserMap)
-                .addOnSuccessListener {
-                    _authState.value = AuthState.Authenticated
-                }
-                .addOnFailureListener { e ->
-                    _authState.value = AuthState.Error("Error al actualizar el perfil: ${e.message}")
-                }
-        }
-    }
-
-*/
 
     fun LoginToGoogle(context: Context, scope: CoroutineScope) {
         _authState.value = AuthState.Loading
         val credentialManager = CredentialManager.create(context)
-/*
-        // Permitir selección de cuentas, incluyendo nuevas cuentas no autorizadas
-        val googleIdOption = GetGoogleIdOption.Builder()
-            .setFilterByAuthorizedAccounts(false)
-            .setServerClientId(WEB_CLIENT_ID)
-            .build()
-*/
-        val signInWithGoogleOption = GetSignInWithGoogleOption
-            .Builder(WEB_CLIENT_ID)
-            .build()
-
-
+        val signInWithGoogleOption = GetSignInWithGoogleOption.Builder(WEB_CLIENT_ID).build()
         val request = GetCredentialRequest.Builder()
             .addCredentialOption(signInWithGoogleOption)
             .build()
 
         scope.launch {
             try {
-                val result = credentialManager.getCredential(
-                    context = context,
-                    request = request
-                )
+                val result = credentialManager.getCredential(context = context, request = request)
                 val credential = result.credential
-                val googleIdTokenCredential = GoogleIdTokenCredential
-                    .createFrom(credential.data)
+                val googleIdTokenCredential = GoogleIdTokenCredential.createFrom(credential.data)
                 val googleIdToken = googleIdTokenCredential.idToken
 
-                // Firebase: cerrar sesión antes de intentar una nueva autenticación
                 auth.signOut()
-
-                val firebaseCredential =
-                    GoogleAuthProvider.getCredential(googleIdToken, null)
+                val firebaseCredential = GoogleAuthProvider.getCredential(googleIdToken, null)
                 auth.signInWithCredential(firebaseCredential)
                     .addOnCompleteListener { task ->
                         if (task.isSuccessful) {
@@ -237,31 +160,22 @@ class AuthViewModel:ViewModel() {
 
                                     userRef.get().addOnSuccessListener { document ->
                                         if (document.exists()) {
-                                            // Verificar si el perfil está completo
-                                            val isProfileComplete =
-                                                document.getBoolean("profileComplete") ?: false
+                                            val isProfileComplete = document.getBoolean("profileComplete") ?: false
                                             if (isProfileComplete) {
                                                 _authState.value = AuthState.Authenticated
                                             } else {
                                                 _authState.value = AuthState.IncompleteProfile
                                             }
                                         } else {
-                                            // Crear un nuevo documento si no existe
                                             createUserDocument(user.uid, user.email ?: "")
                                         }
                                     }.addOnFailureListener {
-                                        _authState.value =
-                                            AuthState.Error("Error al obtener la información del usuario")
+                                        _authState.value = AuthState.Error("Error al obtener la información del usuario")
                                     }
                                 } else {
-                                    // Si el correo no pertenece a la universidad
                                     auth.signOut()
                                     _authState.value = AuthState.Unauthenticated
-                                    Toast.makeText(
-                                        context,
-                                        "Solo se permiten correos de @unjfsc.edu.pe",
-                                        Toast.LENGTH_SHORT
-                                    ).show()
+                                    Toast.makeText(context, "Solo se permiten correos de @unjfsc.edu.pe", Toast.LENGTH_SHORT).show()
                                 }
                             }
                         }
@@ -281,12 +195,10 @@ class AuthViewModel:ViewModel() {
     }
 }
 
-sealed class AuthState{
-    object Authenticated :AuthState()
-    object  Unauthenticated :AuthState()
-    object Loading  :AuthState()
-
-    object IncompleteProfile : AuthState()  // Nuevo estado
-
-    data class  Error(val message : String) :AuthState()
+sealed class AuthState {
+    object Authenticated : AuthState()
+    object Unauthenticated : AuthState()
+    object Loading : AuthState()
+    object IncompleteProfile : AuthState()
+    data class Error(val message: String) : AuthState()
 }
