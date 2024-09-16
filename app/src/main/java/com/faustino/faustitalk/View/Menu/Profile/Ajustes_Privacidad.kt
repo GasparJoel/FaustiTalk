@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import com.faustino.faustitalk.View.Components.Texts.CustomTextCuestions
 import com.faustino.faustitalk.ui.theme.Dark900
 
-@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
+//@Preview(device = "spec:width=1344px,height=2992px,dpi=480")
 @Composable
 fun Ajustes_Privacidad(modifier: androidx.compose.ui.Modifier = androidx.compose.ui.Modifier)  {
 
@@ -30,8 +30,6 @@ fun Ajustes_Privacidad(modifier: androidx.compose.ui.Modifier = androidx.compose
         CustomTextCuestions(titulo = "Ajustes de Privacidad")
 
         Spacer(modifier = androidx.compose.ui.Modifier.height(20.dp))
-
-
 
     }
 
