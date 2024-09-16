@@ -320,6 +320,7 @@ fun prev(modifier: Modifier = Modifier) {
                 Text100(text = "Edad")
                 Text101(text = "19 años")
 
+
             }
         }
 

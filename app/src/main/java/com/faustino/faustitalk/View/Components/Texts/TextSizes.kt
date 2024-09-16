@@ -85,5 +85,6 @@ fun Text101(
         fontSize = 10.sp,
         textAlign = TextAlign.Center,
         modifier = Modifier.padding(top = 8.dp)
+
     )
 }
