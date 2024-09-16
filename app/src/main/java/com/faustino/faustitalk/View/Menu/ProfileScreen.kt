@@ -58,6 +58,9 @@ import com.faustino.faustitalk.View.Components.Texts.Text100
 import com.faustino.faustitalk.View.Components.Texts.Text101
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
+import androidx.compose.material.*
+import androidx.compose.runtime.*
+
 
 @Composable
 fun ProfileScreen(
@@ -347,8 +350,7 @@ fun SectionsScreen() {
     Column {
         // Barra de pestañas
         TabRow(
-            modifier = Modifier
-                .background(Color.Black), // Color de fondo de la barra
+            modifier = Modifier.background(Color.Black), // Color de fondo de la barra
             selectedTabIndex = selectedTabIndex,
             contentColor = Green300 // Color de la pestaña seleccionada
         ) {
@@ -356,7 +358,12 @@ fun SectionsScreen() {
                 Tab(
                     selected = selectedTabIndex == index,
                     onClick = { selectedTabIndex = index },
-                    text = { Text(title) }
+                    text = {
+                        Text(
+                            text = title,
+                            color = if (selectedTabIndex == index) Green300 else Color.Gray
+                        )
+                    }
                 )
             }
         }
