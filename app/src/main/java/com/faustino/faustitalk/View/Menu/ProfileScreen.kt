@@ -25,6 +25,9 @@ import androidx.compose.material.icons.filled.Menu
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Tab
+import androidx.compose.material3.TabRow
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 
@@ -323,6 +326,7 @@ fun prev(modifier: Modifier = Modifier) {
 
             }
         }
+        SectionsScreen()
 
 
 
@@ -332,5 +336,80 @@ fun prev(modifier: Modifier = Modifier) {
 
 
 
+    }
+}
+@Composable
+fun SectionsScreen() {
+    var selectedTabIndex by remember { mutableStateOf(0) }
+
+    val tabs = listOf("Publicaciones", "Acerca de")
+
+    Column {
+        // Barra de pestañas
+        TabRow(
+            modifier = Modifier
+                .background(Color.Black), // Color de fondo de la barra
+            selectedTabIndex = selectedTabIndex,
+            contentColor = Green300 // Color de la pestaña seleccionada
+        ) {
+            tabs.forEachIndexed { index, title ->
+                Tab(
+                    selected = selectedTabIndex == index,
+                    onClick = { selectedTabIndex = index },
+                    text = { Text(title) }
+                )
+            }
+        }
+
+        // Contenido que cambia según la pestaña seleccionada
+        when (selectedTabIndex) {
+            0 -> PublicacionesContent()  // Contenido de la primera pestaña
+            1 -> AcercaDeContent()       // Contenido de la segunda pestaña
+        }
+    }
+}
+
+@Composable
+fun PublicacionesContent() {
+    // Aquí agregas el contenido de "Publicaciones"
+    Text(
+        text = "Contenido de Publicaciones",
+        color = Color.White
+    )
+}
+
+@Composable
+fun AcercaDeContent() {
+    // Aquí agregas el contenido de "Acerca de"
+    Column {
+        Text(
+            text = "Los estudiantes tienen acceso a herramientas de aprendizaje, recursos académicos...",
+            color = Color.White
+        )
+
+        // Título de "Me gusta"
+        Text(
+            text = "Me gusta..",
+            color = Color.White,
+
+        )
+
+        // Botones o secciones de intereses
+        Row {
+            Button(onClick = { /* Acción */ }) {
+                Text("⚽ Entrenar")
+            }
+            Button(onClick = { /* Acción */ }) {
+                Text("⚽ Música")
+            }
+        }
+        Row {
+            Button(onClick = { /* Acción */ }) {
+                Text("⚽ Cantar")
+            }
+            Button(onClick = { /* Acción */ }) {
+                Text("⚽ Tomar café")
+            }
+        }
     }
 }
