@@ -61,3 +61,29 @@ fun Text200(
         fontWeight = FontWeight.Normal,
     )
 }
+
+@Composable
+fun Text100(
+    text:String,
+    color: Color = Color.White
+){
+    Text(text = text,
+        color = Color.White.copy(0.5f),
+        fontWeight = FontWeight.Normal,
+        fontSize = 13.sp,
+        modifier = Modifier.padding(top = 8.dp)
+    )
+}
+@Composable
+fun Text101(
+    text:String,
+    color: Color = Color.White
+){
+    Text(text = text,
+        color = Color.White.copy(0.9f),
+        fontWeight = FontWeight.Normal,
+        fontSize = 10.sp,
+        textAlign = TextAlign.Center,
+        modifier = Modifier.padding(top = 8.dp)
+    )
+}

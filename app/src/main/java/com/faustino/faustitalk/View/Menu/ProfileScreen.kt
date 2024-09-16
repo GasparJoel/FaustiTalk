@@ -51,6 +51,8 @@ import com.faustino.faustitalk.Navigation.Graphs.AuthScreen
 import com.faustino.faustitalk.R
 
 import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
+import com.faustino.faustitalk.View.Components.Texts.Text100
+import com.faustino.faustitalk.View.Components.Texts.Text101
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 
@@ -98,7 +100,7 @@ fun ProfileScreen(
         }
         Column {
             Button(onClick = { showDialog = true }) {
-                Text(text = "Cerrar sesión")
+                Text(text = "C errar sesión")
             }
         }
 
@@ -114,7 +116,7 @@ fun prev(modifier: Modifier = Modifier) {
         modifier = modifier
             .fillMaxSize()
             .background(Dark900)
-            .padding(horizontal = 32.dp,)
+            .padding(horizontal = 16.dp,)
         ,
         horizontalAlignment = Alignment.CenterHorizontally,
     ) {
@@ -147,7 +149,7 @@ fun prev(modifier: Modifier = Modifier) {
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(top = 16.dp),
-
+                horizontalArrangement = Arrangement.SpaceBetween
 
         ){
             Column(
@@ -198,7 +200,8 @@ fun prev(modifier: Modifier = Modifier) {
             Column(
 
                 modifier = Modifier
-                    .weight(1.5f).padding(top = 25.dp),
+                    .weight(1.5f)
+                    .padding(top = 25.dp),
                // verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
 
@@ -264,9 +267,61 @@ fun prev(modifier: Modifier = Modifier) {
 
                 }
 
+
+
             }
         }
 
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 1.dp),
+                Arrangement.SpaceAround
+
+
+        ){
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+            ) {
+                Text100(text = "Facultad")
+                Text101(text = "FIISI")
+
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+            ) {
+                Text100(text = "Escuela")
+                Text101(text = "Ingenieria de sistemas")
+
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                    ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+
+            ) {
+                Text100(text = "Ciclo")
+                Text101(text = "IX")
+
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+            ) {
+                Text100(text = "Edad")
+                Text101(text = "19 años")
+
+            }
+        }
 
 
 
