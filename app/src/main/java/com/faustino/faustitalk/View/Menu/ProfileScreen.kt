@@ -59,6 +59,8 @@ import com.faustino.faustitalk.View.Components.Texts.Text101
 import com.faustino.faustitalk.ui.theme.Dark900
 import com.faustino.faustitalk.ui.theme.Green300
 import androidx.compose.material.*
+import androidx.compose.material3.TabRowDefaults
+import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.*
 
 
@@ -154,8 +156,7 @@ fun prev(modifier: Modifier = Modifier) {
         Row (
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(top = 16.dp),
-                horizontalArrangement = Arrangement.SpaceBetween
+            // .padding(top = 16.dp),
 
         ){
             Column(
@@ -163,7 +164,7 @@ fun prev(modifier: Modifier = Modifier) {
                     .weight(1f),
                 horizontalAlignment = Alignment.CenterHorizontally,
 
-            ) {
+                ) {
                 Box(
                     modifier = Modifier
                         .size(95.dp)
@@ -199,19 +200,22 @@ fun prev(modifier: Modifier = Modifier) {
                     fontWeight = FontWeight.Bold,
                     fontSize = 13.sp,
                     lineHeight = 13.sp
-                  // modifier = Modifier
+                    // modifier = Modifier
                 )
 
             }
+
+
+
             Column(
 
                 modifier = Modifier
                     .weight(1.5f)
                     .padding(top = 25.dp),
-               // verticalArrangement = Arrangement.Center,
+                // verticalArrangement = Arrangement.Center,
                 horizontalAlignment = Alignment.CenterHorizontally,
 
-            ) {
+                ) {
                 Text(
                     text = "AlgunNombre",
                     color = Color.White,
@@ -228,7 +232,7 @@ fun prev(modifier: Modifier = Modifier) {
                 )
                 Row(
                     modifier = Modifier
-                        .fillMaxWidth()
+                        //.fillMaxWidth()
                         .padding(top = 15.dp)
                 ){
 
@@ -237,8 +241,8 @@ fun prev(modifier: Modifier = Modifier) {
                             .clip(shape = CircleShape)
                             .background(Color.White.copy(0.2f))
                             .clickable { }
-                            .height(32.dp)
-                            .weight(1f),
+                            .weight(1f)
+                            .height(32.dp),
                         contentAlignment = Alignment.Center
                     )
                     {
@@ -250,14 +254,15 @@ fun prev(modifier: Modifier = Modifier) {
                         )
 
                     }
-                    Spacer(modifier = modifier.width(4.dp))
+                    Spacer(modifier = Modifier.width(2.dp))
                     Box(
                         modifier = Modifier
                             .clip(shape = CircleShape)
                             .background(Green300)
                             .clickable { }
-                            .height(32.dp)
-                            .weight(1f),
+                            .weight(1f)
+                            .height(32.dp),
+
                         contentAlignment = Alignment.Center
                     )
                     {
@@ -272,8 +277,6 @@ fun prev(modifier: Modifier = Modifier) {
 
 
                 }
-
-
 
             }
         }
@@ -292,6 +295,8 @@ fun prev(modifier: Modifier = Modifier) {
                 ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
                 horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
             ) {
+
+
                 Text100(text = "Facultad")
                 Text101(text = "FIISI")
 
@@ -329,15 +334,9 @@ fun prev(modifier: Modifier = Modifier) {
 
             }
         }
+
+
         SectionsScreen()
-
-
-
-
-
-
-
-
 
     }
 }
@@ -350,12 +349,21 @@ fun SectionsScreen() {
     Column {
         // Barra de pestañas
         TabRow(
-            modifier = Modifier.background(Color.Black), // Color de fondo de la barra
+            modifier = Modifier.background(Dark900), // Color de fondo de la barra
             selectedTabIndex = selectedTabIndex,
-            contentColor = Green300 // Color de la pestaña seleccionada
+            contentColor = Green300,
+            containerColor = Dark900,
+            indicator = { tabPositions ->
+                TabRowDefaults.Indicator(
+                    Modifier.tabIndicatorOffset(tabPositions[selectedTabIndex]),
+                    color = Green300
+                )
+            }
         ) {
             tabs.forEachIndexed { index, title ->
                 Tab(
+                    selectedContentColor = Dark900,
+                    unselectedContentColor = Dark900,
                     selected = selectedTabIndex == index,
                     onClick = { selectedTabIndex = index },
                     text = {
