@@ -17,10 +17,16 @@ fun RootNavigationGraph(authViewModel: AuthViewModel, route: String) {
         route = Graph.ROOT
     ){
 
-        composable(route = Graph.MAIN_SCREEN){
+        composable(route = Graph.MAIN_SCREEN,
+            enterTransition = { null },
+            exitTransition = { null },
+            popEnterTransition = { null },
+            popExitTransition = { null }
+        ){
             MainScreen(rootNavHostController = rootNavHostController, authViewModel = authViewModel)
         }
         authNavGraph(rootNavHostController,authViewModel)
+        settingsNavGraph(rootNavHostController,authViewModel)
 
     }
 
@@ -30,4 +36,5 @@ object Graph{
     const val ROOT = "root_graph"
     const val AUTHENTICATION = "auth_graph"
     const val MAIN_SCREEN = "main_screen_graph"
+    const val SETTING = "setting_screen_graph"
 }

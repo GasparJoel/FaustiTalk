@@ -12,6 +12,7 @@ import androidx.compose.material3.IconButton
 
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -21,6 +22,7 @@ import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.currentBackStackEntryAsState
 
 import androidx.navigation.compose.rememberNavController
 import com.faustino.faustitalk.Navigation.Graphs.MainNavGraph
@@ -56,6 +58,19 @@ fun BottomBarCustom(navController: NavHostController) {
         mutableStateOf( BottonBarScreen.Home.icon )
     }
 
+    LaunchedEffect(navController) {
+        navController.currentBackStackEntryFlow.collect { backStackEntry ->
+            val currentRoute = backStackEntry.destination.route
+            selected.value = when (currentRoute) {
+                BottonBarScreen.Home.route -> BottonBarScreen.Home.icon
+                BottonBarScreen.Search.route -> BottonBarScreen.Search.icon
+                BottonBarScreen.Post.route -> BottonBarScreen.Post.icon
+                BottonBarScreen.Inbox.route -> BottonBarScreen.Inbox.icon
+                BottonBarScreen.Profile.route -> BottonBarScreen.Profile.icon
+                else -> BottonBarScreen.Home.icon
+            }
+        }
+    }
     BottomAppBar (
         containerColor = Dark900,
         actions = {
@@ -77,9 +92,15 @@ fun RowScope.IconBottomCustom(
     IconButton(
 
         onClick = {
-            selected.value = screen.icon
+           // selected.value = screen.icon
             navController.navigate( screen.route ){
-                popUpTo(0)
+                navController.graph.startDestinationRoute?.let { route ->
+                    popUpTo(route) {
+                        saveState = false
+                    }
+                }
+                launchSingleTop = true
+                restoreState = true
             }
         },
         modifier = Modifier.weight(1f),

@@ -64,6 +64,7 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.TabRowDefaults
 import androidx.compose.material3.TabRowDefaults.tabIndicatorOffset
 import androidx.compose.runtime.*
+import com.faustino.faustitalk.Navigation.Graphs.Graph
 import com.faustino.faustitalk.View.Components.Texts.Text200
 
 
@@ -74,46 +75,292 @@ fun ProfileScreen(
     rootNavHostController: NavHostController
 ) {
 
-    var showDialog by remember { mutableStateOf(false) }
+    Column(
+        modifier = modifier
+            .fillMaxSize()
+            .background(Dark900)
+            .padding(horizontal = 16.dp,)
+        ,
+        horizontalAlignment = Alignment.CenterHorizontally,
+    ) {
 
-
-
-        // RUTA DE PRUEBA A RP1
-        prev(modifier = modifier)
-
-
-        if (showDialog) {
-            AlertDialog(
-                onDismissRequest = { showDialog = false },
-                title = { Text("Cerrar sesión") },
-                text = { Text("¿Estás seguro de que deseas cerrar sesión?") },
-                confirmButton = {
-                    Button(onClick = {
-                        showDialog = false
-                        authViewModel.signout()  // Lógica de cierre de sesión
-
-                        // Navega a la pantalla de bienvenida y limpia las rutas anteriores
-                        rootNavHostController.navigate(AuthScreen.Welcome.route) {
-                            popUpTo(AuthScreen.Welcome.route) { inclusive = true }
-                            launchSingleTop = true // Evita que se creen múltiples instancias de la misma pantalla
-                        }
-                    }) {
-                        Text("Aceptar")
-                    }
-
-                },
-                dismissButton = {
-                    Button(onClick = { showDialog = false }) {
-                        Text("Cancelar")
-                    }
-                }
+        //TopBar Perfil
+        Box(modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 20.dp)
+        ){
+            Text(
+                text = "Perfil",
+                color = Color.White,
+                fontWeight = FontWeight.ExtraBold,
+                fontSize = 25.sp,
+                modifier = Modifier.align(Alignment.Center)
             )
+
+            Icon(
+                imageVector = Icons.Default.Menu, contentDescription = "Menu de Perfil"
+                , tint = Color.White
+                , modifier = Modifier
+                    .align(Alignment.CenterEnd)
+                    .clip(CircleShape)
+                    .clickable {
+                        rootNavHostController.navigate(Graph.SETTING){
+                            popUpTo(Graph.MAIN_SCREEN) {
+                                saveState = true
+                            }
+                        }
+
+                    }
+            )
+
         }
-        Column {
-            Button(onClick = { showDialog = true }) {
-                Text(text = "C errar sesión")
+
+        Row (
+            modifier = Modifier
+                .fillMaxWidth()
+            // .padding(top = 16.dp),
+
+        ){
+            Column(
+                modifier = Modifier
+                    .weight(1f),
+                horizontalAlignment = Alignment.CenterHorizontally,
+
+                ) {
+                Box(
+                    modifier = Modifier
+                        .size(95.dp)
+                        .border(
+                            BorderStroke(
+                                3.dp,
+                                Brush.horizontalGradient(listOf(Green300.copy(0.5f), Green300))
+                            ), CircleShape
+                        )
+                    , contentAlignment = Alignment.Center
+
+                )
+
+                {
+                    Image(
+                        painter = painterResource(id = R.drawable.profile_user_icon),
+                        contentDescription = "",
+                        modifier = Modifier
+                            .size(80.dp)
+                            .clip(CircleShape)
+                    )
+                }
+                Text(
+                    text = "@AlgunNombre",
+                    color = Color.White.copy(0.6f),
+                    fontWeight = FontWeight.Normal,
+                    fontSize = 13.sp,
+                    modifier = Modifier.padding(top = 10.dp)
+                )
+                Text(
+                    text = "Estudiante",
+                    color = Green300,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 13.sp,
+                    lineHeight = 13.sp
+                    // modifier = Modifier
+                )
+
+            }
+
+
+
+            Column(
+
+                modifier = Modifier
+                    .weight(1.5f)
+                    .padding(top = 25.dp),
+                // verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally,
+
+                ) {
+                Text(
+                    text = "AlgunNombre",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize =20.sp,
+                    modifier = Modifier
+                )
+                Text(
+                    text = "AlgunApellidooo",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 18.sp,
+                    modifier = Modifier
+                )
+                Row(
+                    modifier = Modifier
+                        //.fillMaxWidth()
+                        .padding(top = 15.dp)
+                ){
+
+                    Box(
+                        modifier = Modifier
+                            .clip(shape = CircleShape)
+                            .background(Color.White.copy(0.2f))
+                            .clickable { }
+                            .weight(1f)
+                            .height(32.dp),
+                        contentAlignment = Alignment.Center
+                    )
+                    {
+                        Text(
+                            text = "Compartir",
+                            color = Color.White,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 12.sp
+                        )
+
+                    }
+                    Spacer(modifier = Modifier.width(2.dp))
+                    Box(
+                        modifier = Modifier
+                            .clip(shape = CircleShape)
+                            .background(Green300)
+                            .clickable { }
+                            .weight(1f)
+                            .height(32.dp),
+
+                        contentAlignment = Alignment.Center
+                    )
+                    {
+                        Text(
+                            text = "Editar",
+                            color = Dark900,
+                            fontWeight = FontWeight.Medium,
+                            fontSize = 12.sp
+                        )
+
+                    }
+
+
+                }
+
             }
         }
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 1.dp),
+            Arrangement.SpaceAround
+
+
+        ){
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+            ) {
+
+
+                Text100(text = "Facultad")
+
+                Text101(text = "FIISI")
+
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+            ) {
+                Text100(text = "Escuela")
+                Spacer(modifier = Modifier.height(0.dp))
+                Text101(text = "Ing. Sistemas")
+
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+
+            ) {
+                Text100(text = "Ciclo")
+                Text101(text = "IX")
+
+            }
+            Column(
+                modifier = Modifier
+                    .weight(1f)
+                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+            ) {
+                Text100(text = "Edad")
+                Text101(text = "19 años")
+
+
+            }
+        }
+        HorizontalDivider(thickness = 1.dp, color = Color.White.copy(0.2f), modifier = Modifier.padding(top = 10.dp, bottom = 5.dp))
+
+        Row(
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(top = 1.dp),
+            Arrangement.SpaceAround
+
+
+        ){
+
+            Column(
+                modifier = Modifier
+                    .weight(1f),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "120",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                )
+                Text(
+                    text = "Amigos",
+                    color = Color.White.copy(0.5f),
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 1.sp,
+                    fontSize = 11.sp,
+                )
+            }
+
+            Column(
+                modifier = Modifier
+                    .weight(1f),
+                verticalArrangement = Arrangement.Center,
+                horizontalAlignment = Alignment.CenterHorizontally
+            ) {
+                Text(
+                    text = "20",
+                    color = Color.White,
+                    fontWeight = FontWeight.Bold,
+                    fontSize = 20.sp,
+                    modifier = Modifier
+                )
+                Text(
+                    text = "Publicaciones",
+                    color = Color.White.copy(0.5f),
+                    fontWeight = FontWeight.Normal,
+                    lineHeight = 1.sp,
+                    fontSize = 11.sp,
+                )
+            }
+
+        }
+
+
+
+
+        SectionsScreen()
+
+    }
 
 
 }

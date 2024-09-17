@@ -1,5 +1,8 @@
 package com.faustino.faustitalk.Navigation.Graphs
 
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
@@ -26,19 +29,49 @@ fun MainNavGraph(
         startDestination = BottonBarScreen.Home.route,
         route = Graph.MAIN_SCREEN
     ) {
-        composable(route = BottonBarScreen.Home.route) {
+        composable(
+            route = BottonBarScreen.Home.route,
+            enterTransition = { fadeIn(animationSpec = tween(0)) },  // Sin animación
+            exitTransition = { fadeOut(animationSpec = tween(0)) },  // Sin animación
+            popEnterTransition = { fadeIn(animationSpec = tween(0)) },
+            popExitTransition = { fadeOut(animationSpec = tween(0)) }
+        ) {
             HomeScreen()
         }
-        composable(route = BottonBarScreen.Inbox.route) {
+        composable(
+            route = BottonBarScreen.Inbox.route,
+            enterTransition = { fadeIn(animationSpec = tween(0)) },
+            exitTransition = { fadeOut(animationSpec = tween(0)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(0)) },
+            popExitTransition = { fadeOut(animationSpec = tween(0)) }
+        ) {
             InboxScreen()
         }
-        composable(route = BottonBarScreen.Post.route) {
+        composable(
+            route = BottonBarScreen.Post.route,
+            enterTransition = { fadeIn(animationSpec = tween(0)) },
+            exitTransition = { fadeOut(animationSpec = tween(0)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(0)) },
+            popExitTransition = { fadeOut(animationSpec = tween(0)) }
+        ) {
             PostScreen()
         }
-        composable(route = BottonBarScreen.Profile.route) {
-            ProfileScreen(modifier,authViewModel, rootNavHostController)
+        composable(
+            route = BottonBarScreen.Profile.route,
+            enterTransition = { fadeIn(animationSpec = tween(0)) },
+            exitTransition = { fadeOut(animationSpec = tween(0)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(0)) },
+            popExitTransition = { fadeOut(animationSpec = tween(0)) }
+        ) {
+            ProfileScreen(modifier, authViewModel, rootNavHostController)
         }
-        composable(route = BottonBarScreen.Search.route) {
+        composable(
+            route = BottonBarScreen.Search.route,
+            enterTransition = { fadeIn(animationSpec = tween(0)) },
+            exitTransition = { fadeOut(animationSpec = tween(0)) },
+            popEnterTransition = { fadeIn(animationSpec = tween(0)) },
+            popExitTransition = { fadeOut(animationSpec = tween(0)) }
+        ) {
             SearchScreen()
         }
     }
