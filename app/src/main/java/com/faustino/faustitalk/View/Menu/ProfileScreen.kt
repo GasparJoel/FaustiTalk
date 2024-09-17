@@ -115,7 +115,7 @@ fun ProfileScreen(
 
 }
 
-@Preview(device = "id:pixel_7_pro")
+@Preview
 @Composable
 fun prev(modifier: Modifier = Modifier) {
 
@@ -334,40 +334,6 @@ fun prev(modifier: Modifier = Modifier) {
 
             }
         }
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 1.dp),
-            Arrangement.SpaceAround
-
-
-        ){
-
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
-                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
-            ) {
-                Text100(text = "Escuela")
-                Text101(text = "Ingenieria de sistemas")
-
-            }
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
-                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
-
-            ) {
-                Text100(text = "Ciclo")
-                Text101(text = "IX")
-
-            }
-
-        }
-
-
 
 
         SectionsScreen()
