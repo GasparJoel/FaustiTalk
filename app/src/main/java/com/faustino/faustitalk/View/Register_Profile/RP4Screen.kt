@@ -99,9 +99,9 @@ fun GridItemSelect(item: ItemSelectInterest, isSelected: Boolean, onSelectChange
             .fillMaxWidth(),
         onClick = onSelectChange
     ) {
-        Text(modifier = Modifier.padding(end = 4.dp), text = item.emoji, fontSize = 17.sp)
+       // Text(modifier = Modifier.padding(end = 4.dp), text = item.emoji, fontSize = 17.sp)
         Text(
-            text = item.text,
+            text = item.emoji + " "+item.text,
             fontSize = 14.sp,
             color = colorText,
             textAlign = TextAlign.Center

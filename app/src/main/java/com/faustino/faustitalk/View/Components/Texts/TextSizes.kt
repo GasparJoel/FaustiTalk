@@ -70,7 +70,7 @@ fun Text100(
     Text(text = text,
         color = Color.White.copy(0.5f),
         fontWeight = FontWeight.Normal,
-        fontSize = 13.sp,
+        fontSize = 11.sp,
         modifier = Modifier.padding(top = 8.dp)
     )
 }
@@ -82,9 +82,11 @@ fun Text101(
     Text(text = text,
         color = Color.White.copy(0.9f),
         fontWeight = FontWeight.Normal,
-        fontSize = 10.sp,
+        fontSize = 12.sp,
+        lineHeight = 1.sp,
+        maxLines = 1,
         textAlign = TextAlign.Center,
-        modifier = Modifier.padding(top = 8.dp)
+       // modifier = Modifier.padding(top = 8.dp)
 
     )
 }
