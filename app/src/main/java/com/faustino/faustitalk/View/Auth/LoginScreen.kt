@@ -211,7 +211,7 @@ fun LoginScreen(
 
             Btn_SiguienteGreen(
                 "Iniciar",
-                onClick = { authViewModel.login(email, password) },
+                onClick = { authViewModel.login(email, password,context) },
                 enabled = authState.value != AuthState.Loading
             )
 
