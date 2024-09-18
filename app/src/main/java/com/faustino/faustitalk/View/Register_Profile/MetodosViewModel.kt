@@ -18,8 +18,9 @@ class MetodosViewModel : ViewModel() {
 
     private val _userData = MutableLiveData<Map<String, Any>>()
     val userData: LiveData<Map<String, Any>> = _userData
-
+    init  {fetchUserData()}
     private val userC = User()
+
 
     fun completeRP1Screen(name: String, apellido: String, username: String) {
         userC.setUsername(username)

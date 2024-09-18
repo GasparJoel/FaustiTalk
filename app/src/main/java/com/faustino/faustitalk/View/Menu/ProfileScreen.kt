@@ -78,7 +78,11 @@ fun ProfileScreen(
     metodosViewModel: MetodosViewModel
 ) {
 
+    LaunchedEffect(Unit) {
+        metodosViewModel.fetchUserData()
+    }
     val userData by metodosViewModel.userData.observeAsState(initial = emptyMap())
+
 
     val username = userData["username"] as? String ?: "@Username"
     val name = userData["name"] as? String ?: "@name"
@@ -115,7 +119,7 @@ fun ProfileScreen(
                     .align(Alignment.CenterEnd)
                     .clip(CircleShape)
                     .clickable {
-                        rootNavHostController.navigate(Graph.SETTING){
+                        rootNavHostController.navigate(Graph.SETTING) {
                             popUpTo(Graph.MAIN_SCREEN) {
                                 saveState = true
                             }
@@ -161,7 +165,7 @@ fun ProfileScreen(
                     )
                 }
                 Text(
-                    text = username,
+                    text = "@"+ username,
                     color = Color.White.copy(0.6f),
                     fontWeight = FontWeight.Normal,
                     fontSize = 13.sp,
@@ -254,61 +258,14 @@ fun ProfileScreen(
             }
         }
 
-        Row(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(top = 1.dp),
-            Arrangement.SpaceAround
 
-
-        ){
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
-                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
-            ) {
-
-
-                Text100(text = "Facultad")
-
-                Text101(text = "FIISI")
-
-            }
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
-                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
-            ) {
-                Text100(text = "Escuela")
-                Spacer(modifier = Modifier.height(0.dp))
-                Text101(text = "Ing. Sistemas")
-
-            }
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
-                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
-
-            ) {
-                Text100(text = "Ciclo")
-                Text101(text = "IX")
-
-            }
-            Column(
-                modifier = Modifier
-                    .weight(1f)
-                ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
-                horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
-            ) {
-                Text100(text = "Edad")
-                Text101(text = "19 años")
-
-
-            }
+        if (tipoPerfil == "Universitario"){
+            InfoEstudiante()
+        }else{
+            InfoDocenteAdm()
         }
+
+
         HorizontalDivider(thickness = 1.dp, color = Color.White.copy(0.2f), modifier = Modifier.padding(top = 10.dp, bottom = 5.dp))
 
         Row(
@@ -366,15 +323,99 @@ fun ProfileScreen(
 
         }
 
-
-
-
         SectionsScreen()
+
 
     }
 
 
 }
+
+
+@Composable
+fun InfoEstudiante(){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 1.dp),
+        Arrangement.SpaceAround
+
+
+    ){
+        Column(
+            modifier = Modifier
+                .weight(1f)
+            ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+            horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+        ) {
+
+
+            Text100(text = "Facultad")
+
+            Text101(text = "FIISI")
+
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+            ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+            horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+        ) {
+            Text100(text = "Escuela")
+            Spacer(modifier = Modifier.height(0.dp))
+            Text101(text = "Ing. Sistemas")
+
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+            ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+            horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+
+        ) {
+            Text100(text = "Ciclo")
+            Text101(text = "IX")
+
+        }
+        Column(
+            modifier = Modifier
+                .weight(1f)
+            ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+            horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+        ) {
+            Text100(text = "Edad")
+            Text101(text = "19 años")
+
+
+        }
+    }
+
+
+
+}
+
+@Composable
+fun InfoDocenteAdm(){
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(top = 1.dp),
+        Arrangement.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .weight(1f)
+            ,verticalArrangement = Arrangement.Center, // Centrar verticalmente
+            horizontalAlignment = Alignment.CenterHorizontally // Centrar horizontalmente
+
+        ) {
+            Text100(text = "Especialidad")
+            Text101(text = "Especialista en chat GPT")
+
+        }
+    }
+}
+
 
 
 @Composable
