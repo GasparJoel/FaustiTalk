@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.Navigation.Graphs
 
+import MetodosViewModel
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -21,6 +22,7 @@ fun MainNavGraph(
     homeNavHostController: NavHostController,
     rootNavHostController: NavHostController,
     authViewModel: AuthViewModel,
+    metodosViewModel:MetodosViewModel,
     modifier: Modifier
 ) {
 
@@ -63,7 +65,7 @@ fun MainNavGraph(
             popEnterTransition = { fadeIn(animationSpec = tween(0)) },
             popExitTransition = { fadeOut(animationSpec = tween(0)) }
         ) {
-            ProfileScreen(modifier, authViewModel, rootNavHostController)
+            ProfileScreen(modifier, authViewModel, rootNavHostController,metodosViewModel)
         }
         composable(
             route = BottonBarScreen.Search.route,

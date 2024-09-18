@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.Navigation
 
+import MetodosViewModel
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.padding
 
@@ -34,7 +35,8 @@ import com.faustino.faustitalk.ui.theme.Green300
 fun MainScreen(
     homeNavHostController: NavHostController = rememberNavController(),
     rootNavHostController: NavHostController,
-    authViewModel: AuthViewModel
+    authViewModel: AuthViewModel,
+    metodosViewModel:MetodosViewModel
 ) {
 
     Scaffold (
@@ -46,7 +48,8 @@ fun MainScreen(
             rootNavHostController = rootNavHostController,
             homeNavHostController = homeNavHostController,
             authViewModel = authViewModel,
-            modifier = modifier
+            modifier = modifier ,
+            metodosViewModel=metodosViewModel
         )
     }
 

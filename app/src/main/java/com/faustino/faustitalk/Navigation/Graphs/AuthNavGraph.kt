@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.Navigation.Graphs
 
+import MetodosViewModel
 import androidx.navigation.NavGraphBuilder
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -12,7 +13,11 @@ import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 import com.faustino.faustitalk.View.Auth.WelcomeScreen
 import com.faustino.faustitalk.View.Register_Profile.RP1Screen
 
-fun NavGraphBuilder.authNavGraph(rootNavHostController: NavHostController, authViewModel: AuthViewModel) {
+fun NavGraphBuilder.authNavGraph(
+    rootNavHostController: NavHostController,
+    authViewModel: AuthViewModel,
+    metodosViewModel: MetodosViewModel
+) {
     navigation(
         route = Graph.AUTHENTICATION,
         startDestination = AuthScreen.Welcome.route
@@ -27,7 +32,7 @@ fun NavGraphBuilder.authNavGraph(rootNavHostController: NavHostController, authV
             WelcomeScreen(navController = rootNavHostController, authViewModel = authViewModel)
         }
         composable(route = AuthScreen.RegisterProfile.route){
-            RegProfileScreen(rootNavHostController = rootNavHostController, authViewModel = authViewModel)
+            RegProfileScreen(rootNavHostController = rootNavHostController, authViewModel = authViewModel ,metodosViewModel=metodosViewModel)
         }
 
     }

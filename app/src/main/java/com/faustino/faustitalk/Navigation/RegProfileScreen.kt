@@ -64,10 +64,11 @@ import com.faustino.faustitalk.ui.theme.Green300
 fun RegProfileScreen(
     rpNavHostController: NavHostController = rememberNavController(),
      rootNavHostController: NavHostController,
-     authViewModel: AuthViewModel
+     authViewModel: AuthViewModel,
+     metodosViewModel: MetodosViewModel
 ) {
 
-    var metodosViewModel = MetodosViewModel()
+   // var metodosViewModel = MetodosViewModel()
 
     var progress by remember { mutableStateOf(0.16f) }
     var rp1estate by remember { mutableStateOf(true) }

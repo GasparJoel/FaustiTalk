@@ -1,5 +1,6 @@
 package com.faustino.faustitalk.Navigation.Graphs
 
+import MetodosViewModel
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -10,6 +11,7 @@ import com.faustino.faustitalk.View.Auth.ViewModel.AuthViewModel
 @Composable
 fun RootNavigationGraph(authViewModel: AuthViewModel, route: String) {
     val rootNavHostController = rememberNavController()
+    val metodosViewModel = MetodosViewModel()
     //val authViewModel = AuthViewModel()
     NavHost(
         navController = rootNavHostController,
@@ -23,9 +25,9 @@ fun RootNavigationGraph(authViewModel: AuthViewModel, route: String) {
             popEnterTransition = { null },
             popExitTransition = { null }
         ){
-            MainScreen(rootNavHostController = rootNavHostController, authViewModel = authViewModel)
+            MainScreen(rootNavHostController = rootNavHostController, authViewModel = authViewModel ,metodosViewModel=metodosViewModel)
         }
-        authNavGraph(rootNavHostController,authViewModel)
+        authNavGraph(rootNavHostController,authViewModel,metodosViewModel)
         settingsNavGraph(rootNavHostController,authViewModel)
 
     }
