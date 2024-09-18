@@ -2,6 +2,7 @@ package com.faustino.faustitalk.View.Auth.ViewModel
 
 import android.content.Context
 import android.widget.Toast
+import androidx.compose.ui.platform.LocalContext
 import androidx.credentials.CredentialManager
 import androidx.credentials.GetCredentialRequest
 import androidx.credentials.exceptions.GetCredentialException
@@ -19,9 +20,9 @@ import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.ktx.Firebase
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 const val WEB_CLIENT_ID = "789640903345-0ehtnjqpqnbipc10knt0o1meebovntpo.apps.googleusercontent.com"
-
 class AuthViewModel : ViewModel() {
     private val auth: FirebaseAuth = Firebase.auth
     private val _authState = MutableLiveData<AuthState>()
@@ -38,7 +39,6 @@ class AuthViewModel : ViewModel() {
             checkUserProfile()
         }
     }
-
     fun checkUserProfile() {
         val user = auth.currentUser
         if (user != null) {
@@ -64,7 +64,9 @@ class AuthViewModel : ViewModel() {
         }
     }
 
-    fun login(email: String, password: String) {
+
+
+    fun login(email: String, password: String, context: Context) {
         if (email.isEmpty() || password.isEmpty()) {
             _authState.value = AuthState.Error("El correo y la contraseña no pueden estar vacíos")
             return
@@ -74,7 +76,14 @@ class AuthViewModel : ViewModel() {
         auth.signInWithEmailAndPassword(email, password)
             .addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    checkUserProfile()
+                    val user = auth.currentUser
+                    val verifica = user?.isEmailVerified
+                    if(verifica==true){
+                        println("verifica")
+                        checkUserProfile()
+                    }else{
+                        Toast.makeText(context,"No ha Verificado su correo", Toast.LENGTH_SHORT)
+                    }
                 } else {
                     _authState.value = AuthState.Error(task.exception?.message ?: "Algo salió mal")
                 }
@@ -93,13 +102,26 @@ class AuthViewModel : ViewModel() {
                 if (task.isSuccessful) {
                     val user = auth.currentUser
                     if (user != null) {
-                        createUserDocument(user.uid, email)
-                        _authState.value = AuthState.IncompleteProfile
+                        //createUserDocument(user.uid, email)
+                        //_authState.value = AuthState.IncompleteProfile
+                        sendEmailVerification()
                     }
+
                 } else {
                     _authState.value = AuthState.Error(task.exception?.message ?: "Algo salió mal")
                 }
             }
+    }
+
+    fun sendEmailVerification(){
+        val user = auth.currentUser!!
+        user.sendEmailVerification().addOnCompleteListener{task ->
+            if(task.isSuccessful){
+
+            }else{
+
+            }
+        }
     }
 
     fun signout() {
